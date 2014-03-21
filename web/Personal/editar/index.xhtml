@@ -1,0 +1,630 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+                <c:choose>
+                    <c:when test="#{personal.empleado.contratoActual.vacio}">
+                        <ice:panelGrid columns="6" bgcolor="#E8E8E8">
+                            <br/><br/><br/>
+                            <ice:commandLink action="#{personal.salirSinGuardar}" value="Salir sin guardar" immediate="true"/>
+                            <ice:commandButton action="#{personal.salirGuardando}" value="Salir y GUARDAR"/>
+                            <ice:commandButton action="#{personal.guardarCambios}" value="GUARDAR AHORA"  />
+                            <ice:panelLayout layout="flow" >
+                                <ice:outputLabel for="itApellidos" value="Apellidos:"/>
+                                <br/>
+                                <ice:inputText id="itApellidos" value="#{personal.empleado.apellidos}"/>
+                            </ice:panelLayout>
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="itNombre" value="Nombre:"/>
+                                <br/>
+                                <ice:inputText id="itNombre" value="#{personal.empleado.nombre}"/>
+                            </ice:panelLayout>
+
+                        </ice:panelGrid>
+                    </c:when>
+                    <c:otherwise>
+                        <ice:panelGrid columns="6" >
+                            <br/><br/><br/>
+                            <ice:commandLink action="#{personal.salirSinGuardar}" value="Salir sin guardar"/>
+                            <ice:commandButton action="#{personal.salirGuardando}" value="Salir y GUARDAR"/>
+                            <ice:commandButton action="#{personal.guardarCambios}" value="GUARDAR AHORA"  />
+                            <ice:panelLayout layout="flow" >
+                                <ice:outputLabel for="itApellidos" value="Apellidos:"/>
+                                <br/>
+                                <ice:inputText id="itApellidos" value="#{personal.empleado.apellidos}"/>
+                            </ice:panelLayout>
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="itNombre" value="Nombre:"/>
+                                <br/>
+                                <ice:inputText id="itNombre" value="#{personal.empleado.nombre}"/>
+                            </ice:panelLayout>
+
+                        </ice:panelGrid>
+                    </c:otherwise>
+                </c:choose>
+
+                <ice:panelTabSet>
+                    <ice:panelTab id="tabDatosPersonales" label="Datos personales">
+                        <ice:panelGrid columns="2" cellspacing="20">
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="itFechaNacimiento" value="Fecha de nacimiento:"/>
+                                <br/>
+                                <ice:selectInputDate renderAsPopup="true" id="itFechaNacimiento" value="#{personal.empleado.fechaNacimiento}" renderMonthAsDropdown="true" renderYearAsDropdown="true">
+                                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                </ice:selectInputDate>
+                                <br/>
+                                <br/>
+                                <ice:outputLabel for="itDNI" value="DNI:"/>
+                                <br/>
+                                <ice:inputText id="itDNI" value="#{personal.empleado.dni}"/>
+                                <br/>
+                                <br/>
+                                <ice:outputLabel for="itSeguridadSocial" value="Seguridad social:"/>
+                                <br/>
+                                <ice:inputText id="itSeguridadSocial" value="#{personal.empleado.numSeguridadSocial}"/>
+                                <br/>
+                                <br/>
+                                <ice:outputLabel for="somSexo" value="Sexo:"/>
+                                <br/>
+                                <ice:selectOneMenu value="#{personal.empleado.sexo}" name="somDepartamento">
+                                    <f:selectItems value="#{personal.sexoItemsAvailableSelectOne}"/>
+                                </ice:selectOneMenu>
+                            </ice:panelLayout>
+
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="itDireccion" value="Dirección:"/>
+                                <br/>
+                                <ice:inputTextarea id="itDireccion" cols="40" value="#{personal.empleado.direccion}"/>
+                                <br/>
+                                <br/>
+                                <ice:outputLabel for="itTelefonoEmpleado" value="Teléfono:"/>
+                                <br/>
+                                <ice:inputText id="itTelefonoEmpleado" value="#{personal.empleado.telefono}"/>
+                                <br/>
+                                <br/>
+                                <ice:outputLabel for="itNumCuentaBancaria" value="Número de cuenta bancaria:"/>
+                                <br/>
+                                <ice:inputText id="itNumCuentaBancaria" value="#{personal.empleado.numCuentaBancaria}"/>
+                            </ice:panelLayout>
+                        </ice:panelGrid>
+                        <ice:panelLayout layout="flow">
+                            <ice:outputLabel for="itWeb" value="Web:"/>
+                            <br/>
+                            <ice:inputText id="itWeb" cols="40" value="#{personal.empleado.web}" size="80"/>
+                        </ice:panelLayout>
+                    </ice:panelTab>
+
+                    <ice:panelTab id="tabContratoActual" label="Contrato Actual">
+                        <ice:panelLayout layout="flow">
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="itRegistroPersonal" value="Registro personal:"/>
+                                <br/>
+                                <ice:inputText id="itRegistroPersonal" value="#{personal.empleado.contratoActual.registroPersonal}" size="50"/>
+                            </ice:panelLayout>
+
+                            <ice:panelGrid columns="2" cellspacing="20">
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itTelefono" value="Teléfono:"/>
+                                    <br/>
+                                    <ice:inputText id="itTelefono" value="#{personal.empleado.contratoActual.telefono}"/>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itCorreoElectronico" value="Correo electrónico:"/>
+                                    <br/>
+                                    <ice:inputText id="itCorreoElectronico" value="#{personal.empleado.contratoActual.EMail}"/>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itCorreoElectronico2" value="Correo electrónico 2:"/>
+                                    <br/>
+                                    <ice:inputText id="itCorreoElectronico2" value="#{personal.empleado.contratoActual.EMailsec}"/>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="somDepartamento" value="Departamento:"/>
+                                    <br/>
+                                    <ice:selectOneMenu value="#{personal.empleado.contratoActual.departamento}" name="somDepartamento">
+                                        <f:selectItems value="#{departamentos.departamentoItemsAvailableSelectOne}"/>
+                                    </ice:selectOneMenu>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itLocalizacion" value="Localización:"/>
+                                    <br/>
+                                    <ice:inputText id="itLocalizacion" value="#{personal.empleado.contratoActual.localizacion}"/>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="somOrganismo" value="Organismo:"/>
+                                    <br/>
+                                    <ice:selectOneMenu value="#{personal.empleado.contratoActual.organismo}" name="somOrganismo">
+                                        <f:selectItems value="#{organismos.organismoItemsAvailableSelectOne}"/>
+                                    </ice:selectOneMenu>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="somAdscripcion" value="Adscripcion:"/>
+                                    <br/>
+                                    <ice:selectOneMenu value="#{personal.empleado.contratoActual.tipoEmpleado.adscripcion}" name="somAdscripcion">
+                                        <f:selectItems value="#{adscripciones.adscripcionItemsAvailableSelectOne}"/>
+                                    </ice:selectOneMenu>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="somJornadaLaboral" value="Jornada Laboral:"/>
+                                    <br/>
+                                    <ice:selectOneMenu value="#{personal.empleado.contratoActual.jornadaLaboral}" name="somJornadaLaboral">
+                                        <f:selectItems value="#{jornadasLaborales.jornadaLaboralItemsAvailableSelectOne}"/>
+                                    </ice:selectOneMenu>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="somTipoEmpleado" value="Tipo empleado:"/>
+                                    <br/>
+                                    <ice:selectOneMenu value="#{personal.empleado.contratoActual.tipoEmpleado.tipoEmpleado}" name="somTipoEmpleado"  partialSubmit="true">
+                                        <f:selectItems value="#{personal.tiposEmpleadosSelectOne}"/>
+                                    </ice:selectOneMenu>
+                                </ice:panelLayout>
+
+                            </ice:panelGrid>
+
+                            <ice:panelCollapsible expanded="false" >
+                                <f:facet name="header">
+                                    <ice:panelGroup>
+                                        <ice:outputText value="Detalles del tipo de empleado"/>
+                                    </ice:panelGroup>
+                                </f:facet>
+
+                                <c:choose>
+                                    <c:when test="#{personal.empleado.contratoActual.tipoEmpleado.tipoEmpleado eq 'Funcionario'}">
+                                        <ice:panelGrid columns="4" cellspacing="20">
+                                            <ice:panelLayout layout="flow">
+                                                <ice:outputLabel for="somGrupoFuncionario" value="Grupo:"/>
+                                                <br/>
+                                                <ice:selectOneMenu value="#{personal.empleado.contratoActual.tipoEmpleado.grupo}" name="somGrupoFuncionario">
+                                                    <f:selectItems value="#{grupos.grupoItemsAvailableSelectOne}"/>
+                                                </ice:selectOneMenu>
+                                            </ice:panelLayout>
+
+                                            <ice:panelLayout layout="flow">
+                                                <ice:outputLabel for="somCuerpoFuncionario" value="Cuerpo:"/>
+                                                <br/>
+                                                <ice:selectOneMenu value="#{personal.empleado.contratoActual.tipoEmpleado.cuerpo}" name="somCuerpoFuncionario">
+                                                    <f:selectItems value="#{cuerpos.cuerpoItemsAvailableSelectOne}"/>
+                                                </ice:selectOneMenu>
+                                            </ice:panelLayout>
+
+
+
+                                            <ice:panelLayout layout="flow">
+                                                <ice:outputLabel for="somPuestoDeTrabajoFuncionario" value="Puesto de trabajo:"/>
+                                                <br/>
+                                                <ice:selectOneMenu value="#{personal.empleado.contratoActual.tipoEmpleado.puestoTrabajo}" name="somPuestoDeTrabajoFuncionario">
+                                                    <f:selectItems value="#{puestosDeTrabajo.puestoDeTrabajoItemsAvailableSelectOne}"/>
+                                                </ice:selectOneMenu>
+                                            </ice:panelLayout>
+
+                                            <ice:panelLayout layout="flow">
+                                                <ice:outputLabel for="itNivelFuncionario" value="Nivel:"/>
+                                                <br/>
+                                                <ice:inputText id="itNivelFuncionario" value="#{personal.empleado.contratoActual.tipoEmpleado.nivel}"/>
+                                            </ice:panelLayout>
+
+                                            <ice:panelLayout layout="flow">
+                                                <ice:outputLabel for="itTelefonoFuncionario" value="Teléfono alternativo:"/>
+                                                <br/>
+                                                <ice:inputText id="itTelefonoFuncionario" value="#{personal.empleado.contratoActual.tipoEmpleado.telefono}"/>
+                                            </ice:panelLayout>
+
+                                            <ice:panelLayout layout="flow">
+                                                <ice:outputLabel for="itEmailFuncionario" value="EMail alternativo:"/>
+                                                <br/>
+                                                <ice:inputText id="itEmailFuncionario" value="#{personal.empleado.contratoActual.tipoEmpleado.eMail}"/>
+                                            </ice:panelLayout>
+
+                                        </ice:panelGrid>
+
+                                    </c:when>
+
+                                    <c:when test="#{personal.empleado.contratoActual.tipoEmpleado.tipoEmpleado eq 'LaboralFijo'}">
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="somGrupoLaboralFijo" value="Grupo:"/>
+                                            <br/>
+                                            <ice:selectOneMenu value="#{personal.empleado.contratoActual.tipoEmpleado.grupo}" name="somGrupoLaboralFijo">
+                                                <f:selectItems value="#{grupos.grupoItemsAvailableSelectOne}"/>
+                                            </ice:selectOneMenu>
+                                        </ice:panelLayout>
+
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="somCategoriaLaboralFijo" value="Categoria:"/>
+                                            <br/>
+                                            <ice:selectOneMenu value="#{personal.empleado.contratoActual.tipoEmpleado.categoria}" name="somCategoriaLaboralFijo">
+                                                <f:selectItems value="#{categorias.categoriaItemsAvailableSelectOne}"/>
+                                            </ice:selectOneMenu>
+                                        </ice:panelLayout>
+
+
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="somEspecialidadLaboralLaboralFijo" value="Especialidad Laboral:"/>
+                                            <br/>
+                                            <ice:selectOneMenu value="#{personal.empleado.contratoActual.tipoEmpleado.especialidadLaboral}" name="somEspecialidadLaboralLaboralFijo">
+                                                <f:selectItems value="#{especialidadesLaborales.especialidadLaboralItemsAvailableSelectOne}"/>
+                                            </ice:selectOneMenu>
+                                        </ice:panelLayout>
+                                    </c:when>
+
+                                    <c:when test="#{personal.empleado.contratoActual.tipoEmpleado.tipoEmpleado eq 'LaboralTemporal'}">
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="somGrupoLaboralTemporal" value="Grupo:"/>
+                                            <br/>
+                                            <ice:selectOneMenu value="#{personal.empleado.contratoActual.tipoEmpleado.grupo}" name="somGrupoLaboralTemporal">
+                                                <f:selectItems value="#{grupos.grupoItemsAvailableSelectOne}"/>
+                                            </ice:selectOneMenu>
+                                        </ice:panelLayout>
+
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="somCategoriaLaboralTemporal" value="Categoria:"/>
+                                            <br/>
+                                            <ice:selectOneMenu value="#{personal.empleado.contratoActual.tipoEmpleado.categoria}" name="somCategoriaLaboralTemporal">
+                                                <f:selectItems value="#{categorias.categoriaItemsAvailableSelectOne}"/>
+                                            </ice:selectOneMenu>
+                                        </ice:panelLayout>
+
+                                        <ice:panelLayout layout="flow" >
+                                            <ice:outputLabel for="somTipoLaboralTemporal" value="Tipo Laboral Temporal:"/>
+                                            <br/>
+                                            <ice:selectOneMenu value="#{personal.empleado.contratoActual.tipoEmpleado.tipoLaboralTemporal}" name="somTipoLaboralTemporal">
+                                                <f:selectItems value="#{tiposLaboralTemporal.tipoLaboralTemporalItemsAvailableSelectOne}"/>
+                                            </ice:selectOneMenu>
+                                        </ice:panelLayout>
+                                    </c:when>
+
+                                    <c:when test="#{personal.empleado.contratoActual.tipoEmpleado.tipoEmpleado eq 'Estancia'}">
+
+                                    </c:when>
+
+                                    <c:when test="#{personal.empleado.contratoActual.tipoEmpleado.tipoEmpleado eq 'Becario'}">
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="somTipoBecarioBecario" value="Tipo de becario:"/>
+                                            <br/>
+                                            <ice:selectOneMenu value="#{personal.empleado.contratoActual.tipoEmpleado.tipoBecario}" name="somTipoBecarioBecario">
+                                                <f:selectItems value="#{tiposBecario.tipoBecarioItemsAvailableSelectOne}"/>
+                                            </ice:selectOneMenu>
+                                        </ice:panelLayout>
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="somInvestigadorPrincipalBecario" value="Investigador principal:"/>
+                                            <br/>
+                                            <ice:selectOneMenu value="#{personal.empleado.contratoActual.tipoEmpleado.investigadorPrincipal}" name="somInvestigadorPrincipalBecario">
+                                                <f:selectItems value="#{personal.empleadoItemsAvailableSelectOne}"/>
+                                            </ice:selectOneMenu>
+                                        </ice:panelLayout>
+                                    </c:when>
+
+                                </c:choose>
+
+                            </ice:panelCollapsible>
+                            <br/>
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="somLineaInvestigacion" value="Línea de investigación:"/>
+                                <br/>
+                                <ice:selectOneMenu id="somLineaInvestigacion" value="#{personal.empleado.contratoActual.lineaInvestigacion}" partialSubmit="true">
+                                    <f:selectItems value="#{proyectos.lineaInvestigacionItemsAvailableSelectOne}"/>
+                                </ice:selectOneMenu>
+                            </ice:panelLayout>
+                            <br/>
+                            <ice:panelGrid columns="4">
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaInicioIACT" value="Fecha inicio IACT:"/>
+                                    <br/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaInicioIACT" value="#{personal.empleado.contratoActual.fechaInicioIACT}">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy"/>
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaFinIACT" value="Fecha fin IACT:"/>
+                                    <br/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaFinIACT" value="#{personal.empleado.contratoActual.fechaFinIACT}">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaInicioContratoCategoria" value="Fecha inicio contrato:"/>
+                                    <br/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaInicioContratoCategoria" value="#{personal.empleado.contratoActual.fechaInicioContrato}">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+
+
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaFinContratoCategoria" value="Fecha fin contrato:"/>
+                                    <br/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaFinContratoCategoria" value="#{personal.empleado.contratoActual.fechaFinContrato}">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+                            </ice:panelGrid>
+                            <br/>
+                            <ice:outputLabel for="AutoCmpTxtFace" value="Proyecto:"/><br/>
+                            <ice:selectInputText id="AutoCmpTxtFace"
+                                                 rows="10"
+                                                 width="500"
+                                                 valueChangeListener="#{personal.selectInputValueChanged}"
+                                                 listVar="proyecto"
+                                                 listValue="#{personal.proyectoMatchPossibilities}"
+                                                 partialSubmit="true"
+                                                 immediate="true"
+                                                 >
+
+                                <f:facet name="selectInputText" >
+                                    <ice:panelGrid columns="3">
+                                        <ice:outputText value="#{proyecto.referencia}" />
+                                        <ice:outputText value="#{proyecto.responsable.empleadoIACT.apellidos}, #{proyecto.responsable.empleadoIACT.nombre}"/>
+                                        <ice:outputText value="#{proyecto.estadoProyecto.nombre}" style="font-weight: bold;"/>
+                                    </ice:panelGrid>
+                                </f:facet>
+
+                            </ice:selectInputText>
+
+
+                            <ice:panelCollapsible expanded="false" rendered="#{not(empty personal.empleado.contratoActual.proyecto)}">
+                                <f:facet name="header">
+                                    <ice:panelGroup>
+                                        <ice:outputText value="Detalles del proyecto"/>
+                                    </ice:panelGroup>
+                                </f:facet>
+                                <ice:panelGroup>
+                                    <ice:panelGrid columns="2" >
+                                        <ice:panelLayout layout="flow" >
+                                            <ice:outputLabel for="itReferenciaProyecto" value="Referencia del proyecto:"/>
+                                            <br/>
+                                            <ice:inputText id="itReferenciaProyecto" value="#{personal.empleado.contratoActual.proyecto.proyecto.referencia}" disabled="true" style="color:black;" />
+                                        </ice:panelLayout>
+
+                                        <ice:panelLayout layout="flow" >
+                                            <ice:outputLabel for="itNombreInvestigador" value="Investigador principal:"/>
+                                            <br/>
+                                            <ice:inputText id="itNombreInvestigador" value="#{personal.empleado.contratoActual.proyecto.proyecto.responsable.empleadoIACT.apellidos}, #{personal.empleado.contratoActual.proyecto.proyecto.responsable.empleadoIACT.nombre}" disabled="true" style="color:black;" size="50"/>
+                                        </ice:panelLayout>
+
+                                    </ice:panelGrid>
+                                </ice:panelGroup>
+                            </ice:panelCollapsible>
+                            <br/><br/>
+                            <ice:panelCollapsible id="pcSubirContrato" expanded="false" rendered="#{empty personal.empleado.contratoActual.documento}">
+                                <f:facet name="header">
+                                    <ice:panelGroup>
+                                        <ice:outputText value="Asignar documento a contrato..."/>
+                                    </ice:panelGroup>
+                                </f:facet>
+
+                                <ice:panelSeries value="#{personal.ficherosAutomaticos}" var="fichero" rendered="#{not empty personal.ficherosAutomaticos}">
+                                    <ice:panelGrid columns="4">
+                                        <ice:outputText value="Fichero creado hace #{fichero.creadoHace}"/>
+                                        <ice:outputResource mimeType="application/pdf" resource="#{fichero.resource}" label="Ver" type="link" attachment="false"/>
+                                        <ice:commandLink action="#{fichero.asignarAContrato}" value="Asignar" partialSubmit="true"/>
+                                        <ice:commandLink action="#{fichero.borrar}" value="Borrar" partialSubmit="true"/>
+                                    </ice:panelGrid>
+                                </ice:panelSeries>
+                                <br/>
+                                <ice:inputFile id="ifDocumentoContrato" uniqueFolder="false" uploadDirectory="/home/intranet/SCAN" uploadDirectoryAbsolute="true"/>
+                                <br/>
+                                <ice:commandButton value="Actualizar ficheros" partialSubmit="true"/>
+                            </ice:panelCollapsible>
+
+                            <ice:panelLayout layout="flow" rendered="#{not empty personal.empleado.contratoActual.documento}">
+                                <ice:panelGrid columns="3">
+                                    <ice:outputLabel value="Documento del contrato"/>
+                                    <ice:outputResource mimeType="application/pdf" resource="#{personal.empleado.contratoActual.documento.resource}" label="Ver" type="link" attachment="false"/>
+                                    <ice:commandLink action="#{personal.empleado.contratoActual.documento.borrar}" value="Borrar" partialSubmit="true"/>
+                                </ice:panelGrid>
+
+                            </ice:panelLayout>
+
+
+                            <br/><br/>
+                            <ice:commandLink value="Finalizar contrato" action="#{personal.llevarAContratosAnteriores}"/>
+
+
+                        </ice:panelLayout>
+                    </ice:panelTab>
+
+                    <ice:panelTab id="tabContratosAnteriores" label="Contratos Anteriores">
+                        <ice:panelSeries id="contAntPanel"
+                                         value="#{personal.empleado.contratosAnteriores}"
+                                         var="contratoAnterior">
+
+                            <ice:panelGrid columns="4" cellspacing="20">
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itRegistroPersonaAnt" value="Registro personal:"/>
+                                    <br/>
+                                    <ice:inputText id="itRegistroPersonalAnt" value="#{contratoAnterior.registroPersonal}" disabled="true" style="color:black;"/>
+                                </ice:panelLayout>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itTelefonoAnt" value="Teléfono:"/>
+                                    <br/>
+                                    <ice:inputText id="itTelefonoAnt" value="#{contratoAnterior.telefono}" disabled="true" style="color:black;"/>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itCorreoElectronicoAnt" value="Correo electrónico:"/>
+                                    <br/>
+                                    <ice:inputText id="itCorreoElectronicoAnt" value="#{contratoAnterior.EMail}" disabled="true" style="color:black;"/>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="somDepartamentoAnt" value="Departamento:"/>
+                                    <br/>
+                                    <ice:inputText id="somDepartamentoAnt" value="#{contratoAnterior.departamento.nombre}" disabled="true" style="color:black;"/>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itLocalizacionAnt" value="Localización:"/>
+                                    <br/>
+                                    <ice:inputText id="itLocalizacionAnt" value="#{contratoAnterior.localizacion}" disabled="true" style="color:black;"/>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="somOrganismoAnt" value="Organismo:"/>
+                                    <br/>
+                                    <ice:inputText id="somOrganismoAnt" value="#{contratoAnterior.organismo.nombre}" disabled="true" style="color:black;"/>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="somAdscripcionAnt" value="Adscripcion:"/>
+                                    <br/>
+                                    <ice:inputText id="somAdscripcionAnt" value="#{contratoAnterior.tipoEmpleado.adscripcion.nombre}" disabled="true" style="color:black;"/>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="somJornadaLaboralAnt" value="Jornada Laboral:"/>
+                                    <br/>
+                                    <ice:inputText id="somJornadaLaboralAnt" value="#{contratoAnterior.jornadaLaboral.nombre}" disabled="true" style="color:black;"/>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="somTipoEmpleadoAnt" value="Tipo empleado:"/>
+                                    <br/>
+                                    <ice:inputText id="somTipoEmpleadoAnt" value="#{contratoAnterior.tipoEmpleado.tipoEmpleado}" disabled="true" style="color:black;"/>
+                                </ice:panelLayout>
+
+                            </ice:panelGrid>
+                            <br/>
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="somLineaInvestigacionAnt" value="Línea de investigación:"/>
+                                <br/>
+                                <ice:inputText id="somLineaInvestigacionAnt" value="#{contratoAnterior.lineaInvestigacion.nombre}" disabled="true" style="color:black;" size="100"/>
+                            </ice:panelLayout>
+                            <br/>
+
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="somProyectoAnterior" value="Proyecto:"/>
+                                <br/>
+                                <ice:inputText id="somProyectoAnterior" value="#{contratoAnterior.proyecto.proyecto.referencia}" disabled="true" style="color:black;" size="100"/>
+                            </ice:panelLayout>
+                            <br/>
+
+                            <ice:panelGrid columns="4">
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="itFechaInicioIACTAnt" value="Fecha inicio IACT:"/>
+                                <br/>
+                                <ice:selectInputDate renderAsPopup="true" id="itFechaInicioIACTAnt" value="#{contratoAnterior.fechaInicioIACT}">
+                                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                </ice:selectInputDate>
+                            </ice:panelLayout>
+
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="itFechaFinIACTAnt" value="Fecha fin IACT:"/>
+                                <br/>
+                                <ice:selectInputDate renderAsPopup="true" id="itFechaFinIACTAnt" value="#{contratoAnterior.fechaFinIACT}">
+                                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                </ice:selectInputDate>
+                            </ice:panelLayout>
+
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="itFechaInicioContratoCategoriaAnt" value="Fecha inicio contrato:"/>
+                                <br/>
+                                <ice:selectInputDate renderAsPopup="true" id="itFechaInicioContratoCategoriaAnt" value="#{contratoAnterior.fechaInicioContrato}">
+                                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                </ice:selectInputDate>
+                            </ice:panelLayout>
+
+
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="itFechaFinContratoCategoriaAnt" value="Fecha fin contrato:"/>
+                                <br/>
+                                <ice:selectInputDate renderAsPopup="true" id="itFechaFinContratoCategoriaAnt" value="#{contratoAnterior.fechaFinContrato}">
+                                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                </ice:selectInputDate>
+                            </ice:panelLayout>
+
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="itaObservacionesAnt" value="Observaciones:"/>
+                                <br/>
+                                <ice:inputTextarea value="#{contratoAnterior.observaciones}" id="itaObservacionesAnt" cols="40"/>
+                            </ice:panelLayout>
+
+                            <br/>
+                            <ice:panelLayout layout="flow" rendered="#{not empty personal.empleado.contratoActual.documento}">
+                                <ice:outputResource mimeType="application/pdf" resource="#{personal.empleado.contratoActual.documento.resource}" label="Documento del contrato" type="link" attachment="false"/>
+                            </ice:panelLayout>
+                            <br/>
+                            <br/>
+                            <ice:panelLayout layout="flow">
+                                <ice:commandLink value="Llevar a contrato actual" action="#{personal.llevarAContratoActual}" >
+                                    <f:setPropertyActionListener value="#{contratoAnterior}" target="#{personal.contratoAnteriorSeleccionado}" />
+                                </ice:commandLink>
+
+
+
+                                <ice:commandLink value="Borrar" action="#{personal.borrarContratoAnterior}" >
+                                    <f:setPropertyActionListener value="#{contratoAnterior}" target="#{personal.contratoAnteriorSeleccionado}" />
+                                </ice:commandLink>
+                            </ice:panelLayout>
+
+                            </ice:panelGrid>
+                            <br/>
+                        </ice:panelSeries>
+                    </ice:panelTab>
+
+                    <ice:panelTab id="tabImputacionFaltas" label="Ausencias jornada laboral">
+                        <ice:panelSeries id="impFaltasPanel"
+                                         value="#{personal.empleado.faltas}"
+                                         var="falta">
+
+
+
+                            <ice:panelGrid columns="2" cellspacing="20">
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaFalta" value="Fecha:"/>
+                                    <br/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaFalta" value="#{falta.fecha}">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itMotivo" value="Motivo:"/>
+                                    <br/>
+                                    <ice:inputText id="itMotivo" value="#{falta.motivo}" size="60"/>
+                                </ice:panelLayout>
+
+                            </ice:panelGrid>
+
+
+                            <ice:commandLink value="Borrar" action="#{personal.borrarFalta}" >
+                                <f:setPropertyActionListener value="#{falta}" target="#{personal.faltaSeleccionada}" />
+                            </ice:commandLink>
+
+                            <hr/>
+                        </ice:panelSeries>
+
+                        <ice:panelLayout layout="flow">
+                            <ice:commandLink value="Nueva falta" action="#{personal.nuevaFalta}"/>
+                        </ice:panelLayout>
+
+
+                    </ice:panelTab>
+                </ice:panelTabSet>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

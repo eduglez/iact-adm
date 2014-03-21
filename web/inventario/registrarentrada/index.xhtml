@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+
+    <body>
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <h3><ice:outputText value="Nueva entrada de #{inventarioProducto.producto.nombre}"/></h3>
+
+                <ice:panelGrid columns="2">
+                    <ice:panelLayout layout="flow">
+                        <ice:outputLabel for="itFecha" value="Fecha:"/>
+                        <br/>
+                        <ice:selectInputDate renderAsPopup="true" id="itFecha" value="#{inventarioEntrada.movimientoEntrada.fechaEntrada}">
+                            <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                        </ice:selectInputDate>
+                    </ice:panelLayout>
+
+                    <ice:panelLayout layout="flow">
+                        <ice:outputLabel for="somPedido" value="Pedido:"/>
+                        <br/>
+                        <ice:selectOneMenu id="somPedido" value="#{inventarioEntrada.movimientoEntrada.pedido}">
+                            <f:selectItems value="#{pedidos.pedidoItemsAvailableSelectOne}"/>
+                        </ice:selectOneMenu>
+                    </ice:panelLayout>
+
+                </ice:panelGrid>
+
+                <ice:outputText value="Asignado a: "/>
+
+                <ice:panelLayout layout="flow">
+
+                    <ice:outputLabel for="somAProyecto" value="A proyecto:"/>
+                    <br/>
+                    <ice:selectOneMenu id="somAProyecto" value="#{inventarioEntrada.asignacion.proyecto}">
+                        <f:selectItems value="#{proyectos.proyectoItemsAvailableSelectOne}"/>
+                    </ice:selectOneMenu>
+                    <br/><br/>
+                    <ice:outputLabel for="somAEmpleado" value="A empleado:"/>
+                    <br/>
+                    <ice:selectOneMenu id="somAEmpleado" value="#{inventarioEntrada.asignacion.empleado}">
+                        <f:selectItems value="#{personal.empleadoItemsAvailableSelectOne}"/>
+                    </ice:selectOneMenu>
+                    <br/><br/>
+                    <ice:outputLabel for="somALineaInvestigacion" value="A Línea de Investigación"/>
+                    <br/>
+                    <ice:selectOneMenu id="somALineaInvestigacion" value="#{inventarioEntrada.asignacion.lineaInvestigacion}">
+                        <f:selectItems value="#{proyectos.lineaInvestigacionItemsAvailableSelectOne}"/>
+                    </ice:selectOneMenu>
+                </ice:panelLayout>
+                <ice:panelGrid columns="7">
+                    <br/><br/><br/><br/><br/><br/>
+                    <ice:panelLayout layout="flow" rendered="#{not inventarioProducto.producto.tipoCantidad.flotante}">
+                        <ice:outputLabel for="itCantidadEntera" value="Cantidad:"/>
+                        <br/>
+                        <ice:inputText id="itCantidadEntera" value="#{inventarioEntrada.movimientoEntrada.cantidadEntera}"/>
+                        <br/><br/>
+
+
+                    </ice:panelLayout>
+
+                    <ice:panelLayout layout="flow" rendered="#{inventarioProducto.producto.tipoCantidad.flotante}">
+                        <ice:outputLabel for="itCantidadFlotante" value="Cantidad:"/>
+                        <br/>
+                        <ice:inputText id="itCantidadFlotante" value="#{inventarioEntrada.movimientoEntrada.cantidadFlotante}"/>
+                        <br/><br/>
+                    </ice:panelLayout>
+                </ice:panelGrid>
+
+                <ice:commandButton value="Aceptar" action="#{inventarioEntrada.registrarEntradaProducto}"/>
+
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+
+                        <h2>Configuración de los sistemas automáticos</h2>
+                        <h3>Aviso de finalización de contratos</h3>
+                        <ice:panelLayout layout="flow" rendered="#{workers.contratosCheckEnabled}">
+                            <ice:outputText value="El sistema está funcionando" style="color:green;"/><br/>
+                            <ice:commandButton value="Desactivar" action="#{workers.desactivarContratosCheck}" partialSubmit="true"/>
+                        </ice:panelLayout>
+
+                        <ice:panelLayout layout="flow" rendered="#{not workers.contratosCheckEnabled}">
+                            <ice:outputText value="El sistema está parado" style="color:red;"/><br/>
+                            <ice:commandButton value="Activar" action="#{workers.activarContratosCheck}" partialSubmit="true"/>
+                        </ice:panelLayout>
+
+                        <h3>Aviso de justificación de proyectos</h3>
+                        <ice:panelLayout layout="flow" rendered="#{workers.justificacionProyectosEnabled}">
+                            <ice:outputText value="El sistema está funcionando" style="color:green;"/><br/>
+                            <ice:commandButton value="Desactivar" action="#{workers.desactivarJustificacionProyectosCheck}" partialSubmit="true"/>
+                        </ice:panelLayout>
+
+                        <ice:panelLayout layout="flow" rendered="#{not workers.justificacionProyectosEnabled}">
+                            <ice:outputText value="El sistema está parado" style="color:red;"/><br/>
+                            <ice:commandButton value="Activar" action="#{workers.activarJustificacionProyectosCheck}" partialSubmit="true"/>
+                        </ice:panelLayout>
+
+                        <h3>BackUp del sistema</h3>
+                        <ice:panelLayout layout="flow" rendered="#{workers.DBBackUpEnabled}">
+                            <ice:outputText value="El sistema está funcionando" style="color:green;"/><br/>
+                            <ice:commandButton value="Desactivar" action="#{workers.desactivarDBBackUp}" partialSubmit="true"/>
+                        </ice:panelLayout>
+
+                        <ice:panelLayout layout="flow" rendered="#{not workers.DBBackUpEnabled}">
+                            <ice:outputText value="El sistema está parado" style="color:red;"/><br/>
+                            <ice:commandButton value="Activar" action="#{workers.activarDBBackUp}" partialSubmit="true"/>
+                        </ice:panelLayout>
+
+                        
+
+                    <ice:panelLayout style="margin-top:20px;">
+                        <ice:commandLink action="index" value="Salir"/>
+                    </ice:panelLayout>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

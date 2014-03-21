@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pedido" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="FECHA_PEDIDO" class="java.util.Date"/>
+	<parameter name="NUM_PEDIDO" class="java.lang.String"/>
+	<parameter name="NOMBRE_PROYECTO" class="java.lang.String"/>
+	<parameter name="NOMBRE_INVESTIGADOR_PRINCIPAL" class="java.lang.String"/>
+	<parameter name="NOMBRE_SOLICITANTE" class="java.lang.String"/>
+	<parameter name="RAZON_SOCIAL_ENTREGA" class="java.lang.String"/>
+	<parameter name="DIRECCION_ENTREGA" class="java.lang.String"/>
+	<parameter name="TELEFONO_ENTREGA" class="java.lang.String"/>
+	<parameter name="RAZON_SOCIAL_FACTURACION" class="java.lang.String"/>
+	<parameter name="DIRECCION_FACTURACION" class="java.lang.String"/>
+	<parameter name="TELEFONO_FACTURACION" class="java.lang.String"/>
+	<parameter name="FAX_FACTURACION" class="java.lang.String"/>
+	<parameter name="CIF_FACTURACION" class="java.lang.String"/>
+	<parameter name="CIF" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<field name="producto.nombre" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.String"/>
+	<field name="descripcionAlternativa" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="392" splitType="Stretch">
+			<rectangle>
+				<reportElement x="15" y="269" width="525" height="49"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="124" y="88" width="416" height="84"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="128" y="92" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Fecha de pedido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="128" y="112" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Proyecto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="128" y="132" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Investigador principal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="128" y="152" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[A la atención de:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="358" y="92" width="94" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Número de pedido:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="15" y="202" width="525" height="49"/>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="30" y="195" width="167" height="14"/>
+				<textElement>
+					<font fontName="Times New Roman" size="11"/>
+				</textElement>
+				<text><![CDATA[DIRECCIÓN DE FACTURACIÓN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="30" y="209" width="498" height="14"/>
+				<textElement>
+					<font fontName="Times New Roman" size="11"/>
+				</textElement>
+				<text><![CDATA[INSTITUTO ANDALUZ DE CIENCIAS DE LA TIERRA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="30" y="223" width="498" height="14"/>
+				<textElement>
+					<font fontName="Times New Roman" size="11"/>
+				</textElement>
+				<text><![CDATA[AVDA. DE LAS PALMERAS Nº4, 18100. ARMILLA -GRANADA]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="30" y="237" width="498" height="14"/>
+				<textElement>
+					<font fontName="Times New Roman" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Teléfono: 958230000 Ext:190140     Fax: 958552620     C.I.F. "+$P{CIF}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="30" y="290" width="56" height="14"/>
+				<textElement>
+					<font fontName="Times New Roman" size="11" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Dirección:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="30" y="262" width="141" height="14"/>
+				<textElement>
+					<font fontName="Times New Roman" size="11"/>
+				</textElement>
+				<text><![CDATA[DIRECCIÓN DE ENTREGA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="30" y="304" width="56" height="14"/>
+				<textElement>
+					<font fontName="Times New Roman" size="11"/>
+				</textElement>
+				<text><![CDATA[Teléfono:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="15" y="335" width="525" height="49"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="124" y="68" width="134" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16"/>
+				</textElement>
+				<text><![CDATA[Orden de pedido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="30" y="328" width="84" height="14"/>
+				<textElement>
+					<font fontName="Times New Roman" size="11"/>
+				</textElement>
+				<text><![CDATA[EMITIDO PARA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="30" y="356" width="56" height="14"/>
+				<textElement>
+					<font fontName="Times New Roman" size="11" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Dirección:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="30" y="370" width="56" height="14"/>
+				<textElement>
+					<font fontName="Times New Roman" size="11" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Teléfono: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="159" y="370" width="56" height="14"/>
+				<textElement>
+					<font fontName="Times New Roman" size="11" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Fax: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="333" y="370" width="56" height="14"/>
+				<textElement>
+					<font fontName="Times New Roman" size="11" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[CIF: ]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="228" y="92" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{FECHA_PEDIDO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="92" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{NUM_PEDIDO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="228" y="112" width="300" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{NOMBRE_PROYECTO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="228" y="132" width="300" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{NOMBRE_INVESTIGADOR_PRINCIPAL}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="228" y="152" width="300" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{NOMBRE_SOLICITANTE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="30" y="276" width="498" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{RAZON_SOCIAL_ENTREGA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="86" y="290" width="442" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{DIRECCION_ENTREGA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="86" y="304" width="442" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{TELEFONO_ENTREGA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="30" y="342" width="498" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{RAZON_SOCIAL_FACTURACION}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="86" y="356" width="442" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{DIRECCION_FACTURACION}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="86" y="370" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{TELEFONO_FACTURACION}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="187" y="370" width="135" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{FAX_FACTURACION}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="358" y="370" width="170" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{CIF_FACTURACION}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="15" y="0" width="127" height="31"/>
+				<imageExpression class="java.lang.String"><![CDATA["/reports/img/MINECO.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="400" y="0" width="155" height="40"/>
+				<imageExpression class="java.lang.String"><![CDATA["/reports/img/IACT.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="47" y="4" width="261" height="14"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre producto / Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="485" y="4" width="55" height="14"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<line>
+				<reportElement x="15" y="21" width="540" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="51" splitType="Stretch">
+			<textField>
+				<reportElement x="485" y="2" width="58" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="47" y="2" width="427" height="48"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionAlternativa}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="15" y="50" width="540" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.8"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="15" y="2" width="32" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="446" y="4" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="528" y="4" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

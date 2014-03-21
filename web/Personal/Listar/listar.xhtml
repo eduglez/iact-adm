@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+                <h1>Personal
+                    <table style="font-size:small;" border="0" cellspacing="12">
+                    <tbody>
+                        <tr>
+                            <td><ice:outputResource mimeType="application/vnd.ms-excel" resource="#{personal.personalExcel}" label="Excel (Personal Contrato Actual)" type="link" fileName="ListadoPersonal.xls" attachment="true"/></td>
+                            <td><ice:outputResource mimeType="application/vnd.ms-excel" resource="#{personal.contratosExcel}" label="Excel (Personal Todos Contratos)" type="link" fileName="ListadoContratos.xls" attachment="true"/></td>
+                        </tr>
+                    </tbody>
+                </table></h1>
+
+
+                <ice:panelLayout layout="flow">
+                    <ice:commandButton action="#{personal.createSetup}" value="Insertar"  />
+                </ice:panelLayout>
+                        <br/>
+                  <ice:panelCollapsible expanded="false">
+                    <f:facet name="header">
+                        <ice:panelGroup>
+                            <ice:outputText value="Filtros"/>
+                        </ice:panelGroup>
+                    </f:facet>
+                    <ice:panelGroup>
+                        <ice:outputText value="Por contrato: "/><br/>
+                        <ice:panelLayout layout="flow">
+                            <ice:outputLabel value="Empleados con contrato: " for="sbcConContrato"/>
+                            <ice:selectBooleanCheckbox id="sbcConContrato" value="#{personal.filtroConContrato}" immediate="true" partialSubmit="true"/>
+                        </ice:panelLayout>
+                        <ice:panelLayout layout="flow">
+                            <ice:outputLabel value="Empleados sin contrato: " for="sbcSinContrato"/>
+                            <ice:selectBooleanCheckbox id="sbcSinContrato" value="#{personal.filtroSinContrato}" immediate="true" partialSubmit="true"/>
+                        </ice:panelLayout>
+                    </ice:panelGroup>
+                </ice:panelCollapsible>
+                <ice:dataTable
+                    value="#{personal.empleadoItems}"
+                    var="empleado"
+                    id="Tabla"
+                    sortColumn="#{personal.columnaFiltro}"
+                    sortAscending="#{personal.ascendente}">
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader1" columnName="apellidos" >
+                                <ice:outputText value="Apellidos "/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+
+                        <ice:commandLink value="#{(empty empleado.apellidos)?('SIN_APELLIDOS'):(empleado.apellidos)}" action="#{personal.verEmpleado}" style="#{((empty empleado.contratoActual) || empleado.contratoActual.vacio)?'color:BlueViolet;':'color:Black;'}">
+                            <f:setPropertyActionListener value="#{empleado}" target="#{personal.empleado}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader2"
+                                                   columnName="nombre" >
+
+                            <ice:outputText value="Nombre "/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+
+                        <ice:commandLink value="#{(empty empleado.nombre)?('SIN_NOMBRE'):(empleado.nombre)}" action="#{personal.verEmpleado}" style="#{((empty empleado.contratoActual) || empleado.contratoActual.vacio)?'color:BlueViolet;':'color:Black;'}">
+                            <f:setPropertyActionListener value="#{empleado}" target="#{personal.empleado}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:outputText value="Teléfono"/>
+                        </f:facet>
+
+                        <ice:commandLink value="#{((empty empleado.contratoActual) || empleado.contratoActual.vacio)?'-': empleado.contratoActual.telefono}" action="#{personal.verEmpleado}">
+                            <f:setPropertyActionListener value="#{empleado}" target="#{personal.empleado}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:outputText value="¿Trabajando ahora en el IACT?"/>
+                        </f:facet>
+
+                        <ice:outputText value="#{((empty empleado.contratoActual) || empleado.contratoActual.vacio)?'NO':'SI'}" style="#{((empty empleado.contratoActual) || empleado.contratoActual.vacio)?'color:red;':'color:green;'}"/>
+
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:outputText value="¿Contrato Finaliza en un Mes?"/>
+                        </f:facet>
+
+                        <ice:outputText value="#{(not empty empleado.contratoActual) and (empleado.contratoActual.finalizadoEnUnMes)?'SI':'NO'}" style="#{(not empty empleado.contratoActual) and (empleado.contratoActual.finalizadoEnUnMes)?'color: red;':'color: green;'}"/>
+
+                    </ice:column>
+
+                    <ice:column rendered="#{login.adm||login.personal||login.gerencia}">
+                        <ice:commandButton value="Borrar" action="#{personal.destroy}" inmediate="true" panelConfirmation="pcBorrado">
+                            <f:setPropertyActionListener value="#{empleado}" target="#{personal.empleado}" />
+                        </ice:commandButton>
+                        <ice:panelConfirmation id="pcBorrado" message="Seguro que desea borrar el empleado #{empleado.nombre} #{empleado.apellidos}" acceptLabel="Aceptar" rendered="true" cancelLabel="Cancelar"/>
+                    </ice:column>
+
+                    <ice:column rendered="#{login.adm||login.personal||login.gerencia}">
+                        <ice:commandButton value="Editar" action="#{personal.editSetup}" inmediate="true">
+                            <f:setPropertyActionListener value="#{empleado}" target="#{personal.empleado}" />
+                        </ice:commandButton>
+                    </ice:column>
+
+                </ice:dataTable>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

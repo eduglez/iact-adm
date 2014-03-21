@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+                <h3>Información de Salida</h3>
+
+                <c:set var="producto" value="#{inventarioSalida.movimientoSalida.productoAsignado.producto}"/>
+
+                <ice:outputText value="Fecha: "/>
+                <ice:outputText value="#{inventarioSalida.movimientoSalida.fechaSalida}" style="font-weight:bold;">
+                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                </ice:outputText>
+                <hr/>
+                <ice:outputText value="Nombre del producto: "/>
+                <ice:outputText value="#{producto.nombre}" style="font-weight:bold;"/>
+                <hr/>
+                <ice:outputText value="Descripción del producto: "/>
+                <ice:outputText value="#{producto.descripcion}" style="font-weight:bold;"/>
+                <hr/>
+                <ice:outputText value="EAN: "/>
+                <ice:outputText value="#{producto.ean}" style="font-weight:bold;"/>
+                <hr/>
+                
+                <ice:outputText value="Asignado A Proyecto: "/>
+                <ice:outputText value="${inventarioSalida.movimientoSalida.productoAsignado.proyecto.referencia}" style="font-weight:bold;"/>
+                <hr/>
+                <ice:outputText value="Asignado A Línea de Investigación: "/>
+                <ice:outputText value="${inventarioSalida.movimientoSalida.productoAsignado.lineaInvestigacion.nombre}" style="font-weight:bold;"/>
+                <hr/>
+                <ice:outputText value="Asignado A Empleado: "/>
+                <ice:outputText value="${inventarioSalida.movimientoSalida.productoAsignado.empleado.apellidos}, ${inventarioSalida.movimientoSalida.productoAsignado.empleado.nombre}" style="font-weight:bold;"/>
+                <hr/>
+
+
+                <ice:outputText value="Para Proyecto: "/>
+                <ice:outputText value="${inventarioSalida.movimientoSalida.paraProyecto.referencia}" style="font-weight:bold;"/>
+                <hr/>
+                <ice:outputText value="Para Línea de Investigación: "/>
+                <ice:outputText value="${inventarioSalida.movimientoSalida.paraLineaInvestigacion.nombre}" style="font-weight:bold;"/>
+                <hr/>
+                <ice:outputText value="Para Empleado: "/>
+                <ice:outputText value="${inventarioSalida.movimientoSalida.paraEmpleado.apellidos}, ${inventarioSalida.movimientoSalida.paraEmpleado.nombre}" style="font-weight:bold;"/>
+                <hr/>
+
+                <ice:outputText value="Cantidad (#{producto.tipoCantidad.nombre}):"/>
+                <ice:outputText value="#{producto.tipoCantidad.flotante ? inventarioSalida.movimientoSalida.cantidadFlotante : inventarioSalida.movimientoSalida.cantidadEntera}" style="font-weight:bold;"/>
+                <hr/>
+               
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+

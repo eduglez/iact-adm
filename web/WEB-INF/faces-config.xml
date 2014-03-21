@@ -1,0 +1,1189 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<faces-config version="1.2" 
+    xmlns="http://java.sun.com/xml/ns/javaee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+    <application>
+        <view-handler>com.icesoft.faces.facelets.D2DFaceletViewHandler</view-handler>
+        <locale-config>
+            <default-locale>es-ES</default-locale>
+        </locale-config>
+        <message-bundle>
+            jsf.util.messages
+        </message-bundle>
+    </application>
+
+    <!-- GLOBAL MANAGED BEANS -->
+    <managed-bean>
+        <managed-bean-name>tree</managed-bean-name>
+        <managed-bean-class>jsf.controllers.NavigationTreeBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+
+    <managed-bean>
+        <managed-bean-name>login</managed-bean-name>
+        <managed-bean-class>jsf.controllers.LoginController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <!-- CULTURACIENTIFICA -->
+        <!-- Actividad Cientifica -->
+    <managed-bean>
+        <managed-bean-name>actividadCientificaJpa</managed-bean-name>
+        <managed-bean-class>culturacientifica.jpacontroller.ActividadCientificaJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>culturaCientifica</managed-bean-name>
+        <managed-bean-class>culturacientifica.jsfcontroller.ActividadCientificaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <converter>
+        <converter-for-class>culturacientifica.modelo.ActividadCientifica</converter-for-class>
+        <converter-class>culturacientifica.jsfcontroller.ActividadCientificaConverter</converter-class>
+    </converter>
+
+    <!-- PERSONAL -->
+        <!-- Jornadas Laborales -->
+    <managed-bean>
+        <managed-bean-name>jornadaLaboralJpa</managed-bean-name>
+        <managed-bean-class>personal.jpacontroller.JornadaLaboralJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>jornadasLaborales</managed-bean-name>
+        <managed-bean-class>personal.jsfcontroller.JornadaLaboralController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <converter>
+        <converter-for-class>personal.modelo.JornadaLaboral</converter-for-class>
+        <converter-class>personal.jsfcontroller.JornadaLaboralConverter</converter-class>
+    </converter>
+
+        <!-- Adscripciones -->
+    <managed-bean>
+        <managed-bean-name>adscripcionJpa</managed-bean-name>
+        <managed-bean-class>personal.jpacontroller.AdscripcionJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>adscripciones</managed-bean-name>
+        <managed-bean-class>personal.jsfcontroller.AdscripcionController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <converter>
+        <converter-for-class>personal.modelo.Adscripcion</converter-for-class>
+        <converter-class>personal.jsfcontroller.AdscripcionConverter</converter-class>
+    </converter>
+
+        <!-- TiposBecario -->
+    <managed-bean>
+        <managed-bean-name>tipoBecarioJpa</managed-bean-name>
+        <managed-bean-class>personal.jpacontroller.TipoBecarioJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>tiposBecario</managed-bean-name>
+        <managed-bean-class>personal.jsfcontroller.TipoBecarioController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <converter>
+        <converter-for-class>personal.modelo.TipoBecario</converter-for-class>
+        <converter-class>personal.jsfcontroller.TipoBecarioConverter</converter-class>
+    </converter>
+
+        <!-- Categoria -->
+    <managed-bean>
+        <managed-bean-name>categoriaJpa</managed-bean-name>
+        <managed-bean-class>personal.jpacontroller.CategoriaJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>categorias</managed-bean-name>
+        <managed-bean-class>personal.jsfcontroller.CategoriaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <converter>
+        <converter-for-class>personal.modelo.Categoria</converter-for-class>
+        <converter-class>personal.jsfcontroller.CategoriaConverter</converter-class>
+    </converter>
+
+         <!-- TipoLaboralTemporal -->
+    <managed-bean>
+        <managed-bean-name>tipoLaboralTemporalJpa</managed-bean-name>
+        <managed-bean-class>personal.jpacontroller.TipoLaboralTemporalJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>tiposLaboralTemporal</managed-bean-name>
+        <managed-bean-class>personal.jsfcontroller.TipoLaboralTemporalController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <converter>
+        <converter-for-class>personal.modelo.TipoLaboralTemporal</converter-for-class>
+        <converter-class>personal.jsfcontroller.TipoLaboralTemporalConverter</converter-class>
+    </converter>
+
+        <!-- Contrato -->
+    <managed-bean>
+        <managed-bean-name>contratoJpa</managed-bean-name>
+        <managed-bean-class>personal.jpacontroller.ContratoJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>contratos</managed-bean-name>
+        <managed-bean-class>personal.jsfcontroller.ContratoController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <converter>
+        <converter-for-class>personal.modelo.Contrato</converter-for-class>
+        <converter-class>personal.jsfcontroller.ContratoConverter</converter-class>
+    </converter>
+
+        <!-- Contratos -->
+    <managed-bean>
+        <managed-bean-name>declaracionJuradaJAEDOC</managed-bean-name>
+        <managed-bean-class>personal.contratos.jsfcontroller.DeclaracionJuradaJAEDOC</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>contratoJAEDOC</managed-bean-name>
+        <managed-bean-class>personal.contratos.jsfcontroller.ContratoJAEDOC</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+
+    <managed-bean>
+        <managed-bean-name>departamentos</managed-bean-name>
+        <managed-bean-class>personal.jsfcontroller.DepartamentoController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>cuerpos</managed-bean-name>
+        <managed-bean-class>personal.jsfcontroller.CuerpoController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+
+    <managed-bean>
+        <managed-bean-name>especialidadesLaborales</managed-bean-name>
+        <managed-bean-class>personal.jsfcontroller.EspecialidadLaboralController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>grupos</managed-bean-name>
+        <managed-bean-class>personal.jsfcontroller.GrupoController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>puestosDeTrabajo</managed-bean-name>
+        <managed-bean-class>personal.jsfcontroller.PuestoDeTrabajoController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+   
+    <managed-bean>
+        <managed-bean-name>personal</managed-bean-name>
+        <managed-bean-class>personal.jsfcontroller.EmpleadoController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+
+    <managed-bean>
+        <managed-bean-name>departamentoJpa</managed-bean-name>
+        <managed-bean-class>personal.jpacontroller.DepartamentoJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>cuerpoJpa</managed-bean-name>
+        <managed-bean-class>personal.jpacontroller.CuerpoJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+
+    <managed-bean>
+        <managed-bean-name>especialidadLaboralJpa</managed-bean-name>
+        <managed-bean-class>personal.jpacontroller.EspecialidadLaboralJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>grupoJpa</managed-bean-name>
+        <managed-bean-class>personal.jpacontroller.GrupoJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>puestoDeTrabajoJpa</managed-bean-name>
+        <managed-bean-class>personal.jpacontroller.PuestoDeTrabajoJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+
+    <managed-bean>
+        <managed-bean-name>empleadoJpa</managed-bean-name>
+        <managed-bean-class>personal.jpacontroller.EmpleadoJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <converter>
+        <converter-for-class>personal.modelo.Departamento</converter-for-class>
+        <converter-class>personal.jsfcontroller.DepartamentoConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>personal.modelo.Cuerpo</converter-for-class>
+        <converter-class>personal.jsfcontroller.CuerpoConverter</converter-class>
+    </converter>
+
+
+    <converter>
+        <converter-for-class>personal.modelo.EspecialidadLaboral</converter-for-class>
+        <converter-class>personal.jsfcontroller.EspecialidadLaboralConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>personal.modelo.Grupo</converter-for-class>
+        <converter-class>personal.jsfcontroller.GrupoConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>personal.modelo.PuestoDeTrabajo</converter-for-class>
+        <converter-class>personal.jsfcontroller.PuestoDeTrabajoConverter</converter-class>
+    </converter>
+
+
+    <converter>
+        <converter-for-class>personal.modelo.Empleado</converter-for-class>
+        <converter-class>personal.jsfcontroller.EmpleadoConverter</converter-class>
+    </converter>
+
+   
+    <navigation-rule>
+        <from-view-id>/DatosAuxiliares/Departamentos/*</from-view-id>
+        <navigation-case>
+            <from-outcome>departamento-insertar</from-outcome>
+            <to-view-id>/DatosAuxiliares/Departamentos/insertar.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>departamento-editar</from-outcome>
+            <to-view-id>/DatosAuxiliares/Departamentos/editar.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/DatosAuxiliares/Cuerpos/*</from-view-id>
+        <navigation-case>
+            <from-outcome>cuerpo-insertar</from-outcome>
+            <to-view-id>/DatosAuxiliares/Cuerpos/insertar.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cuerpo-editar</from-outcome>
+            <to-view-id>/DatosAuxiliares/Cuerpos/editar.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+
+    <navigation-rule>
+        <from-view-id>/DatosAuxiliares/Grupos/*</from-view-id>
+        <navigation-case>
+            <from-outcome>grupo-insertar</from-outcome>
+            <to-view-id>/DatosAuxiliares/Grupos/insertar.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>grupo-editar</from-outcome>
+            <to-view-id>/DatosAuxiliares/Grupos/editar.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/DatosAuxiliares/EspecialidadesLaborales/*</from-view-id>
+        <navigation-case>
+            <from-outcome>especialidadLaboral-insertar</from-outcome>
+            <to-view-id>/DatosAuxiliares/EspecialidadesLaborales/insertar.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>especialidadLaboral-editar</from-outcome>
+            <to-view-id>/DatosAuxiliares/EspecialidadesLaborales/editar.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/DatosAuxiliares/PuestosTrabajo/*</from-view-id>
+        <navigation-case>
+            <from-outcome>puestoTrabajo-insertar</from-outcome>
+            <to-view-id>/DatosAuxiliares/PuestosTrabajo/insertar.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>puestoTrabajo-editar</from-outcome>
+            <to-view-id>/DatosAuxiliares/PuestosTrabajo/editar.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+   
+
+    <navigation-rule>
+        <from-view-id>/personal/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>empleado-editar</from-outcome>
+            <to-view-id>/personal/editar/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+    </navigation-rule>
+
+
+
+
+    <!-- COMPRAS -->
+    <managed-bean>
+        <managed-bean-name>lineasPedido</managed-bean-name>
+        <managed-bean-class>compras.jsfcontroller.LineaPedidoController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>pedidos</managed-bean-name>
+        <managed-bean-class>compras.jsfcontroller.PedidoController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>entidadesSolicitantes</managed-bean-name>
+        <managed-bean-class>compras.jsfcontroller.EntidadSolicitanteController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>proveedores</managed-bean-name>
+        <managed-bean-class>compras.jsfcontroller.ProveedorController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>datosFacturacion</managed-bean-name>
+        <managed-bean-class>compras.jsfcontroller.DatosFacturacionController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>datosEntrega</managed-bean-name>
+        <managed-bean-class>compras.jsfcontroller.DatosEntregaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>productos</managed-bean-name>
+        <managed-bean-class>compras.jsfcontroller.ProductoController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>estadosPedido</managed-bean-name>
+        <managed-bean-class>compras.jsfcontroller.EstadoPedidoController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+
+        <!-- COMPRAS JPA -->
+
+    <managed-bean>
+        <managed-bean-name>facturaJpa</managed-bean-name>
+        <managed-bean-class>compras.jpacontroller.FacturaJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+
+    <managed-bean>
+        <managed-bean-name>facturas</managed-bean-name>
+        <managed-bean-class>compras.jsfcontroller.FacturaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>datosEntregaJpa</managed-bean-name>
+        <managed-bean-class>compras.jpacontroller.DatosEntregaJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>entidadSolicitanteJpa</managed-bean-name>
+        <managed-bean-class>compras.jpacontroller.EntidadSolicitanteJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>pedidoJpa</managed-bean-name>
+        <managed-bean-class>compras.jpacontroller.PedidoJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>productoJpa</managed-bean-name>
+        <managed-bean-class>compras.jpacontroller.ProductoJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>proveedorJpa</managed-bean-name>
+        <managed-bean-class>compras.jpacontroller.ProveedorJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>datosFacturacionJpa</managed-bean-name>
+        <managed-bean-class>compras.jpacontroller.DatosFacturacionJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>estadoPedidoJpa</managed-bean-name>
+        <managed-bean-class>compras.jpacontroller.EstadoPedidoJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    
+
+    <!-- COMPRAS CONVERTERS -->
+    <converter>
+        <converter-for-class>compras.modelo.Factura</converter-for-class>
+        <converter-class>compras.jsfcontroller.FacturaConverter</converter-class>
+    </converter>
+
+
+    <converter>
+        <converter-for-class>compras.modelo.Proveedor</converter-for-class>
+        <converter-class>compras.jsfcontroller.ProveedorConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>compras.modelo.EntidadSolicitante</converter-for-class>
+        <converter-class>compras.jsfcontroller.EntidadSolicitanteConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>compras.modelo.DatosEntrega</converter-for-class>
+        <converter-class>compras.jsfcontroller.DatosEntregaConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>compras.modelo.DatosFacturacion</converter-for-class>
+        <converter-class>compras.jsfcontroller.DatosFacturacionConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>compras.modelo.Producto</converter-for-class>
+        <converter-class>compras.jsfcontroller.ProductoConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>compras.modelo.EstadoPedido</converter-for-class>
+        <converter-class>compras.jsfcontroller.EstadoPedidoConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>compras.modelo.Pedido</converter-for-class>
+        <converter-class>compras.jsfcontroller.PedidoConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-id>EuroCurrencyConverter</converter-id>
+        <converter-class>jsf.util.EuroCurrencyConverter</converter-class>
+    </converter>
+   
+    <!-- PROYECTOS -->
+    <managed-bean>
+        <managed-bean-name>proyectos</managed-bean-name>
+        <managed-bean-class>proyectos.jsfcontroller.ProyectoController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>organismos</managed-bean-name>
+        <managed-bean-class>proyectos.jsfcontroller.OrganismoController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>entidadesFinanciadoras</managed-bean-name>
+        <managed-bean-class>proyectos.jsfcontroller.EntidadFinanciadoraController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>tiposProyecto</managed-bean-name>
+        <managed-bean-class>proyectos.jsfcontroller.TipoProyectoController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>estadosProyecto</managed-bean-name>
+        <managed-bean-class>proyectos.jsfcontroller.EstadoProyectoController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <!-- PROYECTOS JPA -->
+    <managed-bean>
+        <managed-bean-name>lineaInvestigacionJpa</managed-bean-name>
+        <managed-bean-class>proyectos.jpacontroller.LineaInvestigacionJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>organismoJpa</managed-bean-name>
+        <managed-bean-class>proyectos.jpacontroller.OrganismoJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>entidadFinanciadoraJpa</managed-bean-name>
+        <managed-bean-class>proyectos.jpacontroller.EntidadFinanciadoraJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>tipoProyectoJpa</managed-bean-name>
+        <managed-bean-class>proyectos.jpacontroller.TipoProyectoJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>proyectoJpa</managed-bean-name>
+        <managed-bean-class>proyectos.jpacontroller.ProyectoJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>estadoProyectoJpa</managed-bean-name>
+        <managed-bean-class>proyectos.jpacontroller.EstadoProyectoJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>anualidadJpa</managed-bean-name>
+        <managed-bean-class>proyectos.jpacontroller.AnualidadJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+
+
+    <!-- PROYECTOS CONVERTERS -->
+    <converter>
+        <converter-for-class>proyectos.modelo.LineaInvestigacion</converter-for-class>
+        <converter-class>proyectos.jsfcontroller.LineaInvestigacionConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>proyectos.modelo.Proyecto</converter-for-class>
+        <converter-class>proyectos.jsfcontroller.ProyectoConverter</converter-class>
+    </converter>
+
+
+    <converter>
+        <converter-for-class>proyectos.modelo.Organismo</converter-for-class>
+        <converter-class>proyectos.jsfcontroller.OrganismoConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>proyectos.modelo.EntidadFinanciadora</converter-for-class>
+        <converter-class>proyectos.jsfcontroller.EntidadFinanciadoraConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>proyectos.modelo.TipoProyecto</converter-for-class>
+        <converter-class>proyectos.jsfcontroller.TipoProyectoConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>proyectos.modelo.EstadoProyecto</converter-for-class>
+        <converter-class>proyectos.jsfcontroller.EstadoProyectoConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>proyectos.modelo.distribuciondotacion.Anualidad</converter-for-class>
+        <converter-class>proyectos.jsfcontroller.AnualidadConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>proyectos.modelo.distribuciondotacion.AnualidadPartida</converter-for-class>
+        <converter-class>proyectos.jsfcontroller.AnualidadPartidaConverter</converter-class>
+    </converter>
+
+
+     <navigation-rule>
+        <from-view-id>/proyectos/*</from-view-id>
+        <navigation-case>
+            <from-outcome>proyecto-editar</from-outcome>
+            <to-view-id>/proyectos/editar/</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+
+    <!-- GASTO -->
+    <managed-bean>
+        <managed-bean-name>gastos</managed-bean-name>
+        <managed-bean-class>gasto.jsfcontroller.GastoController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>gastoJpa</managed-bean-name>
+        <managed-bean-class>gasto.jpacontroller.GastoJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <converter>
+        <converter-for-class>gasto.modelo.Gasto</converter-for-class>
+        <converter-class>gasto.jsfcontroller.GastoConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>gasto.modelo.GastoRealizado</converter-for-class>
+        <converter-class>gasto.jsfcontroller.GastoRealizadoConverter</converter-class>
+    </converter>
+
+    <navigation-rule>
+        <from-view-id>/gasto/*</from-view-id>
+        <navigation-case>
+            <from-outcome>gasto-registrar-gasto</from-outcome>
+            <to-view-id>/gasto/registrar/gasto/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>gasto-ver-gasto</from-outcome>
+            <to-view-id>/gasto/ver/gasto/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>gasto-registrar-tipogasto</from-outcome>
+            <to-view-id>/gasto/registrar/tipogasto/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>gasto-ver-tipogasto</from-outcome>
+            <to-view-id>/gasto/ver/tipogasto/</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <!-- INVENTARIO-->
+
+    <managed-bean>
+        <managed-bean-name>inventario</managed-bean-name>
+        <managed-bean-class>inventario.jsfcontroller.InventarioController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+
+    <managed-bean>
+        <managed-bean-name>inventarioEntrada</managed-bean-name>
+        <managed-bean-class>inventario.jsfcontroller.InventarioEntradaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>inventarioSalida</managed-bean-name>
+        <managed-bean-class>inventario.jsfcontroller.InventarioSalidaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>inventarioProducto</managed-bean-name>
+        <managed-bean-class>inventario.jsfcontroller.InventarioProductoController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>inventarioJpa</managed-bean-name>
+        <managed-bean-class>inventario.jpacontroller.InventarioJpaController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <converter>
+        <converter-for-class>inventario.modelo.ProductoAlmacenado</converter-for-class>
+        <converter-class>inventario.jsfcontroller.ProductoInventariableConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>inventario.modelo.TipoCantidad</converter-for-class>
+        <converter-class>inventario.jsfcontroller.TipoCantidadConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>inventario.modelo.MovimientoEntrada</converter-for-class>
+        <converter-class>inventario.jsfcontroller.MovimientoEntradaConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-for-class>inventario.modelo.MovimientoSalida</converter-for-class>
+        <converter-class>inventario.jsfcontroller.MovimientoSalidaConverter</converter-class>
+    </converter>
+
+    <navigation-rule>
+        <from-view-id>/inventario/*</from-view-id>
+        <navigation-case>
+            <from-outcome>inventario-registrar-entrada-producto</from-outcome>
+            <to-view-id>/inventario/registrarentrada/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>inventario-mostrar-entradas-producto</from-outcome>
+            <to-view-id>/inventario/registrarsalida/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>inventario-registrar-salida-producto</from-outcome>
+            <to-view-id>/inventario/registrarsalida/registrarsalidaproducto.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/DatosAuxiliares/TiposProyecto/*</from-view-id>
+        <navigation-case>
+            <from-outcome>tipoProyecto-insertar</from-outcome>
+            <to-view-id>/DatosAuxiliares/TiposProyecto/insertar.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>tipoProyecto-editar</from-outcome>
+            <to-view-id>/DatosAuxiliares/TiposProyecto/editar.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/DatosAuxiliares/EntidadesFinanciadoras/*</from-view-id>
+        <navigation-case>
+            <from-outcome>entidadFinanciadora-insertar</from-outcome>
+            <to-view-id>/DatosAuxiliares/EntidadesFinanciadoras/insertar.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>entidadFinanciadora-editar</from-outcome>
+            <to-view-id>/DatosAuxiliares/EntidadesFinanciadoras/editar.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/DatosAuxiliares/Organismos/*</from-view-id>
+        <navigation-case>
+            <from-outcome>organismo-insertar</from-outcome>
+            <to-view-id>/DatosAuxiliares/Organismos/insertar.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>organismos-editar</from-outcome>
+            <to-view-id>/DatosAuxiliares/Organismos/editar.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/DatosAuxiliares/Proveedores/*</from-view-id>
+        <navigation-case>
+            <from-outcome>proveedor-insertar</from-outcome>
+            <to-view-id>/DatosAuxiliares/Proveedores/insertar.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>proveedor-editar</from-outcome>
+            <to-view-id>/DatosAuxiliares/Proveedores/editar.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/DatosAuxiliares/DatosFacturacion/*</from-view-id>
+        <navigation-case>
+            <from-outcome>datosFacturacion-insertar</from-outcome>
+            <to-view-id>/DatosAuxiliares/DatosFacturacion/insertar.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>datosFacturacion-editar</from-outcome>
+            <to-view-id>/DatosAuxiliares/DatosFacturacion/editar.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/DatosAuxiliares/DatosEntrega/*</from-view-id>
+        <navigation-case>
+            <from-outcome>datosEntrega-insertar</from-outcome>
+            <to-view-id>/DatosAuxiliares/DatosEntrega/insertar.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>datosEntrega-editar</from-outcome>
+            <to-view-id>/DatosAuxiliares/DatosEntrega/editar.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/DatosAuxiliares/Productos/*</from-view-id>
+        <navigation-case>
+            <from-outcome>producto-insertar</from-outcome>
+            <to-view-id>/DatosAuxiliares/Productos/insertar.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>producto-editar</from-outcome>
+            <to-view-id>/DatosAuxiliares/Productos/editar.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+
+    <navigation-rule>
+        <from-view-id>/compras/*</from-view-id>
+        <navigation-case>
+            <from-outcome>pedido-editar</from-outcome>
+            <to-view-id>/compras/editar/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+    </navigation-rule>
+
+
+    <managed-bean>
+        <managed-bean-name>pedidosProyecto</managed-bean-name>
+        <managed-bean-class>compras.jsfcontroller.PedidoProyectoController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+
+    <navigation-rule>
+        <from-view-id>/investigador/*</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/investigador/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>compras-listar</from-outcome>
+            <to-view-id>/investigador/pedidos/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>realizar-pedido-proyecto</from-outcome>
+            <to-view-id>/investigador/pedidos/realizarPedido.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>actividadcientifica-ver</from-outcome>
+            <to-view-id>/investigador/culturacientifica/ver/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>actividadcientifica-editar</from-outcome>
+            <to-view-id>/investigador/culturacientifica/editar/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>culturacientifica-listar</from-outcome>
+            <to-view-id>/investigador/culturacientifica/listar/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>pedido-ver</from-outcome>
+            <to-view-id>/investigador/pedidos/ver.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>pedido-editar</from-outcome>
+            <to-view-id>/investigador/pedidos/realizarPedido.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <!-- REGLAS DE NAVEGACION GENERAL -->
+
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>personal-consultar-portipopersonal</from-outcome>
+            <to-view-id>/personal/consultar/portipopersonal/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>configurarCuenta</from-outcome>
+            <to-view-id>/Usuarios/configuracionUsuario.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>configurarWorkers</from-outcome>
+            <to-view-id>/Usuarios/configuracionWorkers.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>personal</from-outcome>
+            <to-view-id>/personal/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>actividadcientifica-ver</from-outcome>
+            <to-view-id>/culturacientifica/ver/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>actividadcientifica-editar</from-outcome>
+            <to-view-id>/culturacientifica/editar/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+
+        <navigation-case>
+            <from-outcome>culturacientifica-listar</from-outcome>
+            <to-view-id>/culturacientifica/listar/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>culturacientifica-consultar-por-anio</from-outcome>
+            <to-view-id>/culturacientifica/consultar/poranio/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>culturacientifica-consultar-por-investigador</from-outcome>
+            <to-view-id>/culturacientifica/consultar/porinvestigador/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>empleado-ver</from-outcome>
+            <to-view-id>/personal/ver/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>personal-listar</from-outcome>
+            <to-view-id>/personal/listar/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>personal-consultar</from-outcome>
+            <to-view-id>/personal/consultar/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>pedido-ver</from-outcome>
+            <to-view-id>/compras/ver/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>compras</from-outcome>
+            <to-view-id>/compras/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>compras-listar</from-outcome>
+            <to-view-id>/compras/listar/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>compras-consultar</from-outcome>
+            <to-view-id>/compras/consultar/porproductos/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>proyectos</from-outcome>
+            <to-view-id>/proyectos/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>proyectos-listar</from-outcome>
+            <to-view-id>/proyectos/listar/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>proyectos-consultar</from-outcome>
+            <to-view-id>/proyectos/consultar/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>proyecto-ver</from-outcome>
+            <to-view-id>/proyectos/ver/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>datos-auxiliares</from-outcome>
+            <to-view-id>/DatosAuxiliares/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>departamentos</from-outcome>
+            <to-view-id>/DatosAuxiliares/Departamentos/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cuerpos</from-outcome>
+            <to-view-id>/DatosAuxiliares/Cuerpos/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>especialidades-laborales</from-outcome>
+            <to-view-id>/DatosAuxiliares/EspecialidadesLaborales/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>grupos</from-outcome>
+            <to-view-id>/DatosAuxiliares/Grupos/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>puestos-trabajo</from-outcome>
+            <to-view-id>/DatosAuxiliares/PuestosTrabajo/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>tipos-personal</from-outcome>
+            <to-view-id>/DatosAuxiliares/TiposPersonal/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>proveedores</from-outcome>
+            <to-view-id>/DatosAuxiliares/Proveedores/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>datos-facturacion</from-outcome>
+            <to-view-id>/DatosAuxiliares/DatosFacturacion/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>datos-entrega</from-outcome>
+            <to-view-id>/DatosAuxiliares/DatosEntrega/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>productos</from-outcome>
+            <to-view-id>/DatosAuxiliares/Productos/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>organismos</from-outcome>
+            <to-view-id>/DatosAuxiliares/Organismos/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>entidades-financiadoras</from-outcome>
+            <to-view-id>/DatosAuxiliares/EntidadesFinanciadoras/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>tipos-proyecto</from-outcome>
+            <to-view-id>/DatosAuxiliares/TiposProyecto/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>factura-ver</from-outcome>
+            <to-view-id>/compras/facturas/ver/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>factura-editar</from-outcome>
+            <to-view-id>/compras/facturas/editar/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>facturas-listar</from-outcome>
+            <to-view-id>/compras/facturas/listar/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>gasto</from-outcome>
+            <to-view-id>/gasto/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>gasto-ver</from-outcome>
+            <to-view-id>/gasto/ver/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>inventario</from-outcome>
+            <to-view-id>/inventario/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>inventario-ver</from-outcome>
+            <to-view-id>/inventario/ver/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>inventario-ver-almacen</from-outcome>
+            <to-view-id>/inventario/ver/almacen/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>inventario-ver-producto</from-outcome>
+            <to-view-id>/inventario/ver/producto/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>inventario-ver-movimientosalida</from-outcome>
+            <to-view-id>/inventario/ver/movimientosalida/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>inventario-ver-movimientoentrada</from-outcome>
+            <to-view-id>/inventario/ver/movimientoentrada/</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>inventario-seleccionar-producto</from-outcome>
+            <to-view-id>/inventario/seleccionarProducto.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>
+
+
+
+
+

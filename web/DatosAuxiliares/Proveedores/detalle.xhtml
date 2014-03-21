@@ -1,0 +1,67 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ice="http://www.icesoft.com/icefaces/component">
+<ice:panelGrid columns="2" >
+    <ice:panelLayout layout="flow">
+        <ice:outputLabel for="itRazonSocial" value="Razon social:" required="true"/>
+        <br/>
+        <ice:message for="itRazonSocial" style="color:red"/>
+        <ice:inputText id="itRazonSocial" value="#{proveedores.proveedor.razonSocial}" size="50"/>
+    </ice:panelLayout>
+
+    <ice:panelLayout layout="flow">
+        <ice:outputLabel for="itCIF" value="CIF:"/>
+        <br/>
+        <ice:message for="itCIF" style="color:red"/>
+        <ice:inputText id="itCIF" value="#{proveedores.proveedor.cif}" />
+    </ice:panelLayout>
+
+    <ice:panelLayout layout="flow">
+        <ice:outputLabel for="itDireccion" value="Dirección:"/>
+        <br/>
+        <ice:message for="itDireccion" style="color:red"/>
+
+        <ice:inputTextarea id="itDireccion" value="#{proveedores.proveedor.direccion}" cols="50"/>
+    </ice:panelLayout>
+
+   
+
+   
+ <ice:panelLayout layout="flow">
+        <ice:outputLabel for="itEmail" value="Email:" required="true"/>
+        <br/>
+        <ice:message for="itEmail" style="color:red"/>
+        <ice:inputText id="itEmail" value="#{proveedores.proveedor.EMail}"/>
+    </ice:panelLayout>
+
+     <ice:panelLayout layout="flow">
+        <ice:outputLabel for="itTelefono" value="Teléfono:" />
+        <br/>
+        <ice:message for="itTelefono" style="color:red"/>
+        <ice:inputText id="itTelefono" value="#{proveedores.proveedor.telefono}" />
+    </ice:panelLayout>
+    <ice:panelLayout layout="flow">
+        <ice:outputLabel for="itFax" value="Fax:"/>
+        <br/>
+        <ice:message for="itFax" style="color:red"/>
+        <ice:inputText id="itFax" value="#{proveedores.proveedor.fax}"/>
+    </ice:panelLayout>
+ <ice:panelLayout layout="flow">
+        <ice:outputLabel for="itNombrePersonaContacto" value="Nombre de la persona de contacto:"/>
+        <br/>
+        <ice:message for="itNombrePersonaContacto" style="color:red"/>
+        <ice:inputText id="itNombrePersonaContacto" value="#{proveedores.proveedor.nombrePersonaContacto}" size="50"/>
+    </ice:panelLayout>
+  
+
+   
+    <br/>
+    <ice:panelLayout layout="flow">
+        <ice:outputLabel for="itaObservaciones" value="Observaciones:" required="true"/>
+        <br/>
+        <ice:message for="itaObservaciones" style="color:red"/>
+        <ice:inputTextarea id="itaObservaciones" value="#{proveedores.proveedor.observaciones}" cols="50"/>
+    </ice:panelLayout>
+
+
+</ice:panelGrid>
+</div>

@@ -1,0 +1,508 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <ice:panelGrid columns="6" >
+                    <br/><br/><br/>
+                    <ice:commandLink action="#{pedidos.salirSinGuardar}" value="Salir sin guardar" immediate="true"/>
+                    <ice:commandButton action="#{pedidos.salirGuardando}" value="Salir y GUARDAR"/>
+                    <ice:commandButton action="#{pedidos.guardarCambios}" value="GUARDAR AHORA"  />
+                    <ice:panelLayout layout="flow">
+                        <ice:outputLabel for="itNumPedido" value="Numero de pedido:"/>
+                        <br/>
+
+                        <ice:inputText id="itNumPedido" value="#{pedidos.pedido.numPedido}" disabled="true" style="color:black;"/>
+                    </ice:panelLayout>
+                    <ice:panelLayout layout="flow">
+                        <ice:outputLabel for="itFecha" value="Fecha:"/>
+                        <br/>
+                        <ice:message showDetail="false" showSummary="false" for="itFecha" errorClass="errorImagen"/>
+                        <ice:selectInputDate renderAsPopup="true" id="itFecha" value="#{pedidos.pedido.fecha}" required="true" partialSubmit="true">
+                            <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                        </ice:selectInputDate>
+                    </ice:panelLayout>
+                    <ice:panelLayout layout="flow">
+
+                        <ice:outputLabel for="somEstado" value="Estado:"/>
+
+                        <br/>
+                        <ice:message showDetail="false" showSummary="false" for="somEstado" errorClass="errorImagen"/>
+                        <ice:selectOneMenu id="somEstado" value="#{pedidos.pedido.estadoPedido}" partialSubmit="true" required="true">
+                            <f:selectItems value="#{estadosPedido.datosEntregaItemsAvailableSelectOne}"/>
+                        </ice:selectOneMenu>
+                    </ice:panelLayout>
+
+                    <ice:panelLayout layout="flow" rendered="#{pedidos.pedido.cancelado}">
+                        <ice:outputLabel for="itFechaCancelacion" value="Fecha de cancelación:"/>
+                        <br/>
+                        <ice:message showDetail="false" showSummary="false" for="itFechaCancelacion" errorClass="errorImagen"/>
+                        <ice:selectInputDate renderAsPopup="true" id="itFechaCancelacion" value="#{pedidos.pedido.fechaCancelacion}" partialSubmit="true">
+                            <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                        </ice:selectInputDate>
+                    </ice:panelLayout>
+                </ice:panelGrid>
+                <ice:outputResource mimeType="application/pdf" resource="#{pedidos.ordenPedido}" label="Ver orden de pedido" type="link" filename="#{pedidos.nombreFicheroOrdenPedido}" attachment="false" />
+                <ice:panelTabSet>
+
+                    <ice:panelTab id="tabDatosPedido" label="Datos del pedido">
+                        <ice:panelLayout layout="flow">
+
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="somSolicitante" value="Solicitante:"/>
+                                <br/>
+                                <ice:selectOneMenu id="somSolicitante" value="#{pedidos.pedido.solicitante}" partialSubmit="true">
+                                    <f:selectItems value="#{personal.empleadoItemsAvailableSelectOne}"/>
+                                </ice:selectOneMenu>
+                            </ice:panelLayout>
+
+                            <ice:panelCollapsible expanded="false">
+                                <f:facet name="header">
+                                    <ice:panelGroup>
+                                        <ice:outputText value="Detalles del solicitante"/>
+                                    </ice:panelGroup>
+                                </f:facet>
+                                <ice:panelGroup>
+
+
+                                    <ice:panelLayout layout="flow">
+                                        <ice:outputLabel for="itDNI" value="DNI:"/>
+                                        <br/>
+                                        <ice:inputText id="itDNI" value="#{pedidos.pedido.solicitante.dni}" disabled="true" style="color:black;"/>
+                                    </ice:panelLayout>
+
+                                    <ice:panelGrid columns="4" cellspacing="20">
+
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="itTelefonoEmpleado" value="Teléfono:"/>
+                                            <br/>
+                                            <ice:inputText id="itTelefonoEmpleado" value="#{pedidos.pedido.solicitante.contratoActual.telefono}" disabled="true" style="color:black;"/>
+                                        </ice:panelLayout>
+
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="itCorreoElectronicoEmpleado" value="Correo electrónico:"/>
+                                            <br/>
+                                            <ice:inputText id="itCorreoElectronicoEmpleado" value="#{pedidos.pedido.solicitante.contratoActual.EMail}" disabled="true" style="color:black;"/>
+                                        </ice:panelLayout>
+
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="itNombreDepartamento" value="Departamento:"/>
+                                            <br/>
+                                            <ice:inputText id="itNombreDepartamento" value="#{pedidos.pedido.solicitante.contratoActual.departamento.nombre}"  disabled="true" style="color:black;"/>
+                                        </ice:panelLayout>
+
+                                    </ice:panelGrid>
+                                </ice:panelGroup>
+                            </ice:panelCollapsible>
+
+
+                            <br/>
+
+                            <ice:outputLabel for="somEntidadSolicitante" value="EntidadSolicitante:"/>
+                            <br/>
+                            <ice:selectOneMenu id="somEntidadSolicitante" value="#{pedidos.pedido.entidad}" partialSubmit="true">
+                                <f:selectItems value="#{entidadesSolicitantes.entidadSolicitanteItemsAvailableSelectOne}"/>
+                            </ice:selectOneMenu>
+
+                            <br/><br/>
+                            <ice:selectInputText id="AutoCmpTxtFace"
+                                                 rows="10"
+                                                 width="500"
+                                                 valueChangeListener="#{pedidos.selectInputValueChanged}"
+                                                 listVar="proyecto"
+                                                 listValue="#{pedidos.proyectoMatchPossibilities}"
+                                                 rendered="#{pedidos.pedido.entidad.proyecto}"
+                                                 partialSubmit="true"
+                                                 immediate="true"
+                                                 >
+
+                                <f:facet name="selectInputText" >
+                                    <ice:panelGrid columns="5">
+                                        <ice:outputText value="#{proyecto.referencia}" />
+                                        <ice:outputText value="#{proyecto.responsable.empleadoIACT.apellidos}, #{proyecto.responsable.empleadoIACT.nombre}"/>
+                                        <ice:outputText value="#{proyecto.estadoProyecto.nombre}" style="font-weight: bold;"/>
+                                        <ice:outputText value="#{proyecto.convocatoria}" style="font-weight: bold;"/>
+                                        <ice:outputText value="#{proyecto.organismo.nombre}" style="font-weight:bold;"/>
+
+                                    </ice:panelGrid>
+                                </f:facet>
+
+                            </ice:selectInputText>
+
+
+                            <ice:panelCollapsible expanded="false" rendered="#{pedidos.pedido.entidad.proyecto and not(empty pedidos.pedido.proyecto)}">
+                                <f:facet name="header">
+                                    <ice:panelGroup>
+                                        <ice:outputText value="Proyecto #{pedidos.pedido.proyecto.referencia} de #{pedidos.pedido.proyecto.responsable.empleadoIACT.apellidos}, #{pedidos.pedido.proyecto.responsable.empleadoIACT.nombre}"/>
+                                    </ice:panelGroup>
+                                </f:facet>
+                                <ice:panelGroup>
+                                    <ice:panelGrid columns="2" >
+                                        <ice:panelLayout layout="flow" >
+                                            <ice:outputLabel for="itReferenciaProyecto" value="Referencia del proyecto:"/>
+                                            <br/>
+                                            <ice:inputText id="itReferenciaProyecto" value="#{pedidos.pedido.proyecto.referencia}" disabled="true" style="color:black;" />
+                                        </ice:panelLayout>
+
+                                        <ice:panelLayout layout="flow" >
+                                            <ice:outputLabel for="itNombreInvestigador" value="Investigador principal:"/>
+                                            <br/>
+                                            <ice:inputText id="itNombreInvestigador" value="#{pedidos.pedido.proyecto.responsable.empleadoIACT.apellidos}, #{pedidos.pedido.proyecto.responsable.empleadoIACT.nombre}" disabled="true" style="color:black;" size="50"/>
+                                        </ice:panelLayout>
+
+                                        <ice:panelLayout layout="flow" >
+                                            <ice:outputLabel for="itOrganismoProyecto" value="Organismo:"/>
+                                            <br/>
+                                            <ice:inputText id="itOrganismoProyecto" value="#{pedidos.pedido.proyecto.organismo.nombre}" disabled="true" style="color:black;" />
+                                        </ice:panelLayout>
+                                            <ice:panelLayout layout="flow" >
+                                            <ice:outputLabel for="itEstadoProyecto" value="Estado del proyecto:"/>
+                                            <br/>
+                                            <ice:inputText id="itEstadoProyecto" value="#{pedidos.pedido.proyecto.estadoProyecto.nombre}" disabled="true" style="color:black;" />
+                                        </ice:panelLayout>
+                                    </ice:panelGrid>
+                                </ice:panelGroup>
+                            </ice:panelCollapsible>
+                        </ice:panelLayout>
+                                            <br/>
+                                            <ice:outputLabel for="somAsignaciones" value="Asignado a: "/>
+                                            <br/>
+                                            <ice:selectOneMenu id="somAsignaciones" value="#{pedidos.pedido.asignacion}" partialSubmit="true">
+                            <f:selectItems value="#{pedidos.asignacionItemsAvailableSelectOne}"/>
+                        </ice:selectOneMenu>
+                        <br/>
+                        <br/>
+
+                        <ice:outputLabel for="somDatosFacturacion" value="Datos de facturación"/>
+                        <br/>
+                        <ice:selectOneMenu id="somDatosFacturacion" value="#{pedidos.pedido.datosFacturacion}" partialSubmit="true">
+                            <f:selectItems value="#{datosFacturacion.datosFacturacionItemsAvailableSelectOne}"/>
+                        </ice:selectOneMenu>
+                        <br/>
+                        <br/>
+                        <ice:outputLabel for="somDatosEntrega" value="Datos de entrega:"/>
+                        <br/>
+                        <ice:selectOneMenu id="somDatosEntrega" value="#{pedidos.pedido.datosEntrega}" partialSubmit="true">
+                            <f:selectItems value="#{datosEntrega.datosEntregaItemsAvailableSelectOne}"/>
+                        </ice:selectOneMenu>
+
+                        <ice:panelCollapsible expanded="false">
+                            <f:facet name="header">
+                                <ice:panelGroup>
+                                    <ice:outputText value="Detalles de los datos de entrega"/>
+                                </ice:panelGroup>
+                            </f:facet>
+                            <ice:panelGroup>
+                                <ice:panelGrid columns="4" cellspacing="20">
+                                    <ice:panelLayout layout="flow" >
+                                        <ice:outputLabel for="itRazonSocialDatosEntrega" value="Razón social:"/>
+                                        <br/>
+                                        <ice:inputText id="itRazonSocialDatosEntrega" value="#{pedidos.pedido.datosEntrega.razonSocial}" disabled="true"  style="color:black;" />
+                                    </ice:panelLayout>
+                                    <ice:panelLayout layout="flow" >
+                                        <ice:outputLabel for="itDireccionDatosEntrega" value="Dirección:"/>
+                                        <br/>
+                                        <ice:inputText id="itDireccionDatosEntrega" value="#{pedidos.pedido.datosEntrega.direccion}" disabled="true"  style="color:black;" />
+                                    </ice:panelLayout>
+                                    <ice:panelLayout layout="flow" >
+                                        <ice:outputLabel for="itTelefonoDatosEntrega" value="Teléfono:"/>
+                                        <br/>
+                                        <ice:inputText id="itTelefonoDatosEntrega" value="#{pedidos.pedido.datosEntrega.telefono}" disabled="true"  style="color:black;" />
+                                    </ice:panelLayout>
+                                </ice:panelGrid>
+                            </ice:panelGroup>
+                        </ice:panelCollapsible>
+                        <br/>
+
+                        <ice:outputLabel for="somProveedor" value="Proveedor:"/>
+                        <br/>
+                        <ice:selectOneMenu id="somProveedor" value="#{pedidos.pedido.proveedor}" partialSubmit="true">
+                            <f:selectItems value="#{proveedores.proveedorItemsAvailableSelectOne}"/>
+                        </ice:selectOneMenu>
+
+                        <ice:panelCollapsible expanded="false">
+                            <f:facet name="header">
+                                <ice:panelGroup>
+                                    <ice:outputText value="Detalles del proveedor"/>
+                                </ice:panelGroup>
+                            </f:facet>
+                            <ice:panelGroup>
+                                <ice:panelGrid columns="4" cellspacing="20">
+                                    <ice:panelLayout layout="flow" >
+                                        <ice:outputLabel for="itRazonSocialProveedor" value="Razón social:"/>
+                                        <br/>
+                                        <ice:inputText id="itRazonSocialProveedor" value="#{pedidos.pedido.proveedor.razonSocial}" disabled="true" style="color:black;"/>
+                                    </ice:panelLayout>
+                                    <ice:panelLayout layout="flow" >
+                                        <ice:outputLabel for="itDireccionProveedor" value="Dirección:"/>
+                                        <br/>
+                                        <ice:inputText id="itDireccionProveedor" value="#{pedidos.pedido.proveedor.direccion}" disabled="true" style="color:black;"/>
+                                    </ice:panelLayout>
+                                    <ice:panelLayout layout="flow" >
+                                        <ice:outputLabel for="itTelefonoProveedor" value="Teléfono:"/>
+                                        <br/>
+                                        <ice:inputText id="itTelefonoProveedor" value="#{pedidos.pedido.proveedor.telefono}" disabled="true" style="color:black;"/>
+                                    </ice:panelLayout>
+                                    <ice:panelLayout layout="flow" >
+                                        <ice:outputLabel for="itEmailProveedor" value="eMail:"/>
+                                        <br/>
+                                        <ice:inputText id="itEmailProveedor" value="#{pedidos.pedido.proveedor.EMail}" disabled="true" style="color:black;" />
+                                    </ice:panelLayout>
+                                    <ice:panelLayout layout="flow" >
+                                        <ice:outputLabel for="itFaxProveedor" value="Fax:"/>
+                                        <br/>
+                                        <ice:inputText id="itFaxProveedor" value="#{pedidos.pedido.proveedor.fax}" disabled="true" style="color:black;"/>
+                                    </ice:panelLayout>
+                                    <ice:panelLayout layout="flow" >
+                                        <ice:outputLabel for="itCifProveedor" value="eMail:"/>
+                                        <br/>
+                                        <ice:inputText id="itCifProveedor" value="#{pedidos.pedido.proveedor.cif}" disabled="true" style="color:black;"/>
+                                    </ice:panelLayout>
+                                    <ice:panelLayout layout="flow" >
+                                        <ice:outputLabel for="itNombrePersonaContactoProveedor" value="Nombre persona de contacto:"/>
+                                        <br/>
+                                        <ice:inputText id="itNombrePersonaContactoProveedor" value="#{pedidos.pedido.proveedor.nombrePersonaContacto}" disabled="true" style="color:black;"/>
+                                    </ice:panelLayout>
+                                    <ice:panelLayout layout="flow" >
+                                        <ice:outputLabel for="itObservacionesProveedor" value="Observaciones:"/>
+                                        <br/>
+                                        <ice:inputText id="itObservacionesProveedor" value="#{pedidos.pedido.proveedor.observaciones}" disabled="true" style="color:black;"/>
+                                    </ice:panelLayout>
+                                </ice:panelGrid>
+                            </ice:panelGroup>
+                        </ice:panelCollapsible>
+                        <br/>
+                            <ice:panelLayout layout="flow">
+                                        <ice:outputLabel for="itaNotas" value="Observaciones:"/>
+                                        <br/>
+                                        <ice:inputTextarea id="itaNotas" value="#{pedidos.pedido.notas}" cols="60"/>
+                                    </ice:panelLayout>
+                    </ice:panelTab>
+
+                    <ice:panelTab id="tabProductosPedido" label="Productos del pedido">
+                        <ice:panelSeries id="productosPedidoPanel"
+                                         value="#{pedidos.pedido.lineas}"
+                                         var="lineaPedido">
+
+                            <ice:panelGrid columns="3" bgcolor="#{lineaPedido.marcaBorrado?'#E8E8E8':''}">
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel value="Producto" for="somProductoLinea"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="somProductoLinea" errorClass="errorImagen"/>
+                                    <ice:selectOneMenu id="somProductoLinea" value="#{lineaPedido.producto}" partialSubmit="true" immediate="true" required="true">
+                                        <f:selectItems value="#{productos.productoItemsAvailableSelectOne}"/>
+                                    </ice:selectOneMenu>
+                                    <br/>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel value="Cantidad" for="itCantidad"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="itCantidad" errorClass="errorImagen"/>
+                                    <ice:inputText id="itCantidad" value="#{lineaPedido.cantidad}" style="text-align:right;" size="20" required="true" partialSubmit="true">
+                                        <f:validateLongRange minimum="1" />
+                                    </ice:inputText>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <br/>
+                                    <ice:commandButton value="#{lineaPedido.marcaBorrado?'Volver a poner':'Quitar'}" action="#{pedidos.toggleMarcaBorrarLineaPedido}" >
+                                        <f:setPropertyActionListener value="#{lineaPedido}" target="#{pedidos.lineaPedidoSeleccionada}" />
+                                    </ice:commandButton>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:panelLayout layout="flow">
+                                        <ice:outputLabel for="itaDescripcion" value="Descripción:"/>
+                                        <br/>
+                                        <ice:inputTextarea id="itaDescripcion" value="#{lineaPedido.descripcionAlternativa}"  cols="60" rows="3" partialSubmit="true"/>
+                                    </ice:panelLayout>
+                                        <br/>
+                                     <ice:panelLayout layout="flow">
+                                        <ice:outputLabel for="itNumInventario" value="Número de inventario:"/>
+                                        <br/>
+                                        <ice:inputText id="itNumInventario" value="#{lineaPedido.numeroInventario}"/>
+                                    </ice:panelLayout>
+                                     <br/>
+                                     <ice:panelGrid columns="3">
+                                        <ice:outputLabel for="itPrecioUnitario" value="Precio unitario" />
+                                        <ice:outputLabel for="itIVA" value="IVA"/>
+                                        <ice:outputLabel for="itSubTotal" value="Subtotal"/>
+                                        <ice:inputText id="itPrecioUnitario" converter="EuroCurrencyConverter" value="#{lineaPedido.precioUnitario}"/>
+                                        <ice:inputText id="itIVA" converter="EuroCurrencyConverter" value="#{lineaPedido.ivaAplicado}"/>
+                                        <ice:outputText id="itSubTotal" converter="EuroCurrencyConverter" value="#{lineaPedido.subtotal}"/>
+                                    </ice:panelGrid>
+
+                                </ice:panelLayout>
+
+                            </ice:panelGrid>
+                            <hr/>                            <br/>
+
+
+                        </ice:panelSeries>
+
+                        <ice:commandButton value="Nueva linea" action="#{pedidos.insertarLineaPedido}" />
+                    </ice:panelTab>
+
+                    <ice:panelTab id="tabAlbaranes" label="Albaranes">
+                        <ice:commandButton value="Insertar otro albarán" action="#{pedidos.insertarAlbaran}" />
+                        <ice:panelSeries id="albaranesPedido"
+                                         value="#{pedidos.pedido.albaranes}"
+                                         var="albaran" >
+                            <ice:panelGrid columns="4" bgcolor="#{albaran.marcaBorrado?'#E8E8E8':''}">
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel value="Número de albarán" for="itNumAlbaran"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="itNumAlbaran" errorClass="errorImagen"/>
+                                    <ice:inputText id="itNumAlbaran" value="#{albaran.numAlbaran}"/>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel value="Fecha de llegada" for="itFechaLlegada"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="itFechaLlegada" errorClass="errorImagen"/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaLlegada" value="#{albaran.fechaLlegada}">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel value="Factura albarán" for="somFacturaAlbaran"/>
+                                    <br/>
+                                    <ice:selectOneMenu id="somFacturaAlbaran" value="#{albaran.factura}" >
+                                        <f:selectItems value="#{pedidos.facturasPedidoItemsAvailableSelectOne}"/>
+                                    </ice:selectOneMenu>
+
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <br/>
+                                    <ice:commandButton  value="#{albaran.marcaBorrado?'Volver a poner':'Quitar'}"  action="#{pedidos.toggleMarcaBorrarAlbaran}" >
+                                        <f:setPropertyActionListener value="#{albaran}" target="#{pedidos.albaranSeleccionado}" />
+                                    </ice:commandButton>
+                                </ice:panelLayout>
+                            </ice:panelGrid>
+                            <ice:panelLayout layout="flow" rendered="#{not empty albaran.documento}">
+                                <ice:panelGrid columns="3">
+                                    <ice:outputLabel value="Documento del albarán"/>
+                                    <ice:outputResource mimeType="application/pdf" resource="#{albaran.documento.resource}" label="Ver" type="link" attachment="false"/>
+                                    <ice:commandLink action="#{albaran.documento.borrar}" value="Borrar" partialSubmit="true"/>
+                                </ice:panelGrid>
+
+                            </ice:panelLayout>
+                            <ice:panelLayout layout="flow" rendered="#{empty albaran.documento}">
+                                <ice:commandLink value="Asignar documento" partialSubmit="true">
+                                    <f:setPropertyActionListener value="#{albaran}" target="#{pedidos.albaranSeleccionado}" />
+                                </ice:commandLink>
+                            </ice:panelLayout>
+                            <br/>
+
+                        </ice:panelSeries>
+
+                        <ice:panelCollapsible expanded="false" rendered="#{(not empty pedidos.albaranSeleccionado) and (empty pedidos.albaranSeleccionado.documento)}" immediate="true" id="pcSubirDocumentoAlbaran">
+                            <f:facet name="header">
+                                <ice:panelGroup>
+                                    <ice:outputText value="Asignar documento a albarán..."/>
+                                </ice:panelGroup>
+                            </f:facet>
+
+                            <ice:panelSeries value="#{pedidos.documentosAlbaranAutomaticos}" var="fichero">
+                                <ice:panelGrid columns="4">
+                                    <ice:outputText value="Fichero creado hace #{fichero.creadoHace}"/>
+                                    <ice:outputResource mimeType="application/pdf" resource="#{fichero.resource}" label="Ver" type="link" attachment="false"/>
+                                    <ice:commandLink action="#{fichero.asignarAAlbaran}" value="Asignar" partialSubmit="true">
+                                        <f:setPropertyActionListener value="#{pedidos.albaranSeleccionado}" target="#{fichero.albaran}" />
+                                    </ice:commandLink>
+                                    <ice:commandLink action="#{fichero.borrar}" value="Borrar" partialSubmit="true"/>
+                                </ice:panelGrid>
+                            </ice:panelSeries>
+                            <br/>
+                            <ice:inputFile uniqueFolder="false" uploadDirectory="/home/intranet/SCAN" uploadDirectoryAbsolute="true"/>
+                            <br/>
+                            <ice:commandButton value="Actualizar ficheros" partialSubmit="true" immediate="true"/>
+                        </ice:panelCollapsible>
+
+                    </ice:panelTab>
+
+                    <ice:panelTab id="tabFacturas" label="Facturas">
+                        <ice:commandButton value="Insertar otra factura" action="#{pedidos.insertarFactura}" />
+                        <ice:panelSeries id="facturasPedido"
+                                         value="#{pedidos.pedido.facturas}"
+                                         var="factura">
+                            <br/>
+                            <ice:panelGrid columns="3"  bgcolor="#{factura.marcaBorrado?'#E8E8E8':''}">
+                                <ice:panelLayout layout="flow">
+                                    <ice:message showDetail="false" showSummary="false" for="itNumFactura" errorClass="errorImagen"/>
+                                    <ice:outputLabel for="itNumFactura" value="Número de factura"/>
+                                    <br/>
+                                    <ice:inputText value="#{factura.numFactura}" id="itNumFactura"/>
+                                </ice:panelLayout>
+                                <ice:panelLayout layout="flow">
+                                    <ice:message showDetail="false" showSummary="false" for="itImporte" errorClass="errorImagen"/>
+                                    <ice:outputLabel for="itImporte" value="Importe"/>
+                                    <br/>
+                                    <ice:inputText value="#{factura.importe}" id="itImporte" converter="EuroCurrencyConverter"/>
+                                </ice:panelLayout>
+                                <ice:panelLayout layout="flow">
+                                    <br/>
+                                    <ice:commandButton  value="#{factura.marcaBorrado?'Volver a poner':'Quitar'}" action="#{pedidos.toggleMarcaBorrarFactura}" >
+                                        <f:setPropertyActionListener value="#{factura}" target="#{pedidos.facturaSeleccionada}" />
+                                    </ice:commandButton>
+                                </ice:panelLayout>
+                            </ice:panelGrid>
+                            <ice:panelLayout layout="flow" rendered="#{not empty factura.documento}">
+                                <ice:panelGrid columns="3">
+                                    <ice:outputLabel value="Documento de la factura"/>
+                                    <ice:outputResource mimeType="application/pdf" resource="#{factura.documento.resource}" label="Ver" type="link" attachment="false"/>
+                                    <ice:commandLink action="#{factura.documento.borrar}" value="Borrar" partialSubmit="true"/>
+                                </ice:panelGrid>
+
+                            </ice:panelLayout>
+
+                            <ice:panelLayout layout="flow" rendered="#{empty factura.documento}">
+                                <ice:commandLink value="Asignar documento" partialSubmit="true">
+                                    <f:setPropertyActionListener value="#{factura}" target="#{pedidos.facturaSeleccionada}" />
+                                </ice:commandLink>
+                            </ice:panelLayout>
+                            <br/>
+                        </ice:panelSeries>
+                        <ice:panelCollapsible expanded="false" rendered="#{(not empty pedidos.facturaSeleccionada) and (empty pedidos.facturaSeleccionada.documento)}">
+                            <f:facet name="header">
+                                <ice:panelGroup>
+                                    <ice:outputText value="Asignar documento a factura..."/>
+                                </ice:panelGroup>
+                            </f:facet>
+
+                            <ice:panelSeries value="#{pedidos.documentosFacturasAutomaticos}" var="fichero">
+                                <ice:panelGrid columns="4">
+                                    <ice:outputText value="Fichero creado hace #{fichero.creadoHace}"/>
+                                    <ice:outputResource mimeType="application/pdf" resource="#{fichero.resource}" label="Ver" type="link" attachment="false"/>
+                                    <ice:commandLink action="#{fichero.asignarAFactura}" value="Asignar" partialSubmit="true">
+                                        <f:setPropertyActionListener value="#{pedidos.facturaSeleccionada}" target="#{fichero.factura}" />
+                                    </ice:commandLink>
+                                    <ice:commandLink action="#{fichero.borrar}" value="Borrar" partialSubmit="true"/>
+                                </ice:panelGrid>
+                            </ice:panelSeries>
+                            <br/>
+                            <ice:inputFile uniqueFolder="false" uploadDirectory="/home/intranet/SCAN" uploadDirectoryAbsolute="true"/>
+                            <br/>
+                            <ice:commandButton value="Actualizar ficheros" partialSubmit="true" action="#{pedidos.actualizarFicheros}" immediate="true"/>
+                        </ice:panelCollapsible>
+
+                    </ice:panelTab>
+                </ice:panelTabSet>
+                <br/>
+
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>

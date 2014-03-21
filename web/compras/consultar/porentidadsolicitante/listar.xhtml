@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+                <h1>Consulta por Entidades solicitantes/Líneas de investigación</h1>
+                <ice:messages/>
+                <br/>
+
+                <ice:dataTable
+                    value="#{pedidos.pedidoItems}"
+                    var="pedido"
+                    id="Tabla"
+                    sortColumn="#{pedidos.columnaFiltro}"
+                    sortAscending="#{pedidos.ascendente}">
+
+                    <ice:column >
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader1" columnName="numPedido" >
+                                <ice:outputText value="Número de pedido"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:commandLink action="#{pedidos.verPedido}" >
+                            <ice:outputText  value="#{pedido.numPedido}" nospan="true"/>
+                            <f:setPropertyActionListener value="#{pedido}" target="#{pedidos.pedido}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader5" columnName="fecha" >
+                                <ice:outputText value="Fecha"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:commandLink action="#{pedidos.verPedido}">
+                            <ice:outputText value="#{pedido.fecha}">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+                            <f:setPropertyActionListener value="#{pedido}" target="#{pedidos.pedido}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader2" columnName="entidad.nombre" >
+                                <ice:outputText value="Entidad solicitante"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:commandLink value="#{pedido.entidad.nombre}" action="#{pedidos.verPedido}">
+                            <f:setPropertyActionListener value="#{lp.pedido}" target="#{pedidos.pedido}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader3" columnName="proyecto.responsable.empleadoIACT.contratoActual.lineaInvestigacion.nombre">
+                                <ice:outputText value="Línea de investigación"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:commandLink value="#{pedido.proyecto.responsable.empleadoIACT.contratoActual.lineaInvestigacion.nombre}" action="#{pedidos.verPedido}">
+                            <f:setPropertyActionListener value="#{pedido}" target="#{pedidos.pedido}" />
+                        </ice:commandLink>
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader4" columnName="total" >
+                                <ice:outputText value="Total"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:commandLink  action="#{pedidos.verPedido}">
+                            <ice:outputText value="#{pedido.total}" converter="EuroCurrencyConverter"/>
+                            <f:setPropertyActionListener value="#{pedido}" target="#{pedidos.pedido}" />
+                        </ice:commandLink>
+                    </ice:column>
+
+
+
+
+                </ice:dataTable>
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

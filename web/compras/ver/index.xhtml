@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <ice:panelConfirmation id="pcBorrado" message="Seguro que desea borrar el pedido #{pedidos.pedido.numPedido}" acceptLabel="Aceptar" rendered="true" cancelLabel="Cancelar"/>
+                <ice:panelLayout layout="flow">
+                    <ice:panelLayout layout="flow" style="text-align:right;">
+                        <ice:commandButton action="#{pedidos.destroy}" value="Borrar pedido" immediate="true" rendered="#{login.adm||login.gerencia||login.compras}" panelConfirmation="pcBorrado"/>
+                        <ice:commandButton action="#{pedidos.editSetup}" value="Editar pedido" immediate="true" rendered="#{login.adm||login.gerencia||login.compras}"/>
+                        <ice:commandButton action="#{pedidos.listSetup}" value="Salir" immediate="true"/>
+
+                    </ice:panelLayout>
+                    <ice:outputResource mimeType="application/pdf" resource="#{pedidos.ordenPedido}" label="Ver orden de pedido (pdf)" type="link" filename="#{pedidos.nombreFicheroOrdenPedido}" attachment="false" />
+                    <ice:outputResource mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document" resource="#{pedidos.ordenPedidoWordProcessingML}" label="Ver orden de pedido (word)" type="link" filename="#{pedidos.nombreFicheroOrdenPedidoWordProcessingML}" attachment="true" />
+                    <h3>Datos del pedido</h3>
+                    <ice:outputText value="Número de pedido: "/>
+                    <ice:outputText value="#{pedidos.pedido.numPedido}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Fecha: "/>
+                    <ice:outputText value="#{pedidos.pedido.fecha}" style="font-weight:bold;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                    </ice:outputText>
+                    <hr/>
+                    <ice:outputText value="Estado: "/>
+                    <ice:outputText value="#{pedidos.pedido.estadoPedido.nombre}" style="font-weight:bold;"/>
+                    <hr/>
+                    <c:if test="#{pedidos.pedido.cancelado}">
+                        <ice:outputText value="Fecha de cancelación: "/>
+                        <ice:outputText value="#{pedidos.pedido.fechaCancelacion}" style="font-weight:bold;">
+                            <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                        </ice:outputText>
+                        <hr/>
+                    </c:if>
+                    <ice:outputText value="Solicitante: "/>
+                    <ice:commandLink value="#{pedidos.pedido.solicitante.apellidos}, #{pedidos.pedido.solicitante.nombre}" style="font-weight:bold; text-decoration:underline;" action="#{personal.verEmpleado}" rendered="#{not empty pedidos.pedido.solicitante}">
+                        <f:setPropertyActionListener target="#{personal.empleado}" value="#{pedidos.pedido.solicitante}"/>
+                    </ice:commandLink>
+                    <hr/>
+                    <ice:outputText value="Entidad solicitante: "/>
+                    <ice:outputText value="#{pedidos.pedido.entidad.nombre}" style="font-weight:bold;"/>
+                    <hr/>
+                    <c:if test="#{not empty pedidos.pedido.entidad.proyecto}">
+                        <ice:outputText value="Proyecto: "/>
+                        <ice:commandLink value="#{pedidos.pedido.proyecto.referencia}" style="font-weight:bold; text-decoration:underline;" action="#{proyectos.verProyecto}">
+                            <f:setPropertyActionListener target="#{proyectos.proyecto}" value="#{pedidos.pedido.proyecto}"/>
+                        </ice:commandLink>
+                        <hr/>
+                    </c:if>
+                    <ice:outputText value="Asignado a: "/>
+                    <ice:outputText value="#{pedidos.pedido.asignacion}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Datos de entrega: "/>
+                    <ice:panelLayout layout="flow" style="padding:2em;">
+                        <ice:outputText value="Razón social: "/>
+                        <ice:outputText value="#{pedidos.pedido.datosEntrega.razonSocial}" style="font-weight:bold;"/>
+                        <hr/>
+                        <ice:outputText value="Dirección: "/>
+                        <ice:outputText value="#{pedidos.pedido.datosEntrega.direccion}" style="font-weight:bold;"/>
+                        <hr/>
+                        <ice:outputText value="Teléfono: "/>
+                        <ice:outputText value="#{pedidos.pedido.datosEntrega.telefono}" style="font-weight:bold;"/>
+                        <hr/>
+                    </ice:panelLayout>
+                    <hr/>
+                    <ice:outputText value="Proveedor: "/>
+                    <ice:panelLayout layout="flow" style="padding:2em;">
+                        <ice:outputText value="Razón social: "/>
+                        <ice:outputText value="#{pedidos.pedido.proveedor.razonSocial}" style="font-weight:bold;"/>
+                        <hr/>
+                        <ice:outputText value="Cif: "/>
+                        <ice:outputText value="#{pedidos.pedido.proveedor.cif}" style="font-weight:bold;"/>
+                        <hr/>
+                        <ice:outputText value="Dirección: "/>
+                        <ice:outputText value="#{pedidos.pedido.proveedor.direccion}" style="font-weight:bold;"/>
+                        <hr/>
+                        <ice:outputText value="Teléfono: "/>
+                        <ice:outputText value="#{pedidos.pedido.proveedor.telefono}" style="font-weight:bold;"/>
+                        <hr/>
+                        <ice:outputText value="Email: "/>
+                        <ice:outputText value="#{pedidos.pedido.proveedor.EMail}" style="font-weight:bold;"/>
+                        <hr/>
+                        <ice:outputText value="Fax: "/>
+                        <ice:outputText value="#{pedidos.pedido.proveedor.fax}" style="font-weight:bold;"/>
+                        <hr/>
+                        <ice:outputText value="Personal de contacto: "/>
+                        <ice:outputText value="#{pedidos.pedido.proveedor.nombrePersonaContacto}" style="font-weight:bold;"/>
+                        <hr/>
+                        <ice:outputText value="Observaciones: "/>
+                        <ice:outputText value="#{pedidos.pedido.proveedor.observaciones}" style="font-weight:bold;"/>
+                        <hr/>
+
+                    </ice:panelLayout>
+                    <hr/>
+                    <ice:outputText value="Observaciones: "/>
+                    <ice:outputText value="#{pedidos.pedido.notas}" style="font-weight:bold;"/>
+                    <hr/>
+                    <br/>
+                    <h3>Productos</h3>
+                    <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Producto</th>
+                            <th style="font-weight:normal; text-align:left;">Descripción</th>
+                            <th style="font-weight:normal; text-align:left;">Cantidad</th>
+                            <th style="font-weight:normal; text-align:left;">Número de inventario</th>
+                            <th style="font-weight:normal; text-align:left;">Precio unitario</th>
+                            <th style="font-weight:normal; text-align:left;">IVA</th>
+                            <th style="font-weight:normal; text-align:left;">Subtotal</th>
+                        </tr>
+                        <c:forEach items="#{pedidos.pedido.lineas}" var="lineaPedido" >
+                            <tr>
+                                <td>
+                                    <ice:outputText value="#{lineaPedido.producto.nombre}" style="font-weight:bold;"/>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{lineaPedido.descripcionAlternativa}" style="font-weight:bold;"/>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{lineaPedido.cantidad}" style="font-weight:bold;"/>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{lineaPedido.numeroInventario}" style="font-weight:bold;"/>
+                                </td>
+                                <td>
+                                    <ice:outputText converter="EuroCurrencyConverter" value="#{lineaPedido.precioUnitario}" style="font-weight:bold;"/>
+                                </td>
+                                <td>
+                                    <ice:outputText converter="EuroCurrencyConverter" value="#{lineaPedido.ivaAplicado}" style="font-weight:bold;"/>
+                                </td>
+                                <td>
+                                    <ice:outputText converter="EuroCurrencyConverter" value="#{lineaPedido.subtotal}" style="font-weight:bold;"/>
+                                </td>
+
+                            </tr>
+                        </c:forEach>
+                    </table>
+                    <br/>
+                    <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Base imponible</th>
+                            <th style="font-weight:normal; text-align:left;">Total</th>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <ice:outputText value="#{pedidos.pedido.baseImponible}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+
+                            <td>
+                                <ice:outputText value="#{pedidos.pedido.total}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                        </tr>
+
+                    </table>
+                    <br/>
+                    <br/>
+                    <h3>Albaranes</h3>
+                    <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Número de albarán</th>
+                            <th style="font-weight:normal; text-align:left;">Fecha de llegada</th>
+                            <th style="font-weight:normal; text-align:left;">Albarán</th>
+                            <th style="font-weight:normal; text-align:left;">Factura del albarán</th>
+                        </tr>
+                        <c:forEach items="#{pedidos.pedido.albaranes}" var="albaran" >
+                            <tr>
+                                <td>
+                                    <ice:outputText value="#{albaran.numAlbaran}" style="font-weight:bold;"/>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{albaran.fechaLlegada}" style="font-weight:bold;">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:outputText>
+                                </td>
+                                <td>
+                                    <ice:outputResource mimeType="application/pdf" resource="#{albaran.documento.resource}" label="Ver" type="link" attachment="false"/>
+                                </td>
+                                <td>
+                                    <ice:outputResource mimeType="application/pdf" resource="#{albaran.factura.documento.resource}" label="#{albaran.factura.numFactura}" type="link" attachment="false"/>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                    <br/>
+                    <br/>
+                    <h3>Facturas</h3>
+                    <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Número de factura</th>
+                            <th style="font-weight:normal; text-align:left;">Importe</th>
+                            <th style="font-weight:normal; text-align:left;">Factura</th>
+                        </tr>
+                        <c:forEach items="#{pedidos.pedido.facturas}" var="factura" >
+                            <tr>
+                                <td>
+                                    <ice:outputText value="#{factura.numFactura}" style="font-weight:bold;"/>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{factura.importe}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                                </td>
+                                <td>
+                                    <ice:outputResource mimeType="application/pdf" resource="#{factura.documento.resource}" label="Ver" type="link" attachment="false"/>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </ice:panelLayout>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

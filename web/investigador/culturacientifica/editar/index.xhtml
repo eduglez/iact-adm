@@ -1,0 +1,457 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <ice:panelGrid columns="6" >
+                    <br/><br/><br/>
+                    <ice:commandLink action="#{culturaCientifica.salirSinGuardar}" value="Salir sin guardar" immediate="true"/>
+                    <ice:commandButton action="#{culturaCientifica.salirGuardando}" value="Salir y GUARDAR"/>
+                    <ice:commandButton action="#{culturaCientifica.guardarCambios}" value="GUARDAR AHORA"  />
+                    <ice:panelLayout layout="flow">
+                        <ice:outputLabel for="somTipoActividad" value="Tipo de actividad:"/>
+                        <br/>
+                        <ice:selectOneMenu id="somTipoActividad" value="#{culturaCientifica.actividadCientifica.tipo}" partialSubmit="true" required="true">
+                            <f:selectItems value="#{culturaCientifica.tipoActividadCientificaItemsAvailableSelectOne}"/>
+                        </ice:selectOneMenu>
+                    </ice:panelLayout>
+
+                </ice:panelGrid>
+                <ice:panelTabSet>
+                    <ice:panelTab id="tabDatosActividadCientifica" label="Datos de la actividad científica">
+                        <c:choose>
+                            <c:when test="#{culturaCientifica.actividadCientifica.CDDVD}">
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itTituloCD" value="Título: "/>
+                                    <br/>
+                                    <ice:inputText id="itTituloCD" value="#{culturaCientifica.actividadCientifica.titulo}" size="70"/>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaCD" value="Fecha:"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="itFecha" errorClass="errorImagen"/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaCD" value="#{culturaCientifica.actividadCientifica.fecha}" partialSubmit="true">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itISBNCD" value="ISBN: "/>
+                                    <br/>
+                                    <ice:inputText id="itISBNCD" value="#{culturaCientifica.actividadCientifica.ISBN}" size="70"/>
+                                </ice:panelLayout>
+
+
+                            </c:when>
+
+                                    <c:when test="#{culturaCientifica.actividadCientifica.conferencia}">
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itTituloConf" value="Título: "/>
+                                    <br/>
+                                    <ice:inputText id="itTituloConf" value="#{culturaCientifica.actividadCientifica.titulo}" size="70"/>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaConf" value="Fecha:"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="itFecha" errorClass="errorImagen"/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaConf" value="#{culturaCientifica.actividadCientifica.fecha}" partialSubmit="true">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itLugarConf" value="Lugar: "/>
+                                    <br/>
+                                    <ice:inputText id="itLugarConf" value="#{culturaCientifica.actividadCientifica.lugar}" size="70"/>
+                                </ice:panelLayout>
+
+                            </c:when>
+
+                                    <c:when test="#{culturaCientifica.actividadCientifica.diaPuertasAbiertas}">
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itDescripcionDA" value="Descripción: "/>
+                                    <br/>
+                                    <ice:inputText id="itDescripcionDA" value="#{culturaCientifica.actividadCientifica.descripcion}" size="70"/>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaInicioDA" value="Fecha inicio:"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="itFechaInicioDA" errorClass="errorImagen"/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFecha" value="#{culturaCientifica.actividadCientifica.fechaInicio}" partialSubmit="true">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaFinDA" value="Fecha fin:"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="itFechaFinDA" errorClass="errorImagen"/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaFinDA" value="#{culturaCientifica.actividadCientifica.fechaFin}" partialSubmit="true">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+                                <br/>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itLugarDA" value="Lugar: "/>
+                                    <br/>
+                                    <ice:inputText id="itLugarDA" value="#{culturaCientifica.actividadCientifica.lugar}" size="70"/>
+                                </ice:panelLayout>
+
+                            </c:when>
+
+                                    <c:when test="#{culturaCientifica.actividadCientifica.exposicion}">
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itTituloExp" value="Título: "/>
+                                    <br/>
+                                    <ice:inputText id="itTituloExp" value="#{culturaCientifica.actividadCientifica.titulo}" size="70"/>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaExp" value="Fecha:"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="itFechaExp" errorClass="errorImagen"/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaExp" value="#{culturaCientifica.actividadCientifica.fecha}" partialSubmit="true">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itLugarExp" value="Lugar: "/>
+                                    <br/>
+                                    <ice:inputText id="itLugarExp" value="#{culturaCientifica.actividadCientifica.lugar}" size="70"/>
+                                </ice:panelLayout>
+
+                            </c:when>
+
+                                    <c:when test="#{culturaCientifica.actividadCientifica.feria}">
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itTituloFeria" value="Título: "/>
+                                    <br/>
+                                    <ice:inputText id="itTituloFeria" value="#{culturaCientifica.actividadCientifica.titulo}" size="70"/>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaInicioFeria" value="Fecha inicio:"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="itFechaInicioFeria" errorClass="errorImagen"/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaInicioFeria" value="#{culturaCientifica.actividadCientifica.fechaInicio}" partialSubmit="true">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+                                <br/>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaFinFeria" value="Fecha fin:"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="itFechaFinFeria" errorClass="errorImagen"/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaFinFeria" value="#{culturaCientifica.actividadCientifica.fechaFin}" partialSubmit="true">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+                                <br/>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itLugarFeria" value="Lugar: "/>
+                                    <br/>
+                                    <ice:inputText id="itLugarFeria" value="#{culturaCientifica.actividadCientifica.lugar}" size="70"/>
+                                </ice:panelLayout>
+
+                            </c:when>
+
+                                    <c:when test="#{culturaCientifica.actividadCientifica.otraActividad}">
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itDescripcionOtr" value="Descripción: " size="70"/>
+                                    <br/>
+                                    <ice:inputText id="itDescripcionOtr" value="#{culturaCientifica.actividadCientifica.descripcion}"/>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itCantidadOtr" value="Cantidad otorgada: "/>
+                                    <br/>
+                                    <ice:inputText id="itCantidadOtr" value="#{culturaCientifica.actividadCientifica.descripcion}"/>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaOtr" value="Fecha:"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="itFechaOtr" errorClass="errorImagen"/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaOtr" value="#{culturaCientifica.actividadCientifica.fecha}" partialSubmit="true">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+
+                                </ice:panelLayout>
+                           
+                            </c:when>
+
+                                    <c:when test="#{culturaCientifica.actividadCientifica.rutaCientifica}">
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itDescripcionRC" value="Descripción: "/>
+                                    <br/>
+                                    <ice:inputText id="itDescripcionRC" value="#{culturaCientifica.actividadCientifica.descripcion}" size="70"/>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaInicioRC" value="Fecha inicio:"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="itFechaInicioRC" errorClass="errorImagen"/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaInicioRC" value="#{culturaCientifica.actividadCientifica.fechaInicio}" partialSubmit="true">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaFinRC" value="Fecha fin:"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="itFechaFinRC" errorClass="errorImagen"/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaFinRC" value="#{culturaCientifica.actividadCientifica.fechaFin}" partialSubmit="true">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+
+
+                            </c:when>
+
+                                    <c:when test="#{culturaCientifica.actividadCientifica.semanaCiencia}">
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itLugarSC" value="Lugar: "/>
+                                    <br/>
+                                    <ice:inputText id="itLugarSC" value="#{culturaCientifica.actividadCientifica.lugar}" size="70"/>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itTituloSC" value="Título: "/>
+                                    <br/>
+                                    <ice:inputText id="itTituloSC" value="#{culturaCientifica.actividadCientifica.titulo}" size="70"/>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaInicioSC" value="Fecha inicio:"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="itFechaInicioSC" errorClass="errorImagen"/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaInicioSC" value="#{culturaCientifica.actividadCientifica.fechaInicio}" partialSubmit="true">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaFinSC" value="Fecha fin:"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="itFechaFinSC" errorClass="errorImagen"/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaFinSC" value="#{culturaCientifica.actividadCientifica.fechaFin}" partialSubmit="true">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itLugarSC" value="Lugar: "/>
+                                    <br/>
+                                    <ice:inputText id="itLugarSC" value="#{culturaCientifica.actividadCientifica.lugar}" size="70"/>
+                                </ice:panelLayout>
+
+                            </c:when>
+
+                                    <c:when test="#{culturaCientifica.actividadCientifica.taller}">
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itTituloTaller" value="Título: "/>
+                                    <br/>
+                                    <ice:inputText id="itTituloTaller" value="#{culturaCientifica.actividadCientifica.titulo}" size="70"/>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaTaller" value="Fecha:"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="itFechaTaller" errorClass="errorImagen"/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFecha" value="#{culturaCientifica.actividadCientifica.fecha}" partialSubmit="true">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itLugarTaller" value="Lugar: "/>
+                                    <br/>
+                                    <ice:inputText id="itLugarTaller" value="#{culturaCientifica.actividadCientifica.lugar}" size="70"/>
+                                </ice:panelLayout>
+
+                            </c:when>
+                        </c:choose>
+                        <br/>
+                        <ice:panelLayout layout="flow">
+                            <ice:outputLabel for="itCantidadAF" value="Cantidad otorgada: "/>
+                            <br/>
+                            <ice:inputText id="itCantidadAF" value="#{culturaCientifica.actividadCientifica.cantidad}"/>
+                        </ice:panelLayout>
+                        <br/>
+                        <ice:panelLayout layout="flow">
+                            <ice:outputLabel for="somOrganismoFinanciadorAF" value="Organismo Financiador:"/>
+                            <br/>
+                            <ice:selectOneMenu id="somOrganismoFinanciadorAF" value="#{culturaCientifica.actividadCientifica.organismoFinanciador}" partialSubmit="true">
+                                <f:selectItems value="#{culturaCientifica.organosFinanciadoresItemsAvailableSelectOne}"/>
+                            </ice:selectOneMenu>
+                        </ice:panelLayout>
+                        <br/>
+                        <ice:panelLayout layout="flow">
+                            <ice:outputLabel for="taNotas" value="Notas: "/>
+                            <br/>
+                            <ice:inputTextarea id="taNotas" value="#{culturaCientifica.actividadCientifica.notas}"/>
+                        </ice:panelLayout>
+                    </ice:panelTab>
+
+                    <ice:panelTab id="tabAutoresActividadCientifica" label="Autores o Responsables">
+                        <c:forEach items="#{culturaCientifica.actividadCientifica.autoresIACT}" var="autor" >
+                            <ice:panelCollapsible expanded="false" >
+                                <f:facet name="header">
+                                    <ice:panelGroup>
+                                        <ice:outputText value="#{autor.apellidos}, #{autor.nombre}"/>
+                                    </ice:panelGroup>
+                                </f:facet>
+                                <ice:panelGroup>
+                                    <ice:panelGrid columns="3" >
+                                        <ice:panelLayout layout="flow" >
+                                            <ice:outputLabel for="itApellidos" value="Apellidos:"/>
+                                            <br/>
+                                            <ice:inputText id="itApellidos" value="#{autor.apellidos}" disabled="true" style="color:black;" />
+                                        </ice:panelLayout>
+
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="itNombre" value="Nombre:"/>
+                                            <br/>
+                                            <ice:inputText id="itNombre" value="#{autor.nombre}" disabled="true" style="color:black;"/>
+                                        </ice:panelLayout>
+
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="itDNI" value="DNI:"/>
+                                            <br/>
+                                            <ice:inputText id="itDNI" value="#{autor.dni}" disabled="true" style="color:black;"/>
+                                        </ice:panelLayout>
+                                    </ice:panelGrid>
+                                    <ice:panelGrid columns="4" cellspacing="20">
+
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="itTelefonoEmpleado" value="Teléfono:"/>
+                                            <br/>
+                                            <ice:inputText id="itTelefonoEmpleado" value="#{autor.contratoActual.telefono}" disabled="true" style="color:black;"/>
+                                        </ice:panelLayout>
+
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="itCorreoElectronicoEmpleado" value="Correo electrónico:"/>
+                                            <br/>
+                                            <ice:inputText id="itCorreoElectronicoEmpleado" value="#{autor.contratoActual.EMail}" disabled="true" style="color:black;"/>
+                                        </ice:panelLayout>
+
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="itNombreDepartamento" value="Departamento:"/>
+                                            <br/>
+                                            <ice:inputText id="itNombreDepartamento" value="#autor.contratoActual.departamento.nombre}"  disabled="true" style="color:black;"/>
+                                        </ice:panelLayout>
+
+                                    </ice:panelGrid>
+                                </ice:panelGroup>
+                            </ice:panelCollapsible>
+                                    <ice:commandLink value="Quitar de la actividad" action="#{culturaCientifica.quitarDeLaActividad}">
+                                <f:setPropertyActionListener value="#{autor}" target="#{culturaCientifica.autorActividadCientificaSeleccionado}"/>
+                            </ice:commandLink>
+                            <br/><br/><br/>
+                        </c:forEach>
+
+                        <ice:outputLabel value="Buscar empleado para insertar en la actividad cultural:"/>
+                        <br/>
+                        <ice:selectInputText
+                            rows="10"
+                            width="500"
+                            valueChangeListener="#{culturaCientifica.empleadoIACTValueChanged}"
+                            listVar="empleadoIACT"
+                            listValue="#{culturaCientifica.empleadoIACTMatchPossibilities}"
+                            partialSubmit="true"
+                            immediate="true"
+                            id="BuscadorPersonalIACT"
+                            >
+
+                            <f:facet name="selectInputText">
+                                <ice:panelGrid columns="3">
+                                    <ice:outputText value="#{empleadoIACT.apellidos}, #{contratoIACT.empleado.nombre}" />
+                                    <ice:outputText value="#{empleadoIACT.dni}"/>
+                                    <ice:outputText value="#{(not empty empleadoIACT.contratoActual)?(empleadoIACT.contratoActual.tipoEmpleado.adscripcion.nombre):''}" style="font-weight: bold;"/>
+                                </ice:panelGrid>
+                            </f:facet>
+                        </ice:selectInputText>
+
+                    </ice:panelTab>
+
+                    <ice:panelTab id="tabDocumentos" label="Documentos">
+                        <ice:panelLayout layout="flow">
+                            <ice:dataTable
+                                value="#{culturaCientifica.actividadCientifica.documentos}"
+                                var="documento"
+                                id="documentosTable"
+                                width="400">
+
+                                <ice:column>
+                                    <f:facet name="header">
+                                        <ice:outputText value="Nombre del documento"/>
+                                    </f:facet>
+                                    <ice:inputText value="#{documento.nombreDocumento}"/>
+
+                                </ice:column>
+
+                                <ice:column>
+                                    <ice:outputResource mimeType="application/pdf" resource="#{documento.resource}" label="Ver" type="link" attachment="false"/>
+                                </ice:column>
+
+                                <ice:column>
+                                    <ice:outputResource mimeType="application/pdf" resource="#{documento.resource}" label="Descargar" type="link" attachment="true"/>
+                                </ice:column>
+
+                                <ice:column>
+                                    <ice:commandLink value="Borrar" label="Borrar" type="link" action="#{documento.borrar}" immediate="true" partialSubmit="true" />
+                                </ice:column>
+
+                            </ice:dataTable>
+                            <br/><br/>
+                            <ice:panelCollapsible expanded="false">
+                                <f:facet name="header">
+                                    <ice:panelGroup>
+                                        <ice:outputText value="Insertar otro documento"/>
+                                    </ice:panelGroup>
+                                </f:facet>
+
+                                <ice:panelSeries value="#{culturaCientifica.documentosActividadesCientificasAutomaticos}" var="fichero">
+                                    <ice:panelGrid columns="4">
+                                        <ice:outputText value="Fichero creado hace #{fichero.creadoHace}"/>
+                                        <ice:outputResource mimeType="application/pdf" resource="#{fichero.resource}" label="Ver" type="link" attachment="false"/>
+                                        <ice:commandLink action="#{fichero.asignarAActividadCientifica}" value="Asignar" partialSubmit="true">
+                                            <f:setPropertyActionListener value="#{culturaCientifica.actividadCientifica}" target="#{fichero.actividadCientifica}" />
+                                        </ice:commandLink>
+                                        <ice:commandLink action="#{fichero.borrar}" value="Borrar" partialSubmit="true"/>
+                                    </ice:panelGrid>
+                                </ice:panelSeries>
+                                <br/>
+                                <ice:inputFile uniqueFolder="false" uploadDirectory="/home/intranet/SCAN" uploadDirectoryAbsolute="true"/>
+                                <br/>
+                                <ice:commandButton value="Actualizar ficheros" partialSubmit="true" immediate="true"/>
+                            </ice:panelCollapsible>
+
+                        </ice:panelLayout>
+
+                    </ice:panelTab>
+                </ice:panelTabSet>
+                <br/>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Administración IACT</title>
+        <link href="/iact-adm/xmlhttp/css/rime/rime.css" rel="stylesheet" type="text/css" />
+        <link href="/iact-adm/css/iact.css" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body>
+        <div>
+            <div class="header">
+                <img src="/iact-adm/css/logo-gobierno.gif" hspace="20"/>
+                <img src="/iact-adm/css/header.jpg"/>
+
+            </div>
+
+            <div style="margin-left:20px;">
+                <h3>Por favor, introduzca sus credenciales por seguridad</h3>
+                <form method="POST" action="j_security_check">
+                    Login:<br/>
+<input type="text" name="j_username"/><br/>
+Contraseña:<br/>
+<input type="password" name="j_password"/>
+<br/>
+<input type="submit" value="Aceptar" tabindex="0"/>
+</form>
+                </div>
+        </div>
+    </body>
+
+</html>
+

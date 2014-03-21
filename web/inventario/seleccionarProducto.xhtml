@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+
+    <body>
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <ice:outputLabel value="Pase lector de código de barras o introduzca código" for="itEntradaCodigo" />
+                <ice:inputText id="itEntradaCodigo" value="#{inventarioProducto.entradaCodigoBarras}" action="#{inventarioProducto.comprobarEntradaEAN}" />
+                <br/>
+                <script id="formularioscript2" type="text/javascript">$element(document.getElementById('formulario:itEntradaCodigo')).focus();</script>
+                <ice:panelLayout layout="flow" rendered="#{not inventarioProducto.productoEncontrado}">
+                    <ice:outputText value="El producto con código #{inventarioProducto.entradaCodigoBarras} no ha sido encontrado"/>
+                    <ice:commandLink value="Pulse aquí para crearlo" action="#{inventarioProducto.prepairGuardarNuevoProducto}"/>
+                </ice:panelLayout>
+                <br/><br/>
+                <ice:outputLabel value="O seleccione uno de la lista" for="somProductoInventario"/>
+                <ice:selectOneMenu id="somProductoInventario"  value="#{inventarioProducto.producto}" partialSubmit="true">
+                    <f:selectItems value="#{inventarioProducto.productoInventarioItemsSelectOne}"/>
+                </ice:selectOneMenu>
+
+                <ice:panelLayout layout="flow" rendered="#{not empty inventarioProducto.producto}">
+                    <h3>Producto registrado</h3>
+                    <ice:outputText value="EAN: "/>
+                    <ice:outputText value="#{inventarioProducto.producto.ean}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Nombre del producto: "/>
+                    <ice:outputText value="#{inventarioProducto.producto.nombre}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Descripción: "/>
+                    <ice:outputText value="#{inventarioProducto.producto.descripcion}" style="font-weight:bold;"/>
+                    <hr/>
+                    <br/>
+                    <ice:commandButton value="Seleccionar" action="#{inventarioProducto.seleccionar}"/>
+                </ice:panelLayout>
+
+            </ui:define>
+
+
+
+        </ui:composition>
+    </body>
+</html>

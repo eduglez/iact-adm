@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+                <ice:panelBorder >
+                    <f:facet name="center">
+                        <ice:panelLayout layout="flow" style="width:700px">
+                            <ice:panelLayout layout="flow">
+                                <h2>Últimos gastos registrados</h2>
+                                <c:forEach items="#{gastos.ultimosGastosRealizados}" var="gasto">
+                                <li>
+                                    <ice:commandLink action="gasto-ver-gasto" style="font-weight:bold;">
+                                        <ice:outputText value="#{gasto.fecha}">
+                                            <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                        </ice:outputText>
+                                        <f:setPropertyActionListener target="#{gastos.gastoRealizado}" value="#{gasto}"/>
+                                    </ice:commandLink>
+                                    <ice:outputText value="  #{gasto.gasto.tipoGasto}" style="font-weight:bold;"/>
+                                    <br/>
+                                    <table cellspacing="15">
+                                        <tr>
+                                            <td>
+                                                <ice:outputText value="Asignado a:"/>
+                                            </td>
+                                            <td>
+                                                <ice:outputText value="#{gasto.asignadoA}" style="font-weight:bold;"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <ice:outputText value="Con un Total de:"/>
+                                            </td>
+                                            <td>
+                                                <ice:outputText value="#{gasto.total}" converter="EuroCurrencyConverter" style="font-weight:bold;"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                </c:forEach>
+                            </ice:panelLayout>
+
+                        </ice:panelLayout>
+                    </f:facet>
+
+                    <f:facet name="east">
+                        <ice:panelLayout layout="flow" style="width:200px">
+                            <ice:commandButton value="Ver Gastos" action="gasto-ver"/>
+                            <br/><br/>
+                            <ice:commandButton value="REGISTRAR GASTO" action="#{gastos.prepairRegistrarGasto}"/>
+                            <br/><br/>
+                            <ice:commandButton value="REGISTRAR TIPOGASTO" action="#{gastos.prepairRegistrarTipoGasto}"/>
+                        </ice:panelLayout>
+                    </f:facet>
+                </ice:panelBorder>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+

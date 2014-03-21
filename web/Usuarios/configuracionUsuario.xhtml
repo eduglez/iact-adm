@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+                    <ice:panelLayout style="text-align:right; width:20em;">
+                        <ice:commandButton action="index" value="Salir"/>
+                    </ice:panelLayout>
+                    <br/>
+                    <ice:panelLayout layout="flow">
+                        <h3>Cambiar contraseña</h3>
+                        <ice:outputLabel for="itAntiguaCont" value="Contraseña anterior:"/>
+                        <br/>
+                        <ice:message showDetail="false" showSummary="false" for="itAntiguaCont" errorClass="errorImagen"/>
+                        <ice:inputSecret value="#{login.cambContAnt}" id="itAntiguaCont"/>
+                         <br/><br/>
+                        <ice:outputLabel for="itNuevaCont1" value="Contraseña nueva:"/>
+                        <br/>
+                        <ice:message showDetail="false" showSummary="false" for="itNuevaCont1" errorClass="errorImagen"/>
+                        <ice:inputSecret value="#{login.cambContNueva1}" id="itNuevaCont1"/>
+                         <br/><br/>
+                        <ice:outputLabel for="itNuevaCont2" value="Repita contraseña nueva:"/>
+                        <br/>
+                        <ice:message showDetail="false" showSummary="false" for="itNuevaCont2" errorClass="errorImagen"/>
+                        <ice:inputSecret value="#{login.cambContNueva2}" id="itNuevaCont2"/>
+                        <br/>
+                        <br/>
+                        <ice:commandLink action="#{login.cambiarCont}" value="Cambiar" partialSubmit="true"/>
+
+                    </ice:panelLayout>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

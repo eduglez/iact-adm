@@ -1,0 +1,13 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ice="http://www.icesoft.com/icefaces/component">
+<ice:panelGrid columns="2" >
+    <ice:panelLayout layout="flow">
+        <ice:outputLabel for="itNombre" value="Nombre del tipo de proyecto:" required="true"/>
+        <br/>
+        <ice:message for="itNombre" style="color:red"/>
+        <br/>
+        <ice:inputText id="itNombre" value="#{tiposProyecto.tipoProyecto.nombre}"/>
+    </ice:panelLayout>
+
+</ice:panelGrid>
+</div>

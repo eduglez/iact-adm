@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+                <h3>Gastos</h3>
+                <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Fecha</th>
+                            <th style="font-weight:normal; text-align:left;">Gasto</th>
+                            <th style="font-weight:normal; text-align:left;">Descripción</th>
+                            <th style="font-weight:normal; text-align:left;">Asignado A</th>
+                            <th style="font-weight:normal; text-align:left;">Total</th>
+                        </tr>
+                    <c:forEach items="#{gastos.gastosRealizados}" var="gastoRealizado">
+                        <tr>
+                            <td>
+                                <ice:commandLink action="gasto-ver-gasto">
+                                    <ice:outputText value="#{gastoRealizado.fecha}" style="font-weight:bold;">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:outputText>
+                                    <f:setPropertyActionListener target="#{gastos.gastoRealizado}" value="#{gastoRealizado}"/>
+                                </ice:commandLink>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{gastoRealizado.gasto.tipoGasto}"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{gastoRealizado.gasto.descripcion}"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{gastoRealizado.asignadoA}"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{gastoRealizado.total}"/>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+

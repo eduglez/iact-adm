@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <body>
+        
+        <ui:composition template="/templates/template.xhtml">
+            
+            <ui:define name="body">
+                <h1>Listado de puestos de trabajo</h1>
+                                <ice:panelLayout layout="flow">
+                        <ice:commandButton action="#{puestosDeTrabajo.createSetup}" value="Insertar"  />
+                    </ice:panelLayout>
+                <ice:dataTable
+                   value="#{puestosDeTrabajo.puestoDeTrabajoItems}"
+                   var="puestoDeTrabajo"
+                   id="dtPuestosTrabajo">
+                       
+                       <ice:column>
+                           <f:facet name="header">
+                               <ice:outputText value="Nombre del puesto de trabajo"/>
+                           </f:facet>
+                           <ice:outputText value="#{puestoDeTrabajo.nombre}"/>
+                       </ice:column>
+                        <ice:column>
+                            <ice:commandButton value="Borrar" action="#{puestosDeTrabajo.destroy}" panelConfirmation="pcBorrado">
+                                <f:setPropertyActionListener value="#{puestoDeTrabajo}" target="#{puestosDeTrabajo.puestoDeTrabajo}" />
+                        </ice:commandButton>
+                        <ice:panelConfirmation id="pcBorrado" message="¿Seguro que desea borrar el Puesto de Trabajo #{puestoDeTrabajo.nombre}?" acceptLabel="Aceptar" rendered="true" cancelLabel="Cancelar"/>
+                    </ice:column>
+                </ice:dataTable><br/>
+            </ui:define>
+
+        </ui:composition>
+        
+    </body>
+</html>

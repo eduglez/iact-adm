@@ -1,0 +1,275 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+                <h1>Proyectos
+                    <table style="font-size:small;">
+                        <tbody>
+                            <tr>
+                                <td><ice:outputResource mimeType="application/pdf" resource="#{proyectos.proyectosPDF}" label="PDF" type="link" fileName="ListadoProyectos.pdf" attachment="true"/></td>
+                                <td><ice:outputResource mimeType="application/vnd.ms-excel" resource="#{proyectos.proyectosExcel}" label="Excel" type="link" fileName="ListadoProyectos.xls" attachment="true"/></td>
+                            </tr>
+                        </tbody>
+                    </table></h1>
+                    <ice:messages/>
+                    <ice:panelLayout layout="flow">
+                        <ice:commandButton action="#{proyectos.createSetup}" value="Insertar"  rendered="#{login.adm||login.proyectos||login.gerencia}"/>
+
+                </ice:panelLayout>
+                <br/>
+                <ice:panelCollapsible expanded="false">
+                    <f:facet name="header">
+                        <ice:panelGroup>
+                            <ice:outputText value="Filtros"/>
+                        </ice:panelGroup>
+                    </f:facet>
+                    <ice:outputLabel value="Por estado:"/>
+                    <br/>
+                    <ice:panelGroup>
+                        <ice:panelGrid columns="3" layout="flow" cellspacing="10" >
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel value="Fase solicitud: " for="sbcFaseSolicitud"/>
+                                <ice:selectBooleanCheckbox id="sbcFaseSolicitud" value="#{proyectos.filtroFaseSolicitud}" immediate="true" partialSubmit="true"/>
+                            </ice:panelLayout>
+
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel value="Fase aceptación: " for="sbcFaseAceptacion"/>
+                                <ice:selectBooleanCheckbox id="sbcFaseAceptacion" value="#{proyectos.filtroFaseAceptacion}" immediate="true" partialSubmit="true"/>
+                            </ice:panelLayout>
+
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel value="Vigente: " for="sbcVigente"/>
+                                <ice:selectBooleanCheckbox id="sbcVigente" value="#{proyectos.filtroVigente}" immediate="true" partialSubmit="true"/>
+                            </ice:panelLayout>
+
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel value="Finalizado Ejecución: " for="sbcFinalizadoEjecucion"/>
+                                <ice:selectBooleanCheckbox id="sbcFinalizadoEjecucion" value="#{proyectos.filtroFinalizadoEjecucion}" immediate="true" partialSubmit="true"/>
+                            </ice:panelLayout>
+
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel value="Finalizado y Justificado: " for="sbcFinalizadoJustificado"/>
+                                <ice:selectBooleanCheckbox id="sbcFinalizadoJustificado" value="#{proyectos.filtroFinalizadoJustificado}" immediate="true" partialSubmit="true"/>
+                            </ice:panelLayout>
+
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel value="Desestimado: " for="sbcDesestimado"/>
+                                <ice:selectBooleanCheckbox id="sbcDesestimado" value="#{proyectos.filtroDesestimado}" immediate="true" partialSubmit="true"/>
+                            </ice:panelLayout>
+
+
+                        </ice:panelGrid>
+
+                        <br/>
+
+                        <ice:panelLayout layout="flow">
+                            <ice:outputLabel for="somFiltroInvestigador" value="Por responsable:"/>
+                            <br/>
+                            <ice:selectOneMenu id="somFiltroInvestigador" value="#{proyectos.filtroResponsable}" partialSubmit="true">
+                                <f:selectItems value="#{personal.empleadoItemsAvailableSelectOne}"/>
+                            </ice:selectOneMenu>
+                        </ice:panelLayout>
+
+                        <br/>
+                        <ice:outputLabel value="Por fecha:"/>
+                        <br/>
+                        <ice:panelLayout layout="flow">
+
+                            <ice:outputText value="Fecha aceptación:"/>
+                            <br/>
+                            <ice:panelGrid columns="4">
+                                <ice:outputText value="Del "/>
+                                <ice:selectInputDate renderAsPopup="true" id="itFechaAceptacionDespuesDe" value="#{proyectos.filtroFechaAceptacionDespuesDe}" renderMonthAsDropdown="true" renderYearAsDropdown="true">
+                                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                </ice:selectInputDate>
+                                <ice:outputText value=" al "/>
+                                <ice:selectInputDate renderAsPopup="true" id="itFechaAceptacionAntesDe" value="#{proyectos.filtroFechaAceptacionAntesDe}" renderMonthAsDropdown="true" renderYearAsDropdown="true">
+                                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                </ice:selectInputDate>
+                            </ice:panelGrid>
+                        </ice:panelLayout>
+
+                        <br/>
+                        <ice:panelLayout layout="flow">
+
+                            <ice:outputText value="Fecha solicitud"/>
+                            <br/>
+                            <ice:panelGrid columns="4">
+                                <ice:outputText value="Del "/>
+                                <ice:selectInputDate renderAsPopup="true" id="itFechaSolicitudDespuesDe" value="#{proyectos.filtroFechaSolicitudDespuesDe}" renderMonthAsDropdown="true" renderYearAsDropdown="true">
+                                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                </ice:selectInputDate>
+                                <ice:outputText value=" al "/>
+                                <ice:selectInputDate renderAsPopup="true" id="itFechaSolicitudAntesDe" value="#{proyectos.filtroFechaSolicitudAntesDe}" renderMonthAsDropdown="true" renderYearAsDropdown="true">
+                                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                </ice:selectInputDate>
+                            </ice:panelGrid>
+                        </ice:panelLayout>
+
+                        <br/>
+                        <ice:panelLayout layout="flow">
+
+                            <ice:outputText value="Fecha inicio"/>
+                            <br/>
+                            <ice:panelGrid columns="4">
+                                <ice:outputText value="Del "/>
+                                <ice:selectInputDate renderAsPopup="true" id="itFechaInicioDespuesDe" value="#{proyectos.filtroFechaInicioDespuesDe}" renderMonthAsDropdown="true" renderYearAsDropdown="true">
+                                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                </ice:selectInputDate>
+                                <ice:outputText value=" al "/>
+                                <ice:selectInputDate renderAsPopup="true" id="itFechaInicioAntesDe" value="#{proyectos.filtroFechaInicioAntesDe}" renderMonthAsDropdown="true" renderYearAsDropdown="true">
+                                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                </ice:selectInputDate>
+                            </ice:panelGrid>
+                        </ice:panelLayout>
+                            <br/>
+                            <ice:panelLayout layout="flow">
+                            <ice:outputLabel for="somFiltroLineaInvestigacion" value="Por línea de investigación:"/>
+                            <br/>
+                            <ice:selectOneMenu id="somFiltroLineaInvestigacion" value="#{proyectos.filtroLineaInvestigacion}" partialSubmit="true">
+                                <f:selectItems value="#{proyectos.lineaInvestigacionItemsAvailableSelectOne}"/>
+                            </ice:selectOneMenu>
+                        </ice:panelLayout>
+
+                    </ice:panelGroup>
+                </ice:panelCollapsible>
+                <ice:dataTable
+                    value="#{proyectos.proyectoItemsFiltrados}"
+                    var="proyecto"
+                    id="Tabla"
+                    sortColumn="#{proyectos.columnaOrden}"
+                    sortAscending="#{proyectos.ascendente}">
+
+
+                    <ice:column rendered="#{(not empty proyectos.filtroFechaAceptacionAntesDe) and (not empty proyectos.filtroFechaAceptacionDespuesDe)}">
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader10" columnName="fechaAceptacion" >
+                                <ice:outputText value="Fecha Aceptación"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                            <ice:outputText value="#{proyecto.fechaAceptacion}">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+
+                    </ice:column>
+
+                    <ice:column rendered="#{(not empty proyectos.filtroFechaSolicitudAntesDe) and (not empty proyectos.filtroFechaSolicitudDespuesDe)}">
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader11" columnName="fechaSolicitud" >
+                                <ice:outputText value="Fecha Solicitud"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:outputText value="#{proyecto.fechaSolicitud}">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+
+                    </ice:column>
+
+                    <ice:column rendered="#{(not empty proyectos.filtroFechaInicioAntesDe) and (not empty proyectos.filtroFechaInicioDespuesDe)}">
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader11" columnName="fechaInicio" >
+                                <ice:outputText value="Fecha Inicio"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:outputText value="#{proyecto.fechaInicio}">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+
+                    </ice:column>
+
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader1" columnName="id" >
+                                <ice:outputText value="Id"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:commandLink value="#{proyecto.id}" action="#{proyectos.verProyecto}"  style="color:#{proyecto.estadoProyecto.styleColor};">
+                            <f:setPropertyActionListener value="#{proyecto}" target="#{proyectos.proyecto}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader2" columnName="responsable" >
+                                <ice:outputText value="Responsable"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:commandLink value="#{proyecto.responsable.empleadoIACT.apellidos}, #{proyecto.responsable.empleadoIACT.nombre}" action="#{proyectos.verProyecto}"  style="color:#{proyecto.estadoProyecto.styleColor};">
+                            <f:setPropertyActionListener value="#{proyecto}" target="#{proyectos.proyecto}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader3" columnName="referencia" >
+                                <ice:outputText value="Referencia proyecto"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:commandLink value="#{proyecto.referencia}" action="#{proyectos.verProyecto}"  style="color:#{proyecto.estadoProyecto.styleColor};">
+                            <f:setPropertyActionListener value="#{proyecto}" target="#{proyectos.proyecto}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader4" columnName="tipoproyecto" >
+                                <ice:outputText value="Tipo de proyecto"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:commandLink value="#{proyecto.tipoProyecto.nombre}" action="#{proyectos.verProyecto}"  style="color:#{proyecto.estadoProyecto.styleColor};">
+                            <f:setPropertyActionListener value="#{proyecto}" target="#{proyectos.proyecto}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader5" columnName="estadoproyecto" >
+                                <ice:outputText value="Estado proyecto"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:commandLink value="#{proyecto.estadoProyecto.nombre}" action="#{proyectos.verProyecto}"  style="color:#{proyecto.estadoProyecto.styleColor};">
+                            <f:setPropertyActionListener value="#{proyecto}" target="#{proyectos.proyecto}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+                    <ice:column rendered="#{login.adm||login.proyectos||login.gerencia}">
+                        <ice:commandButton value="Borrar" action="#{proyectos.destroy}" inmediate="true" panelConfirmation="pcBorrado">
+                            <f:setPropertyActionListener value="#{proyecto}" target="#{proyectos.proyecto}" />
+                        </ice:commandButton>
+                        <ice:panelConfirmation id="pcBorrado" message="Seguro que desea borrar el proyecto #{proyecto.referencia}" acceptLabel="Aceptar" rendered="true" cancelLabel="Cancelar"/>
+                    </ice:column>
+
+                    <ice:column rendered="#{login.adm||login.proyectos||login.gerencia}">
+                        <ice:commandButton value="Editar" action="#{proyectos.editSetup}" inmediate="true">
+                            <f:setPropertyActionListener value="#{proyecto}" target="#{proyectos.proyecto}" />
+                        </ice:commandButton>
+                    </ice:column>
+
+
+
+
+                </ice:dataTable>
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

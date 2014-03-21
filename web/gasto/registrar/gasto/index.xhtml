@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+
+    <body>
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <h3><ice:outputText value="Registro de nuevo gasto"/></h3>
+
+                <ice:panelGrid columns="2">
+                    <ice:panelLayout layout="flow">
+                        <ice:outputLabel for="itFecha" value="Fecha:"/>
+                        <br/>
+                        <ice:selectInputDate renderAsPopup="true" id="itFecha" value="#{gastos.gastoRealizado.fecha}">
+                            <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                        </ice:selectInputDate>
+                    </ice:panelLayout>
+
+                </ice:panelGrid>
+                        <br/>
+                <h4><ice:outputText value="Asignado a: "/></h4>
+
+                <ice:panelLayout layout="flow" style="border-style:solid;border-width:1px;border-color:darkGray;padding:10px;">
+
+                    <ice:outputLabel for="somAProyecto" value="A proyecto:"/>
+                    <br/>
+                    <ice:selectOneMenu id="somAProyecto" value="#{gastos.asignacion.proyecto}">
+                        <f:selectItems value="#{proyectos.proyectoItemsAvailableSelectOne}"/>
+                    </ice:selectOneMenu>
+                    <br/><br/>
+                    <ice:outputLabel for="somAEmpleado" value="A empleado:"/>
+                    <br/>
+                    <ice:selectOneMenu id="somAEmpleado" value="#{gastos.asignacion.empleado}">
+                        <f:selectItems value="#{personal.empleadoItemsAvailableSelectOne}"/>
+                    </ice:selectOneMenu>
+                    <br/><br/>
+                    <ice:outputLabel for="somALineaInvestigacion" value="A Línea de Investigación"/>
+                    <br/>
+                    <ice:selectOneMenu id="somALineaInvestigacion" value="#{gastos.asignacion.lineaInvestigacion}">
+                        <f:selectItems value="#{proyectos.lineaInvestigacionItemsAvailableSelectOne}"/>
+                    </ice:selectOneMenu>
+                </ice:panelLayout>
+                <br/><br/>
+                <ice:panelLayout layout="flow">
+                    <ice:outputLabel for="somTipoGasto" value="Tipo de gasto:"/>
+                    <br/>
+                    <ice:selectOneMenu id="somTipoGasto" value="#{gastos.gastoRealizado.gasto}">
+                        <f:selectItems value="#{gastos.gastosSelectItems}"/>
+                    </ice:selectOneMenu>
+                </ice:panelLayout>
+                <br/><br/>
+                <ice:panelLayout layout="flow">
+                    <ice:outputLabel for="itTotal" value="Total:"/>
+                    <br/>
+                    <ice:inputText id="itTotal" value="#{gastos.gastoRealizado.total}" converter="EuroCurrencyConverter"/>
+                </ice:panelLayout>
+                <br/><br/>
+                <ice:panelLayout layout="flow">
+                    <ice:outputLabel for="itaObservaciones" value="Observaciones:"/>
+                    <br/>
+                    <ice:inputTextarea id="itaObservaciones" value="#{gastos.gastoRealizado.observaciones}" cols="40"/>
+                </ice:panelLayout>
+                <br/><br/>
+                <ice:commandButton value="Aceptar" action="#{gastos.registrarGasto}"/>
+
+
+            </ui:define>
+
+
+
+        </ui:composition>
+    </body>
+</html>

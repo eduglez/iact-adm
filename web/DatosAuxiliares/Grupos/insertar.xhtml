@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+
+                <h1>Insertar nuevo grupo</h1>
+                <ice:panelGrid columns="2" >
+                    <ice:panelLayout layout="flow">
+                        <ice:outputLabel for="itNombreGrupo" value="Nombre grupo:" required="true"/>
+                        <br/>
+                        <ice:message for="itNombreGrupo" style="color:red"/>
+                        <br/>
+                        <ice:inputText id="itNombreGrupo" value="#{grupos.grupo.nombre}"/>
+                    </ice:panelLayout>
+                    <ice:panelLayout layout="flow">
+                        <ice:outputLabel for="itTipoPersonal" value="Tipo de personal:"/>
+                        <br/>
+                        <ice:message for="itTipoPersonal" style="color:red"/>
+                        <br/>
+                        <ice:inputText id="itTipoPersonal" value="#{grupos.grupo.tipoPersonal}"/>
+                    </ice:panelLayout>
+                </ice:panelGrid>
+                <br/>
+                <ice:panelLayout layout="flow">
+                    <ice:commandButton action="#{grupos.create}" value="Aceptar"  />
+                    <ice:commandButton action="#{grupos.listSetup}" value="Cancelar"  immediate="true"/>
+                </ice:panelLayout>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

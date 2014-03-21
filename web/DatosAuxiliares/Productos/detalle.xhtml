@@ -1,0 +1,37 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ice="http://www.icesoft.com/icefaces/component"
+     xmlns:f="http://java.sun.com/jsf/core">
+    <ice:panelGrid columns="3" >
+        <ice:panelLayout layout="flow">
+            <ice:outputLabel for="itNombre" value="Nombre del producto:" required="true"/>
+
+
+            <br/>
+            <ice:inputText id="itNombre" value="#{productos.producto.nombre}" size="40"/><ice:message for="itNombre" style="color:red"/>
+        </ice:panelLayout>
+
+
+
+        <ice:panelLayout layout="flow">
+            <ice:outputLabel for="somTipoProducto" value="Tipo de producto:"/>
+            <br/>
+            <ice:selectOneMenu id="somTipoProducto" value="#{productos.producto.tipo}" partialSubmit="false" required="false">
+                <f:selectItems value="#{productos.tipoProductoItemsAvailableSelectOne}"/>
+            </ice:selectOneMenu>
+        </ice:panelLayout>
+
+        <ice:panelLayout layout="flow">
+            <ice:outputLabel for="somSubtipoTipoProducto" value="Subtipo de producto:"/>
+            <br/>
+            <ice:selectOneMenu id="somSubtipoTipoProducto" value="#{productos.producto.subtipo}" partialSubmit="false" required="false">
+                <f:selectItems value="#{productos.subtipoProductoItemsAvailableSelectOne}"/>
+            </ice:selectOneMenu>
+        </ice:panelLayout>
+
+        <ice:panelLayout layout="flow">
+            <ice:outputLabel for="itDescripcion" value="Descripción del producto:" required="true"/>
+            <br/>
+            <ice:inputTextarea id="itDescripcion" value="#{productos.producto.descripcion}" cols="40"/><ice:message for="itDescripcion" style="color:red"/>
+        </ice:panelLayout>
+    </ice:panelGrid>
+</div>

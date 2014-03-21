@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+                <h1>Personal
+                    <table style="font-size:small;">
+                    <tbody>
+                        <tr>
+                            <td><ice:outputResource mimeType="application/pdf" resource="#{personal.personalPorTipoPersonalPDF}" label="PDF" type="link" fileName="ListadoPersonal.pdf" attachment="true"/></td>
+                            <td><ice:outputResource mimeType="application/vnd.ms-excel" resource="#{personal.personalPorTipoPersonalExcel}" label="Excel" type="link" fileName="ListadoPersonal.xls" attachment="true"/></td>
+                        </tr>
+                    </tbody>
+                </table></h1>
+
+
+                <ice:dataTable
+                    value="#{empleadoJpa.empleadosEntitiesPorCategorias}"
+                    var="empleado"
+                    id="Tabla">
+
+                    <ice:column>
+                        <f:facet name="header">
+                                <ice:outputText value="Tipo de personal"/>
+                        </f:facet>
+
+                        <ice:commandLink value="#{empleado.contratoActual.tipoEmpleado.tipoEmpleado}" action="#{personal.verEmpleado}">
+                            <f:setPropertyActionListener value="#{empleado}" target="#{personal.empleado}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                                <ice:outputText value="Puesto de trabajo"/>
+                        </f:facet>
+
+                        <ice:commandLink value="#{empleado.contratoActual.tipoEmpleado.puestoTrabajo.nombre}" action="#{personal.verEmpleado}">
+                            <f:setPropertyActionListener value="#{empleado}" target="#{personal.empleado}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                                <ice:outputText value="Categoría"/>
+                        </f:facet>
+
+                        <ice:commandLink value="#{empleado.contratoActual.tipoEmpleado.categoria.nombre}" action="#{personal.verEmpleado}">
+                            <f:setPropertyActionListener value="#{empleado}" target="#{personal.empleado}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader1" columnName="apellidos" >
+                                <ice:outputText value="Apellidos "/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+
+                        <ice:commandLink value="#{(empty empleado.apellidos)?('SIN_APELLIDOS'):(empleado.apellidos)}" action="#{personal.verEmpleado}" style="#{((empty empleado.contratoActual) || empleado.contratoActual.vacio)?'color:BlueViolet;':'color:Black;'}">
+                            <f:setPropertyActionListener value="#{empleado}" target="#{personal.empleado}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader2"
+                                                   columnName="nombre" >
+
+                            <ice:outputText value="Nombre "/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+
+                        <ice:commandLink value="#{(empty empleado.nombre)?('SIN_NOMBRE'):(empleado.nombre)}" action="#{personal.verEmpleado}" style="#{((empty empleado.contratoActual) || empleado.contratoActual.vacio)?'color:BlueViolet;':'color:Black;'}">
+                            <f:setPropertyActionListener value="#{empleado}" target="#{personal.empleado}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+
+
+                </ice:dataTable>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

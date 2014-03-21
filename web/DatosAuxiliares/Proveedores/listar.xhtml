@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <body>
+        
+        <ui:composition template="/templates/template.xhtml">
+            
+            <ui:define name="body">
+                <h1>Listado de proveedores</h1>
+                <ice:messages/>
+                <ice:dataTable
+                   value="#{proveedores.proveedorItems}"
+                   var="proveedor"
+                   id="Tabla">
+                       
+                       <ice:column>
+                           <ice:rowSelector
+                        id="selected"
+                        multiple="false"
+                        selectionListener="#{proveedores.selectionListener}"
+                        preStyleOnSelection="true"/>
+                           <f:facet name="header">
+                               <ice:outputText value="Razón social del proveedor"/>
+                           </f:facet>
+                           <ice:outputText value="#{proveedor.razonSocial}"/>
+                       </ice:column>
+
+                </ice:dataTable><br/>
+                <ice:panelLayout layout="flow">
+                        <ice:commandButton action="#{proveedores.createSetup}" value="Insertar"  />
+                        <ice:commandButton value="Borrar" action="#{proveedores.destroy}" immediate="true"/>
+                        <ice:commandButton value="Editar" action="#{proveedores.editSetup}"/>
+                    </ice:panelLayout>
+
+            </ui:define>
+
+        </ui:composition>
+        
+    </body>
+</html>

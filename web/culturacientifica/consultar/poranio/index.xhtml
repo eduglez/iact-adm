@@ -1,0 +1,446 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+                <h1>Resúmen de cultura científica por años</h1>
+
+                <c:forEach items="#{culturaCientifica.estadisticasAnio}" var="estadistica">
+                    <h2><ice:outputText value="#{estadistica.anio}"/></h2>
+                    <h3>Tabla resúmen</h3>
+                    <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;"></th>
+                            <th style="font-weight:normal; text-align:left;">Plan nacional</th>
+                            <th style="font-weight:normal; text-align:left;">Otros (nacional)</th>
+                            <th style="font-weight:normal; text-align:left;">Unión Europea</th>
+                            <th style="font-weight:normal; text-align:left;">Otros (internacional)</th>
+                            <th style="font-weight:normal; text-align:left;">Comunidades autónomas</th>
+                            <th style="font-weight:normal; text-align:left;">No financiado</th>
+                            <th style="font-weight:normal; text-align:left;">Total</th>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Exposiciones</th>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionExposiciones.numPlanNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionExposiciones.totalPlanNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionExposiciones.numOtrosNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionExposiciones.totalOtrosNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionExposiciones.numUnionEuropea}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionExposiciones.totalUnionEuropea}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionExposiciones.numOtrosInternacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionExposiciones.totalOtrosInternacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionExposiciones.numComunidadesAutonomas}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionExposiciones.totalComunidadesAutonomas}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionExposiciones.numNoFinanciados}"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionExposiciones.totalActividades}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionExposiciones.totalFinanciacion}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">CDs y DVDs</th>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionCDDVD.numPlanNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionCDDVD.totalPlanNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionCDDVD.numOtrosNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionCDDVD.totalOtrosNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionCDDVD.numUnionEuropea}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionCDDVD.totalUnionEuropea}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionCDDVD.numOtrosInternacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionCDDVD.totalOtrosInternacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionCDDVD.numComunidadesAutonomas}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionCDDVD.totalComunidadesAutonomas}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionCDDVD.numNoFinanciados}"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionCDDVD.totalActividades}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionCDDVD.totalFinanciacion}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Dias Puertas Abiertas</th>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionDiasPuertasAbiertas.numPlanNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionDiasPuertasAbiertas.totalPlanNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionDiasPuertasAbiertas.numOtrosNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionDiasPuertasAbiertas.totalOtrosNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionDiasPuertasAbiertas.numUnionEuropea}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionDiasPuertasAbiertas.totalUnionEuropea}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionDiasPuertasAbiertas.numOtrosInternacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionDiasPuertasAbiertas.totalOtrosInternacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionDiasPuertasAbiertas.numComunidadesAutonomas}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionDiasPuertasAbiertas.totalComunidadesAutonomas}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionDiasPuertasAbiertas.numNoFinanciados}"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionDiasPuertasAbiertas.totalActividades}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionDiasPuertasAbiertas.totalFinanciacion}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Conferencias</th>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionConferencias.numPlanNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionConferencias.totalPlanNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionConferencias.numOtrosNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionConferencias.totalOtrosNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionConferencias.numUnionEuropea}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionConferencias.totalUnionEuropea}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionConferencias.numOtrosInternacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionConferencias.totalOtrosInternacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionConferencias.numComunidadesAutonomas}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionConferencias.totalComunidadesAutonomas}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionConferencias.numNoFinanciados}"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionConferencias.totalActividades}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionConferencias.totalFinanciacion}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Rutas Cientificas</th>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionRutasCientificas.numPlanNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionRutasCientificas.totalPlanNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionRutasCientificas.numOtrosNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionRutasCientificas.totalOtrosNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionRutasCientificas.numUnionEuropea}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionRutasCientificas.totalUnionEuropea}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionRutasCientificas.numOtrosInternacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionRutasCientificas.totalOtrosInternacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionRutasCientificas.numComunidadesAutonomas}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionRutasCientificas.totalComunidadesAutonomas}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionRutasCientificas.numNoFinanciados}"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionRutasCientificas.totalActividades}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionRutasCientificas.totalFinanciacion}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Talleres y Seminarios</th>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionTalleres.numPlanNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionTalleres.totalPlanNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionTalleres.numOtrosNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionTalleres.totalOtrosNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionTalleres.numUnionEuropea}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionTalleres.totalUnionEuropea}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionTalleres.numOtrosInternacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionTalleres.totalOtrosInternacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionTalleres.numComunidadesAutonomas}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionTalleres.totalComunidadesAutonomas}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionTalleres.numNoFinanciados}"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionTalleres.totalActividades}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionTalleres.totalFinanciacion}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Ferias</th>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionFerias.numPlanNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionFerias.totalPlanNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionFerias.numOtrosNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionFerias.totalOtrosNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionFerias.numUnionEuropea}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionFerias.totalUnionEuropea}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionFerias.numOtrosInternacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionFerias.totalOtrosInternacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionFerias.numComunidadesAutonomas}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionFerias.totalComunidadesAutonomas}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionFerias.numNoFinanciados}"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionFerias.totalActividades}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionFerias.totalFinanciacion}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Semanas Ciencia</th>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionSemanasCiencia.numPlanNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionSemanasCiencia.totalPlanNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionSemanasCiencia.numOtrosNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionSemanasCiencia.totalOtrosNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionSemanasCiencia.numUnionEuropea}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionSemanasCiencia.totalUnionEuropea}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionSemanasCiencia.numOtrosInternacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionSemanasCiencia.totalOtrosInternacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionSemanasCiencia.numComunidadesAutonomas}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionSemanasCiencia.totalComunidadesAutonomas}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionSemanasCiencia.numNoFinanciados}"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionSemanasCiencia.totalActividades}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionSemanasCiencia.totalFinanciacion}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Otras Actividades</th>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionOtrasActividades.numPlanNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionOtrasActividades.totalPlanNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionOtrasActividades.numOtrosNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionOtrasActividades.totalOtrosNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionOtrasActividades.numUnionEuropea}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionOtrasActividades.totalUnionEuropea}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionOtrasActividades.numOtrosInternacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionOtrasActividades.totalOtrosInternacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionOtrasActividades.numComunidadesAutonomas}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionOtrasActividades.totalComunidadesAutonomas}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionOtrasActividades.numNoFinanciados}"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.financiacionOtrasActividades.totalActividades}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.financiacionOtrasActividades.totalFinanciacion}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Total</th>
+                            <td>
+                                <ice:outputText value="#{estadistica.numFinanciacionPlanNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.totalFinanciacionPlanNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.numFinanciacionOtrosNacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.totalFinanciacionOtrosNacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.numFinanciacionUnionEuropea}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.totalFinanciacionUnionEuropea}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.numFinanciacionOtrosInternacional}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.totalFinanciacionOtrosInternacional}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.numFinanciacionComunidadesAutonomas}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.totalFinanciacionComunidadesAutonomas}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.numNoFinanciados}"/>
+                            </td>
+                            <td>
+                                <ice:outputText value="#{estadistica.num}"/>
+                                <br/>
+                                <ice:outputText value="#{estadistica.total}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <h3>Actividades científicas que se han computado</h3>
+                    <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Fecha</th>
+                            <th style="font-weight:normal; text-align:left;">Tipo</th>
+                            <th style="font-weight:normal; text-align:left;">Título</th>
+                            <th style="font-weight:normal; text-align:left;">Autores</th>
+                        </tr>
+                        <c:forEach items="#{estadistica.actividades}" var="actividad">
+                        <tr>
+                            <td>
+                                <ice:commandLink action="#{culturaCientifica.verActividadCientifica}">
+                                    <ice:outputText value="#{actividad.fechaRepresentativa}" style="font-weight:bold;">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy"/>
+                                    </ice:outputText>
+                                    <f:setPropertyActionListener target="#{culturaCientifica.actividadCientifica}" value="#{actividad}"/>
+                                </ice:commandLink>
+                            </td>
+                            <td>
+                                <ice:commandLink action="#{culturaCientifica.verActividadCientifica}">
+                                    <ice:outputText value="#{actividad.tipo}" style="font-weight:bold;"/>
+                                    <f:setPropertyActionListener target="#{culturaCientifica.actividadCientifica}" value="#{actividad}"/>
+                                </ice:commandLink>
+                            </td>
+                            <td>
+                                <ice:commandLink action="#{culturaCientifica.verActividadCientifica}">
+                                    <ice:outputText value="#{actividad.tituloRepresentativo}" style="font-weight:bold;"/>
+                                    <f:setPropertyActionListener target="#{culturaCientifica.actividadCientifica}" value="#{actividad}"/>
+                                </ice:commandLink>
+                            </td>
+                            <td>
+                                <ice:commandLink action="#{culturaCientifica.verActividadCientifica}">
+                                    <ice:outputText value="#{actividad.autoresString}" style="font-weight:bold;"/>
+                                    <f:setPropertyActionListener target="#{culturaCientifica.actividadCientifica}" value="#{actividad}"/>
+                                </ice:commandLink>
+                            </td>
+                        </tr>
+                        </c:forEach>
+                    </table>
+                </c:forEach>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

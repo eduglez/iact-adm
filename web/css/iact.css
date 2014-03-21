@@ -1,0 +1,287 @@
+.columnaNavegador {
+    vertical-align: top;
+    width:275px;
+    padding-left:0px;
+}
+.columnaContenido{
+    vertical-align: top;
+}
+
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 150%;
+}
+
+.header{
+    margin-bottom:20px;
+
+}
+
+.loginBox{
+    border: rgb(255,153,0) 2px solid;
+	width:255px;
+	padding:5px;
+
+}
+.textoMarcado {
+    color:black;
+
+}
+
+.errorImagen{
+background-image: url(http://localhost:8080/iact-adm/css/warn.png); display: block; width: 64px; height: 32px; background-repeat: no-repeat; background-position: 0px 0px;
+}
+
+
+/*
+tr.tituloTabla {
+	background-color: #4C443C;
+	font-weight: bold;
+	font-style: normal;
+	color: #FFB03B;
+	text-align: center;
+}
+
+tr.personal {
+	background-color: #FF7D3E;
+	color: #4C443C;
+}
+tr.personalTitulo {
+	background-color: #FF7D3E;
+	color: #4C443C;
+	font-size: large;
+	font-weight: bolder;
+}
+
+tr.gastosEjecucion {
+	color: #4C443C;
+	background-color: #FFB03B;
+}
+
+tr.gastosEjecucionTitulo {
+	color: #4C443C;
+	background-color: #FFB03B;
+	font-size: large;
+	font-weight: bolder;
+}
+
+tr.costesIndirectos {
+	color: #4C443C;
+	background-color: #C2A25C;
+}
+
+tr.costesIndirectosTitulo {
+	color: #4C443C;
+	background-color: #C2A25C;
+	font-size: large;
+	font-weight: bolder;
+}
+
+tr.totales {
+	background-color: #4C443C;
+	font-weight: bold;
+	font-style: italic;
+	color: #FFB03B;
+	font-size: x-large;
+}
+td.total{
+	text-align: right;
+	font-weight: bold;
+}
+input.valorEntrada {
+	text-align: right;
+	font-weight: 100;
+
+}
+*/
+
+/*
+tr.tituloTabla {
+	background-color: #57657F;
+	color: #AFCBFF;
+
+	font-weight: bold;
+	font-style: normal;
+
+	text-align: center;
+}
+
+tr.personal {
+	background-color: #9DB6E5;
+	color: #2C3340;
+}
+tr.personalTitulo {
+	background-color: #9DB6E5;
+	color: #2C3340;
+	font-size: large;
+	font-weight: bolder;
+}
+
+tr.gastosEjecucion {
+	color: #2C3340;
+	background-color: #AFCBFF;
+}
+
+tr.gastosEjecucionTitulo {
+	color: #2C3340;
+	background-color: #AFCBFF;
+
+	font-size: large;
+	font-weight: bolder;
+}
+
+tr.costesIndirectos {
+	color: #2C3340;
+	background-color: #8398BF;
+}
+
+tr.costesIndirectosTitulo {
+	color: #2C3340;
+	background-color: #8398BF;
+	font-size: large;
+	font-weight: bolder;
+}
+
+tr.totales {
+	background-color: #57657F;
+	font-weight: bold;
+	font-style: italic;
+	color: #AFCBFF;
+	font-size: x-large;
+}
+td.total{
+	text-align: right;
+	font-weight: bold;
+}
+input.valorEntrada {
+	text-align: right;
+	font-weight: 100;
+
+}
+
+*/
+
+/*
+tr.tituloTabla {
+	background-color: #616161;
+	color: #EEEEEE;
+
+	font-weight: bold;
+	font-style: normal;
+
+	text-align: center;
+}
+
+tr.personal {
+	background-color: #E1E1E1;
+	color: #616161;
+}
+tr.personalTitulo {
+	background-color: #E1E1E1;
+	color: #616161;
+	font-size: large;
+	font-weight: bolder;
+}
+
+tr.gastosEjecucion {
+	color: #616161;
+	background-color: #EEEEEE;
+}
+
+tr.gastosEjecucionTitulo {
+	color: #616161;
+	background-color: #EEEEEE;
+
+	font-size: large;
+	font-weight: bolder;
+}
+
+tr.costesIndirectos {
+	color: #616161;
+	background-color: #C7C7C7;
+}
+
+tr.costesIndirectosTitulo {
+	color: #616161;
+	background-color: #C7C7C7;
+	font-size: large;
+	font-weight: bolder;
+}
+
+tr.totales {
+	background-color: #616161;
+	font-weight: bold;
+	font-style: italic;
+	color: #EEEEEE;
+	font-size: x-large;
+}
+td.total{
+	text-align: right;
+	font-weight: bold;
+}
+input.valorEntrada {
+	text-align: right;
+	font-weight: 100;
+
+}
+*/
+
+tr.tituloTabla {
+
+	color: #4C4C4C;
+
+	font-weight: bold;
+	font-style: normal;
+
+	text-align: center;
+}
+
+tr.personal {
+	background-color: #E1E1E1;
+	color: #616161;
+}
+tr.personalTitulo {
+	background-color: #E1E1E1;
+	font-size: large;
+	font-weight: bolder;
+}
+
+tr.gastosEjecucion {
+	color: #616161;
+	background-color: #EEEEEE;
+}
+
+tr.gastosEjecucionTitulo {
+	background-color: #EEEEEE;
+
+	font-size: large;
+	font-weight: bolder;
+}
+
+tr.costesIndirectos {
+	color: #616161;
+	background-color: #C7C7C7;
+}
+
+tr.costesIndirectosTitulo {
+	background-color: #C7C7C7;
+	font-size: large;
+	font-weight: bolder;
+}
+
+tr.totales {
+
+	font-weight: bold;
+	font-style: italic;
+
+	font-size: x-large;
+}
+td.total{
+	text-align: right;
+	font-weight: bold;
+}
+input.valorEntrada {
+	text-align: right;
+	font-weight: 100;
+
+}

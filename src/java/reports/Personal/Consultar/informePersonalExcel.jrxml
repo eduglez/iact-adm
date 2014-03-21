@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListadoPersonal" pageWidth="5100" pageHeight="595" orientation="Landscape" columnWidth="5060" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true">
+	<property name="ireport.zoom" value="2.8531167061100273"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="apellidos" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="contratoActual.telefono" class="java.lang.String"/>
+	<field name="contratoActual.EMail" class="java.lang.String"/>
+	<field name="contratoActual.proyecto.nombre" class="java.lang.String"/>
+	<field name="contratoActual.registroPersonal" class="java.lang.String"/>
+	<field name="contratoActual.departamento.nombre" class="java.lang.String"/>
+	<field name="contratoActual.tipoEmpleado.tipoEmpleado" class="java.lang.String"/>
+	<field name="contratoActual.tipoEmpleado.adscripcion.nombre" class="java.lang.String"/>
+	<field name="dni" class="java.lang.String"/>
+	<field name="contratoActual.fechaInicioContrato" class="java.util.Date"/>
+	<field name="contratoActual.fechaInicioIACT" class="java.util.Date"/>
+	<field name="contratoActual.fechaFinContrato" class="java.util.Date"/>
+	<field name="contratoActual.fechaFinIACT" class="java.util.Date"/>
+	<field name="contratoActual.organismo.nombre" class="java.lang.String"/>
+	<field name="contratoActual.proyecto.proyecto.referencia" class="java.lang.String"/>
+	<field name="contratoActual.proyecto.proyecto.responsable.empleadoIACT.nombre" class="java.lang.String"/>
+	<field name="contratoActual.proyecto.proyecto.responsable.empleadoIACT.apellidos" class="java.lang.String"/>
+	<field name="contratoActual.tipoEmpleado.tipoBecario.nombre" class="java.lang.String"/>
+	<field name="contratoActual.tipoEmpleado.nivel" class="java.lang.String"/>
+	<field name="contratoActual.tipoEmpleado.cuerpo.nombre" class="java.lang.String"/>
+	<field name="contratoActual.tipoEmpleado.puestoTrabajo.nombre" class="java.lang.String"/>
+	<field name="contratoActual.tipoEmpleado.grupo.nombre" class="java.lang.String"/>
+	<field name="contratoActual.tipoEmpleado.categoria.nombre" class="java.lang.String"/>
+	<field name="contratoActual.tipoEmpleado.especialidadLaboral.nombre" class="java.lang.String"/>
+	<field name="contratoActual.tipoEmpleado.tipoLaboralTemporal.nombre" class="java.lang.String"/>
+	<field name="contratoActual.tipoEmpleado.investigadorPrincipal.nombre" class="java.lang.String"/>
+	<field name="contratoActual.tipoEmpleado.investigadorPrincipal.apellidos" class="java.lang.String"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="contratoActual.lineaInvestigacion.lineaInvestigacionPadre.nombre" class="java.lang.String"/>
+	<field name="contratoActual.lineaInvestigacion.nombre" class="java.lang.String"/>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="183" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="625" y="0" width="172" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Teléfono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="797" y="0" width="192" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[E-mail]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1497" y="0" width="222" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Departamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1719" y="0" width="119" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Tipo de personal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1838" y="0" width="163" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Adscripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="283" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[DNI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="383" y="0" width="242" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Registro personal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="989" y="0" width="102" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[F. Inicio Contrato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1091" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[F. Fin Contrato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1191" y="0" width="102" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[F. Inicio IACT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1293" y="0" width="102" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[F. Fin IACT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1395" y="0" width="102" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Organismo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2001" y="0" width="138" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Tipo de Becario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2469" y="0" width="154" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Tipo Laboral Temporal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2623" y="0" width="235" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Especialidad Laboral]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2858" y="0" width="170" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Puesto de trabajo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3028" y="0" width="92" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Grupo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3120" y="0" width="254" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Cuerpo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3374" y="0" width="272" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Categoría]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3646" y="0" width="48" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Nivel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3694" y="0" width="189" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Proyecto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3883" y="0" width="277" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Investigador principal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2139" y="0" width="330" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Investigador Principal (Director de Tesis de Becario)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4160" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Sexo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4260" y="0" width="400" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Línea de investigación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4660" y="0" width="400" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Sublínea de investigación]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="183" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{apellidos}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="183" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="625" y="0" width="172" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contratoActual.telefono}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="797" y="0" width="192" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contratoActual.EMail}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1497" y="0" width="222" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contratoActual.departamento.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1719" y="0" width="119" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contratoActual.tipoEmpleado.tipoEmpleado}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1838" y="0" width="163" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contratoActual.tipoEmpleado.adscripcion.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="283" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{dni}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="989" y="0" width="102" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{contratoActual.fechaInicioContrato}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="1091" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{contratoActual.fechaFinContrato}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="1191" y="0" width="102" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{contratoActual.fechaInicioIACT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="1293" y="0" width="102" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{contratoActual.fechaFinIACT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1395" y="0" width="102" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contratoActual.organismo.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="2001" y="0" width="138" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contratoActual.tipoEmpleado.tipoBecario.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="2469" y="0" width="154" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contratoActual.tipoEmpleado.tipoLaboralTemporal.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="2623" y="0" width="235" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contratoActual.tipoEmpleado.especialidadLaboral.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="2858" y="0" width="170" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contratoActual.tipoEmpleado.puestoTrabajo.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3028" y="0" width="92" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contratoActual.tipoEmpleado.grupo.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3120" y="0" width="254" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contratoActual.tipoEmpleado.cuerpo.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3374" y="0" width="272" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contratoActual.tipoEmpleado.categoria.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3646" y="0" width="48" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contratoActual.tipoEmpleado.nivel}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3694" y="0" width="189" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{contratoActual.proyecto.proyecto.referencia}!=null?$F{contratoActual.proyecto.proyecto.referencia}:"")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="383" y="0" width="242" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contratoActual.registroPersonal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3883" y="0" width="277" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{contratoActual.proyecto.proyecto.responsable.empleadoIACT.apellidos}!=null?$F{contratoActual.proyecto.proyecto.responsable.empleadoIACT.apellidos}:"")+", "+($F{contratoActual.proyecto.proyecto.responsable.empleadoIACT.nombre}!=null?$F{contratoActual.proyecto.proyecto.responsable.empleadoIACT.nombre}:"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2139" y="0" width="330" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{contratoActual.tipoEmpleado.investigadorPrincipal.apellidos}!=null?$F{contratoActual.tipoEmpleado.investigadorPrincipal.apellidos}:"")+", "+($F{contratoActual.tipoEmpleado.investigadorPrincipal.nombre}!=null?$F{contratoActual.tipoEmpleado.investigadorPrincipal.nombre}:"")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="4160" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sexo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="4660" y="0" width="400" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contratoActual.lineaInvestigacion.lineaInvestigacionPadre.nombre}==null?"":$F{contratoActual.lineaInvestigacion.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="4260" y="0" width="400" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contratoActual.lineaInvestigacion.lineaInvestigacionPadre.nombre}==null?$F{contratoActual.lineaInvestigacion.nombre}:$F{contratoActual.lineaInvestigacion.lineaInvestigacionPadre.nombre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

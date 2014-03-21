@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <ice:panelGrid columns="6" >
+                    <br/><br/><br/>
+                    <ice:commandLink action="#{facturas.salirSinGuardar}" value="Salir sin guardar" immediate="true"/>
+                    <ice:commandButton action="#{facturas.salirGuardando}" value="Salir y GUARDAR"/>
+                    <ice:commandButton action="#{facturas.guardarCambios}" value="GUARDAR AHORA"  />
+                    <ice:panelLayout layout="flow">
+                        <ice:outputLabel for="itNumFactura" value="Numero de factura:"/>
+                        <br/>
+
+                        <ice:inputText id="itNumFactura" value="#{facturas.factura.numFactura}"/>
+                    </ice:panelLayout>
+                    <ice:panelLayout layout="flow">
+                        <ice:outputLabel for="itImporte" value="Importe:"/>
+                        <br/>
+                        <ice:inputText id="itImporte" value="#{facturas.factura.importe}" converter="EuroCurrencyConverter"/>
+                    </ice:panelLayout>
+                </ice:panelGrid>
+
+                <br/>
+                <ice:selectOneMenu value="#{facturas.pedidoSeleccionado}" >
+                    <f:selectItems value="#{facturas.pedidoItemsAvailableSelectOne}"/>
+                </ice:selectOneMenu>
+
+                <ice:commandButton value="Asignar pedido a factura" action="#{facturas.asignarPedidoAFactura}" />
+                <ice:panelSeries id="pedidosFactura"
+                                 value="#{facturas.factura.pedidos}"
+                                 var="pedido" >
+                    <ice:panelCollapsible expanded="false">
+                        <f:facet name="header">
+                            <ice:panelGroup>
+                                <ice:outputText value="#{pedido.numPedido}"/>
+                                <ice:outputText value="   #{pedido.fecha}">
+                                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy"/>
+                                </ice:outputText>
+                            </ice:panelGroup>
+                        </f:facet>
+                        <ice:panelGroup>
+                            <ice:panelGrid columns="3" >
+                                <ice:panelLayout layout="flow" >
+                                    <ice:outputLabel for="itNumPedido" value="Número de pedido: "/>
+                                    <br/>
+                                    <ice:inputText id="itNumPedido" value="#{pedido.numPedido}" disabled="true" style="color:black;" />
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFecha" value="Fecha:"/>
+                                    <br/>
+                                    <ice:inputText id="itFecha" value="#{pedido.fecha}" disabled="true" style="color:black;">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy"/>
+                                    </ice:inputText>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itEstado" value="Estado:"/>
+                                    <br/>
+                                    <ice:inputText id="itEstado" value="#{pedido.estadoPedido.nombre}" disabled="true" style="color:black;"/>
+                                </ice:panelLayout>
+
+                                
+
+
+                            </ice:panelGrid>
+
+                                    <ice:panelLayout layout="flow" >
+                                    <ice:outputLabel for="itSolicitante" value="Solicitante: "/>
+                                    <br/>
+                                    <ice:inputText id="itSolicitante" value="#{pedido.solicitante.apellidos}, #{pedido.solicitante.nombre}" disabled="true" style="color:black;" size="80"/>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itProveedor" value="Proveedor: "/>
+                                    <br/>
+                                    <ice:inputText id="itProveedor" value="#{pedido.proveedor.razonSocial}" disabled="true" style="color:black;" size="80"/>
+                                </ice:panelLayout>
+
+                        </ice:panelGroup>
+                    </ice:panelCollapsible>
+                        <ice:commandLink value="Quitar de factura" action="#{facturas.borrarPedidoDeFactura}">
+                            <f:setPropertyActionListener target="#{facturas.pedidoSeleccionado}" value="#{pedido}"/>
+                        </ice:commandLink>
+                </ice:panelSeries>
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,31 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ice="http://www.icesoft.com/icefaces/component">
+<ice:panelLayout layout="flow">
+    <ice:panelLayout layout="flow">
+        <ice:outputLabel for="itRazonSocial" value="Razon social:" required="true"/>
+        <br/>
+        <ice:message for="itRazonSocial" style="color:red"/>
+        
+        <ice:inputText id="itRazonSocial" value="#{datosEntrega.datosEntrega.razonSocial}" size="50"/>
+    </ice:panelLayout>
+
+    <ice:panelLayout layout="flow">
+        <ice:outputLabel for="itTelefono" value="Teléfono:" required="true"/>
+        <br/>
+        <ice:message for="itTelefono" style="color:red"/>
+
+        <ice:inputText id="itTelefono" value="#{datosEntrega.datosEntrega.telefono}"/>
+    </ice:panelLayout>
+  
+    <ice:panelLayout layout="flow">
+        <ice:outputLabel for="itDireccion" value="Dirección:" required="true"/>
+        <br/>
+        <ice:message for="itDireccion" style="color:red"/>
+        
+        <ice:inputTextarea id="itDireccion" value="#{datosEntrega.datosEntrega.direccion}" cols="50"/>
+    </ice:panelLayout>
+
+    
+
+</ice:panelLayout>
+</div>

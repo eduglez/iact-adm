@@ -1,0 +1,321 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+                <ice:panelGrid columns="6" >
+                    <br/><br/><br/>
+
+                    <ice:commandLink action="#{pedidosProyecto.salirSinGuardar}" value="Salir sin guardar" immediate="true"/>
+                    <ice:commandButton action="#{pedidosProyecto.salirGuardando}" value="Salir y GUARDAR"/>
+                    <ice:commandButton action="#{pedidosProyecto.guardarCambios}" value="GUARDAR AHORA"  />
+
+                    <ice:panelLayout layout="flow">
+                        <ice:outputLabel for="itNumPedido" value="Numero de pedido:"/>
+                        <br/>
+
+                        <ice:inputText id="itNumPedido" value="#{pedidosProyecto.pedido.numPedido}" disabled="true" style="color:black;"/>
+                    </ice:panelLayout>
+                    <ice:panelLayout layout="flow">
+                        <ice:outputLabel for="itFecha" value="Fecha:"/>
+                        <br/>
+                        <ice:message showDetail="false" showSummary="false" for="itFecha" errorClass="errorImagen"/>
+                        <ice:selectInputDate renderAsPopup="true" id="itFecha" value="#{pedidosProyecto.pedido.fecha}" required="true" partialSubmit="true">
+                            <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                        </ice:selectInputDate>
+                    </ice:panelLayout>
+                    <ice:panelLayout layout="flow">
+
+                        <ice:outputLabel for="itEstado" value="Estado:"/>
+
+                        <br/>
+                        <ice:message showDetail="false" showSummary="false" for="itEstado" errorClass="errorImagen"/>
+                        <ice:inputText id="itEstado" value="#{pedidosProyecto.pedido.estadoPedido.nombre}" disabled="true" style="color:black;"/>
+                    </ice:panelLayout>
+
+                    <ice:panelLayout layout="flow" rendered="#{pedidosProyecto.pedido.cancelado}">
+                        <ice:outputLabel for="itFechaCancelacion" value="Fecha de cancelación:"/>
+                        <br/>
+                        <ice:message showDetail="false" showSummary="false" for="itFechaCancelacion" errorClass="errorImagen"/>
+                        <ice:inputText id="itFechaCancelacion" value="#{pedidosProyecto.pedido.fechaCancelacion}" disabled="true">
+                            <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                        </ice:inputText>
+                    </ice:panelLayout>
+                </ice:panelGrid>
+
+
+                <ice:panelTabSet>
+
+                    <ice:panelTab id="tabDatosPedido" label="Datos del pedido">
+                        <ice:panelLayout layout="flow">
+
+                            <ice:panelCollapsible expanded="false" >
+                                <f:facet name="header">
+                                    <ice:panelGroup>
+                                        <ice:outputText value="#{pedidosProyecto.pedido.solicitante.apellidos}, #{pedidosProyecto.pedido.solicitante.nombre}"/>
+                                    </ice:panelGroup>
+                                </f:facet>
+                                <ice:panelGroup>
+                                    <ice:panelGrid columns="3" >
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="itDNI" value="DNI:"/>
+                                            <br/>
+                                            <ice:inputText id="itDNI" value="#{pedidosProyecto.pedido.solicitante.dni}" disabled="true" style="color:black;"/>
+                                        </ice:panelLayout>
+                                    </ice:panelGrid>
+                                    <ice:panelGrid columns="4" cellspacing="20">
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="itRegistroPersonal" value="Registro personal:"/>
+                                            <br/>
+                                            <ice:inputText id="itRegistroPersonal" value="#{pedidosProyecto.pedido.solicitante.contratoActual.registroPersonal}"  disabled="true" style="color:black;"/>
+                                        </ice:panelLayout>
+                                        <br/>
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="itTelefonoEmpleado" value="Teléfono:"/>
+                                            <br/>
+                                            <ice:inputText id="itTelefonoEmpleado" value="#{pedidosProyecto.pedido.solicitante.contratoActual.telefono}" disabled="true" style="color:black;"/>
+                                        </ice:panelLayout>
+
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="itCorreoElectronicoEmpleado" value="Correo electrónico:"/>
+                                            <br/>
+                                            <ice:inputText id="itCorreoElectronicoEmpleado" value="#{pedidosProyecto.pedido.solicitante.contratoActual.EMail}" disabled="true" style="color:black;"/>
+                                        </ice:panelLayout>
+
+                                        <ice:panelLayout layout="flow">
+                                            <ice:outputLabel for="itNombreDepartamento" value="Departamento:"/>
+                                            <br/>
+                                            <ice:inputText id="itNombreDepartamento" value="#{pedidosProyecto.pedido.solicitante.contratoActual.departamento.nombre}"  disabled="true" style="color:black;"/>
+                                        </ice:panelLayout>
+
+                                    </ice:panelGrid>
+
+                                </ice:panelGroup>
+                            </ice:panelCollapsible>
+
+                            <br/>
+
+
+                            <c:choose>
+                                <c:when test="#{login.investigador}">
+                                    <ice:outputLabel for="somProyecto" value="Seleccione proyecto:"/>
+                                    <br/>
+                                    <ice:selectOneMenu id="somProyecto" value="#{pedidosProyecto.pedido.proyecto}" partialSubmit="true">
+                                        <f:selectItems value="#{pedidosProyecto.proyectosVigentesItemsAvailableSelectOne}" />
+                                    </ice:selectOneMenu>
+
+                                    <ice:panelCollapsible expanded="false" rendered="#{not empty pedidosProyecto.pedido.proyecto}">
+                                        <f:facet name="header">
+                                            <ice:panelGroup>
+                                                <ice:outputText value="Proyecto #{pedidosProyecto.pedido.proyecto.referencia} de #{pedidosProyecto.pedido.proyecto.responsable.empleadoIACT.apellidos}, #{pedidosProyecto.pedido.proyecto.responsable.empleadoIACT.nombre}"/>
+                                            </ice:panelGroup>
+                                        </f:facet>
+                                        <ice:panelGroup>
+                                            <ice:panelGrid columns="2" >
+                                                <ice:panelLayout layout="flow" >
+                                                    <ice:outputLabel for="itReferenciaProyecto" value="Referencia del proyecto:"/>
+                                                    <br/>
+                                                    <ice:inputText id="itReferenciaProyecto" value="#{pedidosProyecto.pedido.proyecto.referencia}" disabled="true" style="color:black;" />
+                                                </ice:panelLayout>
+
+                                                <ice:panelLayout layout="flow" >
+                                                    <ice:outputLabel for="itNombreInvestigador" value="Investigador principal:"/>
+                                                    <br/>
+                                                    <ice:inputText id="itNombreInvestigador" value="#{pedidosProyecto.pedido.proyecto.responsable.empleadoIACT.apellidos}, #{pedidosProyecto.pedido.proyecto.responsable.empleadoIACT.nombre}" disabled="true" style="color:black;" size="50"/>
+                                                </ice:panelLayout>
+
+                                                <ice:panelLayout layout="flow" >
+                                                    <ice:outputLabel for="itOrganismoProyecto" value="Organismo:"/>
+                                                    <br/>
+                                                    <ice:inputText id="itOrganismoProyecto" value="#{pedidosProyecto.pedido.proyecto.organismo.nombre}" disabled="true" style="color:black;" />
+                                                </ice:panelLayout>
+                                                <ice:panelLayout layout="flow" >
+                                                    <ice:outputLabel for="itEstadoProyecto" value="Estado del proyecto:"/>
+                                                    <br/>
+                                                    <ice:inputText id="itEstadoProyecto" value="#{pedidosProyecto.pedido.proyecto.estadoProyecto.nombre}" disabled="true" style="color:black;" />
+                                                </ice:panelLayout>
+                                            </ice:panelGrid>
+                                        </ice:panelGroup>
+                                    </ice:panelCollapsible>
+
+                                </c:when>
+
+                                <c:when test="#{login.servicios}">
+                                    <ice:outputText value="#{pedidosProyecto.pedido.entidad.nombre}"/>
+                                </c:when>
+                                <c:when test="#{login.secretaria}">
+                                    <ice:outputText value="#{pedidosProyecto.pedido.entidad.nombre}"/>
+                                </c:when>
+                            </c:choose>
+                            <br/>
+                            <br/>
+                            <ice:outputLabel for="somDatosEntrega" value="Datos de entrega:"/>
+                            <br/>
+                            <ice:selectOneMenu id="somDatosEntrega" value="#{pedidosProyecto.pedido.datosEntrega}" partialSubmit="true">
+                                <f:selectItems value="#{datosEntrega.datosEntregaItemsAvailableSelectOne}"/>
+                            </ice:selectOneMenu>
+
+                            <ice:panelCollapsible expanded="false">
+                                <f:facet name="header">
+                                    <ice:panelGroup>
+                                        <ice:outputText value="Detalles de los datos de entrega"/>
+                                    </ice:panelGroup>
+                                </f:facet>
+                                <ice:panelGroup>
+
+                                    <ice:panelLayout layout="flow" >
+                                        <ice:outputLabel for="itRazonSocialDatosEntrega" value="Razón social:"/>
+                                        <br/>
+                                        <ice:inputText id="itRazonSocialDatosEntrega" value="#{pedidosProyecto.pedido.datosEntrega.razonSocial}" disabled="true"  style="color:black;" size="80"/>
+                                    </ice:panelLayout>
+                                    <ice:panelLayout layout="flow" >
+                                        <ice:outputLabel for="itDireccionDatosEntrega" value="Dirección:"/>
+                                        <br/>
+                                        <ice:inputText id="itDireccionDatosEntrega" value="#{pedidosProyecto.pedido.datosEntrega.direccion}" disabled="true"  style="color:black;"  size="80"/>
+                                    </ice:panelLayout>
+                                    <ice:panelLayout layout="flow" >
+                                        <ice:outputLabel for="itTelefonoDatosEntrega" value="Teléfono:"/>
+                                        <br/>
+                                        <ice:inputText id="itTelefonoDatosEntrega" value="#{pedidosProyecto.pedido.datosEntrega.telefono}" disabled="true"  style="color:black;" />
+                                    </ice:panelLayout>
+
+                                </ice:panelGroup>
+                            </ice:panelCollapsible>
+                            <br/>
+
+                            <ice:outputLabel for="somProveedor" value="Proveedor:"/>
+                            <br/>
+                            <ice:selectOneMenu id="somProveedor" value="#{pedidosProyecto.pedido.proveedor}" partialSubmit="true">
+                                <f:selectItems value="#{proveedores.proveedorItemsAvailableSelectOne}"/>
+                            </ice:selectOneMenu>
+                            <ice:panelCollapsible expanded="false">
+                                <f:facet name="header">
+                                    <ice:panelGroup>
+                                        <ice:outputText value="Detalles del proveedor"/>
+                                    </ice:panelGroup>
+                                </f:facet>
+                                <ice:panelGroup>
+                                    <ice:panelLayout layout="flow" >
+                                        <ice:outputLabel for="itRazonSocialProveedor" value="Razón social:"/>
+                                        <br/>
+                                        <ice:inputText id="itRazonSocialProveedor" value="#{pedidosProyecto.pedido.proveedor.razonSocial}" disabled="true" style="color:black;" size="80"/>
+                                    </ice:panelLayout>
+                                    <ice:panelLayout layout="flow" >
+                                        <ice:outputLabel for="itDireccionProveedor" value="Dirección:"/>
+                                        <br/>
+                                        <ice:inputText id="itDireccionProveedor" value="#{pedidosProyecto.pedido.proveedor.direccion}" disabled="true" style="color:black;" size="80"/>
+                                    </ice:panelLayout>
+                                    <ice:panelLayout layout="flow" >
+                                        <ice:outputLabel for="itEmailProveedor" value="eMail:"/>
+                                        <br/>
+                                        <ice:inputText id="itEmailProveedor" value="#{pedidosProyecto.pedido.proveedor.EMail}" disabled="true" style="color:black;" size="50"/>
+                                    </ice:panelLayout>
+                                    <ice:panelLayout layout="flow" >
+                                        <ice:outputLabel for="itObservacionesProveedor" value="Observaciones:"/>
+                                        <br/>
+                                        <ice:inputTextarea id="itObservacionesProveedor" value="#{pedidosProyecto.pedido.proveedor.observaciones}" disabled="true" style="color:black;"  cols="100"/>
+                                    </ice:panelLayout>
+                                    <ice:panelGrid columns="4" cellspacing="20">
+
+
+                                        <ice:panelLayout layout="flow" >
+                                            <ice:outputLabel for="itTelefonoProveedor" value="Teléfono:"/>
+                                            <br/>
+                                            <ice:inputText id="itTelefonoProveedor" value="#{pedidosProyecto.pedido.proveedor.telefono}" disabled="true" style="color:black;"/>
+                                        </ice:panelLayout>
+
+                                        <ice:panelLayout layout="flow" >
+                                            <ice:outputLabel for="itFaxProveedor" value="Fax:"/>
+                                            <br/>
+                                            <ice:inputText id="itFaxProveedor" value="#{pedidosProyecto.pedido.proveedor.fax}" disabled="true" style="color:black;"/>
+                                        </ice:panelLayout>
+                                        <ice:panelLayout layout="flow" >
+                                            <ice:outputLabel for="itCifProveedor" value="CIF:"/>
+                                            <br/>
+                                            <ice:inputText id="itCifProveedor" value="#{pedidosProyecto.pedido.proveedor.cif}" disabled="true" style="color:black;"/>
+                                        </ice:panelLayout>
+                                        <ice:panelLayout layout="flow" >
+                                            <ice:outputLabel for="itNombrePersonaContactoProveedor" value="Nombre persona de contacto:"/>
+                                            <br/>
+                                            <ice:inputText id="itNombrePersonaContactoProveedor" value="#{pedidosProyecto.pedido.proveedor.nombrePersonaContacto}" disabled="true" style="color:black;"/>
+                                        </ice:panelLayout>
+
+                                    </ice:panelGrid>
+
+                                </ice:panelGroup>
+                            </ice:panelCollapsible>
+                            <br/>
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="itaNotas" value="Notas para el responsable de COMPRAS:"/>
+                                <br/>
+                                <ice:inputTextarea id="itaNotas" value="#{pedidosProyecto.pedido.notas}" cols="60"/>
+                            </ice:panelLayout>
+                        </ice:panelLayout>
+                    </ice:panelTab>
+
+                    <ice:panelTab id="tabProductosPedido" label="Productos del pedido">
+                        <ice:panelSeries id="productosPedidoPanel"
+                                         value="#{pedidosProyecto.pedido.lineas}"
+                                         var="lineaPedido">
+
+                            <ice:panelGrid columns="3" bgcolor="#{lineaPedido.marcaBorrado?'#E8E8E8':''}">
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel value="Producto" for="somProductoLinea"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="somProductoLinea" errorClass="errorImagen"/>
+                                    <ice:selectOneMenu id="somProductoLinea" value="#{lineaPedido.producto}" partialSubmit="true" immediate="true" required="true">
+                                        <f:selectItems value="#{productos.productoItemsAvailableSelectOne}"/>
+                                    </ice:selectOneMenu>
+                                    <br/>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel value="Cantidad" for="itCantidad"/>
+                                    <br/>
+                                    <ice:message showDetail="false" showSummary="false" for="itCantidad" errorClass="errorImagen"/>
+                                    <ice:inputText id="itCantidad" value="#{lineaPedido.cantidad}" style="text-align:right;" size="20" required="true" partialSubmit="true">
+                                        <f:validateLongRange minimum="1" />
+                                    </ice:inputText>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <br/>
+                                    <ice:commandButton value="#{lineaPedido.marcaBorrado?'Volver a poner':'Quitar'}" action="#{pedidosProyecto.toggleMarcaBorrarLineaPedido}" >
+                                        <f:setPropertyActionListener value="#{lineaPedido}" target="#{pedidosProyecto.lineaPedidoSeleccionada}" />
+                                    </ice:commandButton>
+                                </ice:panelLayout>
+
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itaDescripcion" value="Descripción:"/>
+                                    <br/>
+                                    <ice:inputTextarea id="itaDescripcion" value="#{lineaPedido.descripcionAlternativa}"  cols="60" rows="3" partialSubmit="true"/>
+                                </ice:panelLayout>
+
+                            </ice:panelGrid>
+                            <br/>
+
+                        </ice:panelSeries>
+
+                        <ice:commandButton value="Nueva linea" action="#{pedidosProyecto.insertarLineaPedido}" />
+                    </ice:panelTab>
+
+
+                </ice:panelTabSet>
+                <br/>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

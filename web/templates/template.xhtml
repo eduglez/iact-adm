@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <head>
+        <title>Administración IACT</title>
+        <link href="/iact-adm/xmlhttp/css/rime/rime.css" rel="stylesheet" type="text/css" />
+        <link href="/iact-adm/css/iact.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    
+    <body>
+        <ice:form id="formulario">
+            <div>
+                <div class="header" >
+
+                    <table>
+                        <tr>
+                            <td><div class="loginBox" >Usuario conectado:
+                                    <b><ice:outputText value=" #{login.name}"/></b>
+                                    <h5 style="margin-top:3px;margin-bottom:-1px;"><ice:commandLink value="Configurar cuenta" action="configurarCuenta"/></h5>
+                                    <h5 style="margin-top:-1px;margin-bottom:-1px;"><ice:commandLink value="Cerrar sesión" action="#{login.logout}"/></h5>
+
+                                </div></td>
+                            <td><img src="/iact-adm/css/header.jpg"/></td>
+                            <td></td>
+                        </tr>
+                    </table>
+
+
+                </div>
+
+                <ice:panelGrid columns="2" cellspacing="5" columnClasses="columnaNavegador columnaContenido">
+                    <ice:panelGroup>
+                        <ice:tree id="tree"
+                                  value="#{tree.model}"
+                                  var="item"
+                                  hideRootNode="false"
+                                  hideNavigation="false"
+                                  imageDir="/iact-adm/xmlhttp/css/rime/css-images/"
+                                  >
+                            <ice:treeNode>
+                                <f:facet name="content">
+                                    <ice:panelGroup style="display: inline" >
+                                        <ice:commandLink value="#{item.userObject.text}" action="#{item.userObject.action}" />
+                                    </ice:panelGroup>
+                                </f:facet>
+                            </ice:treeNode>
+                        </ice:tree>
+                    </ice:panelGroup>
+
+
+
+                    <ice:panelGroup >
+                        <ice:messages layout="table" errorStyle="color:red;" infoStyle="color:blue;"/>
+                        <ui:insert name="body">Default Body</ui:insert>
+                    </ice:panelGroup>
+                </ice:panelGrid>
+
+            </div>
+        </ice:form>
+    </body>
+
+</html>

@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+
+            <ui:define name="body">
+            <ice:panelBorder >
+                <f:facet name="center">
+                    <ice:panelLayout layout="flow" style="width:700px">
+                    <ice:panelLayout layout="flow">
+                        <h2>Alertas</h2>
+                        <ul>
+                            <li>No hay ninguna alerta activa</li>
+                        </ul>
+                    </ice:panelLayout>
+
+                    <ice:panelLayout layout="flow">
+                        <h2>Últimas Entradas</h2>
+                        <ul>
+                            <c:forEach items="#{inventarioEntrada.ultimosMovimientosEntrada}" var="me">
+                                <li>
+                                    <ice:commandLink action="inventario-ver-movimientoentrada" style="font-weight:bold;">
+                                        <ice:outputText value="#{me.fechaEntrada}">
+                                            <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                        </ice:outputText>
+                                        <f:setPropertyActionListener target="#{inventarioEntrada.movimientoEntrada}" value="#{me}"/>
+                                    </ice:commandLink>
+                                    <ice:outputText value="  #{me.productoAsignado.producto}" style="font-weight:bold;"/>
+                                    <br/>
+                                    <table cellspacing="15">
+                                        <tr>
+                                            <td width="69">
+                                                <ice:outputText value="Asignado a:"/>
+                                            </td>
+                                            <td>
+                                                <ice:outputText value="#{me.productoAsignado}" style="font-weight:bold;"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <ice:outputText value="Total:"/>
+                                            </td>
+                                            <td>
+                                                <ice:outputText value="#{me.cantidadEntera} (#{me.productoAsignado.producto.tipoCantidad})" style="font-weight:bold;"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                            
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </ice:panelLayout>
+
+                    <ice:panelLayout layout="flow">
+                        <h2>Últimas Salidas</h2>
+                        <ul>
+                            <c:forEach items="#{inventarioSalida.ultimosMovimientosSalida}" var="ms">
+                                <li>
+                                  <ice:commandLink action="inventario-ver-movimientosalida" style="font-weight:bold;">
+                                        <ice:outputText value="#{ms.fechaSalida}">
+                                            <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                        </ice:outputText>
+                                        <f:setPropertyActionListener target="#{inventarioSalida.movimientoSalida}" value="#{ms}"/>
+                                    </ice:commandLink>
+                                    <ice:outputText value="  #{ms.productoAsignado.producto}" style="font-weight:bold;"/>
+                                    <br/>
+                                    <table cellspacing="15">
+                                        <tr>
+                                            <td width="69">
+                                                <ice:outputText value="Asignado a:"/>
+                                            </td>
+                                            <td>
+                                                <ice:outputText value="#{ms.productoAsignado}" style="font-weight:bold;"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <ice:outputText value="Total:"/>
+                                            </td>
+                                            <td>
+                                                <ice:outputText value="#{ms.cantidadEntera} (#{ms.productoAsignado.producto.tipoCantidad})" style="font-weight:bold;"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </ice:panelLayout>
+                    </ice:panelLayout>
+                </f:facet>
+
+                <f:facet name="east">
+                    <ice:panelLayout layout="flow" style="width:200px">
+                        <ice:commandButton value="Ver Inventario" action="inventario-ver"/>
+                    <br/><br/>
+                    <ice:commandButton value="Ver Almacen" action="inventario-ver-almacen"/>
+                    <br/><br/>
+                    <ice:commandButton value="Ver Producto" action="#{inventarioProducto.verProducto}"/>
+                    <br/><br/>
+                    <ice:commandButton value="ENTRADA DE PRODUCTO" action="#{inventarioEntrada.prepairRegistrarEntradaProducto}"/>
+                    <br/><br/>
+                    <ice:commandButton value="SALIDA DE PRODUCTO" action="#{inventarioSalida.mostrarEntradasProducto}"/>
+                    <br/>
+
+                    </ice:panelLayout>
+                </f:facet>
+            </ice:panelBorder>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+

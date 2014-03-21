@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+
+                <h1>Pedidos
+                    <table style="font-size:small;">
+                        <tbody>
+                            <tr>
+                                <td><ice:outputResource mimeType="application/pdf" resource="#{pedidos.pedidosPDF}" label="PDF" type="link" fileName="ListadoCompras.pdf" attachment="true"/></td>
+                                <td><ice:outputResource mimeType="application/vnd.ms-excel" resource="#{pedidos.pedidosExcel}" label="Excel" type="link" fileName="ListadoCompras.xls" attachment="true"/></td>
+                            </tr>
+                        </tbody>
+                    </table></h1>
+                    <ice:commandButton action="#{pedidos.createSetup}" value="Insertar"  />
+                <br/>
+                <ice:panelGrid columns="3">
+                    <ice:panelLayout layout="flow">
+                        <ice:outputText value="Filtrar por año: "/>
+                        <ice:selectOneMenu id="somAnioFiltro" value="#{pedidos.anioFiltro}" partialSubmit="true">
+                            <f:selectItems value="#{pedidos.anioFiltroItemsAvailableSelectOne}"/>
+                        </ice:selectOneMenu>
+                    </ice:panelLayout>
+
+                </ice:panelGrid>
+
+
+                <ice:dataTable
+                    value="#{pedidos.pedidoItems}"
+                    var="pedido"
+                    id="Tabla"
+                    sortColumn="#{pedidos.columnaFiltro}"
+                    sortAscending="#{pedidos.ascendente}">
+
+                    <ice:column>
+
+                        <f:facet name="header">
+
+                            <ice:commandSortHeader id="regionHeader"
+                                                   columnName="fecha" >
+                                <ice:outputText value="Fecha de pedido"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+
+                        <ice:outputLabel value="#{pedido.fecha}" >
+                            <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                        </ice:outputLabel>
+                    </ice:column>
+
+                    <ice:column>
+
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader1"
+                                                   columnName="numPedido" >
+                                <ice:outputText value="Número pedido"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+
+                        <ice:commandLink value="#{pedido.numPedido}" action="#{pedidos.verPedido}">
+                            <f:setPropertyActionListener value="#{pedido}" target="#{pedidos.pedido}" />
+                        </ice:commandLink>
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader2"
+                                                   columnName="estadoPedido.nombre" >
+                                <ice:outputText value="Estado"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:commandLink value="#{pedido.estadoPedido.nombre}" action="#{pedidos.verPedido}"   style="color:#{pedido.estadoPedido.nombre=='Pendiente de aceptación'?'red':'black'};">
+                            <f:setPropertyActionListener value="#{pedido}" target="#{pedidos.pedido}" />
+                        </ice:commandLink>
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader3"
+                                                   columnName="entidad.nombre" >
+                                <ice:outputText value="Entidad solicitante"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:commandLink value="#{pedido.entidad.nombre}" action="#{pedidos.verPedido}" >
+                            <f:setPropertyActionListener value="#{pedido}" target="#{pedidos.pedido}" />
+                        </ice:commandLink>
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader4"
+                                                   columnName="proveedor.razonSocial" >
+                                <ice:outputText value="Razón social proveedor"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:commandLink value="#{pedido.proveedor.razonSocial}" action="#{pedidos.verPedido}">
+                            <f:setPropertyActionListener value="#{pedido}" target="#{pedidos.pedido}" />
+                        </ice:commandLink>
+                    </ice:column>
+
+                    <ice:column>
+                        <ice:commandButton value="Borrar" action="#{pedidos.destroy}" panelConfirmation="pcBorrado"  rendered="#{login.adm||login.compras||login.gerencia}">
+                            <f:setPropertyActionListener value="#{pedido}" target="#{pedidos.pedido}" />
+                        </ice:commandButton>
+                        <ice:panelConfirmation id="pcBorrado" message="Seguro que desea borrar el pedido #{pedido.numPedido}" acceptLabel="Aceptar" rendered="true" cancelLabel="Cancelar"/>
+                    </ice:column>
+
+                    <ice:column>
+                        <ice:commandButton value="Editar" action="#{pedidos.editSetup}" rendered="#{login.adm||login.compras||login.gerencia}">
+                            <f:setPropertyActionListener value="#{pedido}" target="#{pedidos.pedido}" />
+                        </ice:commandButton>
+                    </ice:column>
+
+                </ice:dataTable>
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

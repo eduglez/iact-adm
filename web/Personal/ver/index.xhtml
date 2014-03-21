@@ -1,0 +1,267 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <ice:panelConfirmation id="pcBorrado" message="Seguro que desea borrar el empleado #{empleado.nombre} #{empleado.apellidos}" acceptLabel="Aceptar" rendered="true" cancelLabel="Cancelar"/>
+                <ice:outputText value="Este empleado no tiene contrato actualmente en el IACT" style="font-size: large;	color: #90C;" visible="#{empty personal.empleado.contratoActual or personal.empleado.contratoActual.vacio}"/>
+                <ice:panelLayout layout="flow">
+                    <ice:panelLayout layout="flow" style="text-align:right;">
+                        <ice:commandButton action="#{personal.destroy}" value="Borrar empleado" immediate="true" rendered="#{login.adm||login.gerencia||login.personal}" panelConfirmation="pcBorrado"/>
+                        <ice:commandButton action="#{personal.editSetup}" value="Editar empleado" immediate="true" rendered="#{login.adm||login.gerencia||login.personal}"/>
+                        <ice:commandButton action="#{personal.listSetup}" value="Salir" immediate="true"/>
+                    </ice:panelLayout>
+                    <h3>Datos del empleado</h3>
+                    <ice:outputText value="Apellidos: "/>
+                    <ice:outputText value="#{personal.empleado.apellidos}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Nombre: "/>
+                    <ice:outputText value="#{personal.empleado.nombre}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Fecha de nacimiento: "/>
+                    <ice:outputText value="#{personal.empleado.fechaNacimiento}" style="font-weight:bold;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                    </ice:outputText>
+                    <hr/>
+                    <ice:outputText value="DNI: "/>
+                    <ice:outputText value="#{personal.empleado.dni}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Seguridad social: "/>
+                    <ice:outputText value="#{personal.empleado.numSeguridadSocial}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Sexo: "/>
+                    <ice:outputText value="#{personal.empleado.sexo}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Dirección: "/>
+                    <ice:outputText value="#{personal.empleado.direccion}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Teléfono: "/>
+                    <ice:outputText value="#{personal.empleado.telefono}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Número de cuenta bancaria: "/>
+                    <ice:outputText value="#{personal.empleado.numCuentaBancaria}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Web: "/>
+                    <ice:outputText value="#{personal.empleado.web}" style="font-weight:bold;"/>
+                    <hr/>
+                    <br/>
+                    <c:if test="#{not personal.empleado.contratoActual.vacio}">
+                        <h3>Contrato actual</h3>
+                        <ice:outputText value="Registro personal: "/>
+                        <ice:outputText value="#{personal.empleado.contratoActual.registroPersonal}" style="font-weight:bold;"/>
+                        <hr/>
+                        <ice:outputText value="Teléfono: "/>
+                        <ice:outputText value="#{personal.empleado.contratoActual.telefono}" style="font-weight:bold;"/>
+                        <hr/>
+                        <ice:outputText value="Correo electrónico: "/>
+                        <ice:outputText value="#{personal.empleado.contratoActual.EMail}" style="font-weight:bold;"/>
+                        <hr/>
+                        <ice:outputText value="Correo electrónico 2: "/>
+                        <ice:outputText value="#{personal.empleado.contratoActual.EMailsec}" style="font-weight:bold;"/>
+                        <hr/>
+                        <ice:outputText value="Departamento: "/>
+                        <ice:outputText value="#{personal.empleado.contratoActual.departamento.nombre}" style="font-weight:bold;"/>
+                        <hr/>
+                        <ice:outputText value="Localización: "/>
+                        <ice:outputText value="#{personal.empleado.contratoActual.localizacion}" style="font-weight:bold;"/>
+                        <hr/>
+                        <ice:outputText value="Organismo: "/>
+                        <ice:outputText value="#{personal.empleado.contratoActual.organismo.nombre}" style="font-weight:bold;"/>
+                        <hr/>
+                        <ice:outputText value="Jornada laboral: "/>
+                        <ice:outputText value="#{personal.empleado.contratoActual.jornadaLaboral.nombre}" style="font-weight:bold;"/>
+                        <hr/>
+                        <ice:outputText value="Adscripción: "/>
+                        <ice:outputText value="#{personal.empleado.contratoActual.tipoEmpleado.adscripcion.nombre}" style="font-weight:bold;"/>
+                        <hr/>
+                        <ice:outputText value="Tipo empleado: "/>
+                        <ice:outputText value="#{personal.empleado.contratoActual.tipoEmpleado.tipoEmpleado}" style="font-weight:bold;"/>
+                        <hr/>
+
+
+                        <c:choose>
+                            <c:when test="#{personal.empleado.contratoActual.tipoEmpleado.tipoEmpleado eq 'Funcionario'}">
+                                <ice:outputText value="Grupo: "/>
+                                <ice:outputText value="#{personal.empleado.contratoActual.tipoEmpleado.grupo.nombre}" style="font-weight:bold;"/>
+                                <hr/>
+                                <ice:outputText value="Cuerpo: "/>
+                                <ice:outputText value="#{personal.empleado.contratoActual.tipoEmpleado.cuerpo.nombre}" style="font-weight:bold;"/>
+                                <hr/>
+                                <ice:outputText value="Puesto de trabajo: "/>
+                                <ice:outputText value="#{personal.empleado.contratoActual.tipoEmpleado.puestoTrabajo.nombre}" style="font-weight:bold;"/>
+                                <hr/>
+                                <ice:outputText value="Nivel: "/>
+                                <ice:outputText value="#{personal.empleado.contratoActual.tipoEmpleado.nivel}" style="font-weight:bold;"/>
+                                <hr/>
+                                <ice:outputText value="Teléfono alternativo: "/>
+                                <ice:outputText value="#{personal.empleado.contratoActual.tipoEmpleado.telefono}" style="font-weight:bold;"/>
+                                <hr/>
+                                <ice:outputText value="Correo electrónico alternativo: "/>
+                                <ice:outputText value="#{personal.empleado.contratoActual.tipoEmpleado.eMail}" style="font-weight:bold;"/>
+                                <hr/>
+                            </c:when>
+
+                            <c:when test="#{personal.empleado.contratoActual.tipoEmpleado.tipoEmpleado eq 'LaboralFijo'}">
+                                <ice:outputText value="Grupo: "/>
+                                <ice:outputText value="#{personal.empleado.contratoActual.tipoEmpleado.grupo.nombre}" style="font-weight:bold;"/>
+                                <hr/>
+                                <ice:outputText value="Categoría: "/>
+                                <ice:outputText value="#{personal.empleado.contratoActual.tipoEmpleado.categoria.nombre}" style="font-weight:bold;"/>
+                                <hr/>
+                                <ice:outputText value="Especialidad laboral: "/>
+                                <ice:outputText value="#{personal.empleado.contratoActual.tipoEmpleado.especialidadLaboral.nombre}" style="font-weight:bold;"/>
+                                <hr/>
+
+                            </c:when>
+
+                            <c:when test="#{personal.empleado.contratoActual.tipoEmpleado.tipoEmpleado eq 'LaboralTemporal'}">
+                                <ice:outputText value="Grupo: "/>
+                                <ice:outputText value="#{personal.empleado.contratoActual.tipoEmpleado.grupo.nombre}" style="font-weight:bold;"/>
+                                <hr/>
+                                <ice:outputText value="Categoría: "/>
+                                <ice:outputText value="#{personal.empleado.contratoActual.tipoEmpleado.categoria.nombre}" style="font-weight:bold;"/>
+                                <hr/>
+                                <ice:outputText value="Tipo de laboral temporal: "/>
+                                <ice:outputText value="#{personal.empleado.contratoActual.tipoEmpleado.tipoLaboralTemporal.nombre}" style="font-weight:bold;"/>
+                                <hr/>
+                            </c:when>
+
+                            <c:when test="#{personal.empleado.contratoActual.tipoEmpleado.tipoEmpleado eq 'Estancia'}">
+
+                            </c:when>
+
+                            <c:when test="#{personal.empleado.contratoActual.tipoEmpleado.tipoEmpleado eq 'Becario'}">
+                                <ice:outputText value="Tipo de becario: "/>
+                                <ice:outputText value="#{personal.empleado.contratoActual.tipoEmpleado.tipoBecario.nombre}" style="font-weight:bold;"/>
+                                <hr/>
+                                <ice:outputText value="Investigador principal: "/>
+                                <ice:outputText value="#{personal.empleado.contratoActual.tipoEmpleado.investigadorPrincipal.apellidos}, #{personal.empleado.contratoActual.tipoEmpleado.investigadorPrincipal.nombre}" style="font-weight:bold;"/>
+                                <hr/>
+
+                            </c:when>
+
+                        </c:choose>
+
+                        <c:choose>
+                            <c:when test="#{empty personal.empleado.contratoActual.lineaInvestigacion.lineaInvestigacionPadre}">
+                                <ice:outputText value="Línea de investigación: "/>
+                                <ice:outputText value="#{personal.empleado.contratoActual.lineaInvestigacion.nombre}" style="font-weight:bold;"/>
+                                <hr/>
+                            </c:when>
+                            <c:otherwise>
+                                <ice:outputText value="Línea de investigación: "/>
+                                <ice:outputText value="#{personal.empleado.contratoActual.lineaInvestigacion.lineaInvestigacionPadre.nombre}" style="font-weight:bold;"/>
+                                <hr/>
+                                <ice:outputText value="Sublínea de investigación: "/>
+                                <ice:outputText value="#{personal.empleado.contratoActual.lineaInvestigacion.nombre}" style="font-weight:bold;"/>
+                                <hr/>
+                            </c:otherwise>
+                        </c:choose>
+                        <ice:outputText value="Fecha inicio IACT: "/>
+                        <ice:outputText value="#{personal.empleado.contratoActual.fechaInicioIACT}" style="font-weight:bold;" >
+                            <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy"/>
+                        </ice:outputText>
+                        <hr/>
+
+                        <ice:outputText value="Fecha fin IACT: "/>
+                        <ice:outputText value="#{personal.empleado.contratoActual.fechaFinIACT}" style="font-weight:bold;">
+                            <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                        </ice:outputText>
+                        <hr/>
+
+                        <ice:outputText value="Fecha inicio contrato: "/>
+                        <ice:outputText value="#{personal.empleado.contratoActual.fechaInicioContrato}" style="font-weight:bold;">
+                            <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                        </ice:outputText>
+                        <hr/>
+
+                        <ice:outputText value="Fecha fin contrato: "/>
+                        <ice:outputText value="#{personal.empleado.contratoActual.fechaFinContrato}" style="font-weight:bold;">
+                            <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                        </ice:outputText>
+                        <hr/>
+                        <ice:outputText value="Proyecto: "/>
+                        <ice:commandLink value="#{personal.empleado.contratoActual.proyecto.proyecto.referencia}" style="font-weight:bold; text-decoration:underline;" action="#{proyectos.verProyecto}">
+                            <f:setPropertyActionListener target="#{proyectos.proyecto}" value="#{personal.empleado.contratoActual.proyecto.proyecto}"/>
+                        </ice:commandLink>
+                        <hr/>
+                        <ice:outputResource mimeType="application/pdf" resource="#{personal.empleado.contratoActual.documento.resource}" label="Ver contrato" type="link" attachment="false"/>
+                    </c:if>
+
+                    <h3>Imputación de faltas</h3>
+                    <c:forEach items="#{personal.empleado.faltas}" var="falta">
+                        <ice:outputText value="Fecha: "/>
+                        <ice:outputText value="#{falta.fecha}" style="font-weight:bold;">
+                            <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                        </ice:outputText>
+                        <br/>
+                        <ice:outputText value="Motivo: "/>
+                        <ice:outputText value="#{falta.motivo}" style="font-weight:bold;"/>
+                        <hr/>
+                    </c:forEach>
+                    <br/>
+                    <h3>Proyectos en los que colabora</h3>
+                    <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Referencia proyecto</th>
+                            <th style="font-weight:normal; text-align:left;">Responsable</th>
+                            <th style="font-weight:normal; text-align:left;">Estado</th>
+                        </tr>
+                        <c:forEach items="#{personal.empleado.proyectos}" var="empleadoProyecto" >
+                            <tr>
+                                <td>
+                                    <ice:commandLink action="#{proyectos.verProyecto}">
+                                        <ice:outputText value="#{empleadoProyecto.proyecto.referencia}" style="font-weight:bold;"/>
+                                        <f:setPropertyActionListener target="#{proyectos.proyecto}" value="#{empleadoProyecto.proyecto}"/>
+                                    </ice:commandLink>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{empleadoProyecto.proyecto.responsable.empleadoIACT.apellidos}, #{empleadoProyecto.proyecto.responsable.empleadoIACT.nombre}" style="font-weight:bold;"/>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{empleadoProyecto.proyecto.estadoProyecto.nombre}" style="font-weight:bold;"/>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+
+                    <h3>Pedidos</h3>
+                    <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Fecha</th>
+                            <th style="font-weight:normal; text-align:left;">Número de pedido</th>
+                            <th style="font-weight:normal; text-align:left;">Estado</th>
+                            <th style="font-weight:normal; text-align:left;">Orden de pedido</th>
+                        </tr>
+                        <c:forEach items="#{personal.pedidosEmpleado}" var="pedidoEmpleado" >
+                            <tr>
+                                <td>
+                                    <ice:outputText value="#{pedidoEmpleado.fecha}" style="font-weight:bold;">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy"/>
+                                    </ice:outputText>
+                                </td>
+                                <td>
+                                    <ice:commandLink action="#{pedidos.verPedido}">
+                                        <ice:outputText value="#{pedidoEmpleado.numPedido}" style="font-weight:bold;"/>
+                                        <f:setPropertyActionListener target="#{pedidos.pedido}" value="#{pedidoEmpleado}"/>
+                                    </ice:commandLink>
+                                </td>
+                                <td><ice:outputText value="#{pedidoEmpleado.estadoPedido.nombre}" style="font-weight:bold;"/></td>
+                                <td><ice:outputResource mimeType="application/pdf" resource="#{pedidoEmpleado.ordenPedido}" label="Ver orden de pedido" type="link" attachment="false" /></td>
+
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </ice:panelLayout>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

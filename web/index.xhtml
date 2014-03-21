@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <h1>Administración IACT</h1>
+                <h3>Eventos importantes</h3>
+                <a href="/iact-adm/rss?query=contratos_finaliza_mes">Contratos que finalizan en un mes</a><br/><br/>
+                <a href="/iact-adm/rss?query=proyectos_justificar_mes">Proyectos que hay que justificar en un mes</a><br/><br/>
+                <a href="/iact-adm/rss?query=proyectos_finalizados_vigentes">Proyectos finalizados que aun son vigentes</a><br/><br/>
+                <a href="/iact-adm/rss?query=pedidos_pendiente_aceptacion">Pedidos pendientes de aceptación</a>
+
+                <c:if test="#{false}">
+                <ice:panelLayout>
+                    <ice:panelGrid columns="3" cellspacing="10">
+                        <ice:outputText value="Aviso de terminación de contrato: "/>
+                        <ice:outputText value="ACTIVADO" style="color:green;" rendered="#{workers.contratosCheckEnabled}"/>
+                        <ice:outputText value="DESACTIVADO" style="color:red;" rendered="#{not workers.contratosCheckEnabled}"/>
+
+                        <ice:outputText value="estoy siendo avisado" style="color:green;" rendered="#{login.reciboAvisosDeFinalizacionDeContratos}"/>
+                        <ice:outputText value="no estoy siendo avisado" style="color:red;" rendered="#{not login.reciboAvisosDeFinalizacionDeContratos}"/>
+
+                        <ice:outputText value="Aviso de justificación de proyectos: "/>
+                        <ice:outputText value="ACTIVADO" style="color:green;" rendered="#{workers.justificacionProyectosEnabled}"/>
+                        <ice:outputText value="DESACTIVADO" style="color:red;" rendered="#{not workers.justificacionProyectosEnabled}"/>
+
+                        <ice:outputText value="estoy siendo avisado" style="color:green;" rendered="#{login.reciboAvisosDeJustificacionDeProyectos}"/>
+                        <ice:outputText value="no estoy siendo avisado" style="color:red;" rendered="#{not login.reciboAvisosDeJustificacionDeProyectos}"/>
+
+                        <ice:outputText value="Sistema de BackUp automático: "/>
+                        <ice:outputText value="ACTIVADO" style="color:green;" rendered="#{workers.DBBackUpEnabled}"/>
+                        <ice:outputText value="DESACTIVADO" style="color:red;" rendered="#{not workers.DBBackUpEnabled}"/>
+
+                        <br/><br/><br/>
+                        <ice:commandLink value="Cambiar configuración" action="configurarWorkers"/>
+                    </ice:panelGrid>
+                        
+                </ice:panelLayout>
+                </c:if>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

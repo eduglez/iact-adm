@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+                <h1>Cultura científica</h1>
+                <ice:panelLayout layout="flow">
+                    <ice:commandButton action="#{culturaCientifica.createSetup}" value="Insertar"  />
+                </ice:panelLayout>
+
+                <ice:dataTable
+                    value="#{culturaCientifica.actividadCientificaItems}"
+                    var="actividadCientifica"
+                    id="ListadoCulturaCientifica">
+
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:outputText value="Fecha"/>
+                        </f:facet>
+
+                        <ice:outputLabel value="#{actividadCientifica.fechaRepresentativa}" >
+                            <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                        </ice:outputLabel>
+
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:outputText value="Tipo"/>
+                        </f:facet>
+                        <ice:commandLink value="#{actividadCientifica.tipo}" action="#{culturaCientifica.verActividadCientifica}">
+                            <f:setPropertyActionListener value="#{actividadCientifica}" target="#{culturaCientifica.actividadCientifica}" />
+                        </ice:commandLink>
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:outputText value="Título o descripción"/>
+                        </f:facet>
+
+                        <ice:commandLink value="#{actividadCientifica.tituloRepresentativo}" action="#{culturaCientifica.verActividadCientifica}">
+                            <f:setPropertyActionListener value="#{actividadCientifica}" target="#{culturaCientifica.actividadCientifica}" />
+                        </ice:commandLink>
+
+
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:outputText value="Autores"/>
+                        </f:facet>
+
+                        <ice:commandLink value="#{actividadCientifica.autoresString}" action="#{culturaCientifica.verActividadCientifica}">
+                            <f:setPropertyActionListener value="#{actividadCientifica}" target="#{culturaCientifica.actividadCientifica}" />
+                        </ice:commandLink>
+                    </ice:column>
+                </ice:dataTable>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+                <h3>Información del producto</h3>
+                <ice:outputText value="EAN: "/>
+                <ice:outputText value="#{inventarioProducto.producto.ean}" style="font-weight:bold;"/>
+                <hr/>
+                <ice:outputText value="Nombre del producto: "/>
+                <ice:outputText value="#{inventarioProducto.producto.nombre}" style="font-weight:bold;"/>
+                <hr/>
+                <ice:outputText value="Descripción: "/>
+                <ice:outputText value="#{inventarioProducto.producto.descripcion}" style="font-weight:bold;"/>
+                <hr/>
+                <br/>
+                <h3>Entradas registradas</h3>
+                <ice:dataTable
+                    value="#{inventarioProducto.entradasProducto}"
+                    var="entrada"
+                    id="tablaEntradas"
+                    sortColumn="#{inventarioProducto.sortColEntradas}"
+                    sortAscending="#{inventarioProducto.sortAscEntradas}">
+
+                    <ice:column>
+                        <f:facet name="header">
+
+                            <ice:commandSortHeader id="regionHeader"
+                                                   columnName="fechaEntrada" >
+                                <ice:outputText value="Fecha de entrada"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+
+                        <ice:commandLink action="inventario-ver-movimientoentrada">
+                            <ice:outputText value="#{entrada.fechaEntrada}" >
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+                            <f:setPropertyActionListener target="#{inventarioEntrada.movimientoEntrada}" value="#{entrada}"/>
+                        </ice:commandLink>
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader1"
+                                                   columnName="productoAsignado.proyecto.referencia" >
+                                <ice:outputText value="Asignado a Proyecto"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:outputText value="#{entrada.productoAsignado.proyecto.referencia}"/>
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader2"
+                                                   columnName="productoAsignado.empleado.nombre" >
+                                <ice:outputText value="Asignado a empleado"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:outputText value="#{entrada.productoAsignado.empleado.apellidos}, #{entrada.productoAsignado.empleado.nombre}"/>
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader3"
+                                                   columnName="productoAsignado.lineaInvestigacion.nombre" >
+                                <ice:outputText value="Asignado a Línea de Investigación"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:outputText value="#{entrada.productoAsignado.lineaInvestigacion}"/>
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:outputText value="Cantidad"/>
+                        </f:facet>
+                        <ice:outputText value="#{entrada.productoAsignado.producto.tipoCantidad.flotante ? entrada.cantidadFlotante : entrada.cantidadEntera}"/>
+                    </ice:column>
+
+                  
+
+                </ice:dataTable>
+
+                <br/>
+                <h3>Salidas registradas</h3>
+                <ice:dataTable
+                    value="#{inventarioProducto.salidasProducto}"
+                    var="salida"
+                    id="tablaSalidas"
+                    sortColumn="#{inventarioProducto.sortColSalidas}"
+                    sortAscending="#{inventarioProducto.sortAscSalidas}">
+
+                    <ice:column>
+                        <f:facet name="header">
+
+                            <ice:commandSortHeader id="regionHeader"
+                                                   columnName="fechaSalida" >
+                                <ice:outputText value="Fecha de salida"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        
+                        <ice:commandLink action="inventario-ver-movimientosalida">
+                            <ice:outputText value="#{salida.fechaSalida}" >
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+                            <f:setPropertyActionListener target="#{inventarioSalida.movimientoSalida}" value="#{salida}"/>
+                        </ice:commandLink>
+                    </ice:column>
+
+                    <ice:column>
+
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader1"
+                                                   columnName="salida.paraProyecto.referencia" >
+                                <ice:outputText value="Asignado a Proyecto"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:outputText value="#{salida.paraProyecto.referencia}"/>
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader2"
+                                                   columnName="paraEmpleado.nombre" >
+                                <ice:outputText value="Asignado a empleado"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:outputText value="#{salida.paraEmpleado.nombre} #{salida.paraEmpleado.apellidos}"/>
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader3"
+                                                   columnName="paraLineaInvestigacion.nombre" >
+                                <ice:outputText value="Asignado a Línea de Investigación"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:outputText value="#{salida.paraLineaInvestigacion.nombre}"/>
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:outputText value="Cantidad"/>
+                        </f:facet>
+                        <ice:outputText value="#{entrada.flotante ? entrada.cantidadFlotante : entrada.cantidadEntera}"/>
+                    </ice:column>
+
+                   
+                </ice:dataTable>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+

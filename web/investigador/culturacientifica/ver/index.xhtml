@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <ice:panelConfirmation id="pcBorrado" message="Seguro que desea borrar la Actividad Científica #{culturaCientifica.actividadCientifica.id}" acceptLabel="Aceptar" rendered="true" cancelLabel="Cancelar"/>
+                <ice:panelLayout layout="flow">
+                    <ice:panelLayout layout="flow" style="text-align:right;">
+                        <ice:commandButton action="#{culturaCientifica.destroy}" value="Borrar Actividad Científica" immediate="true"  panelConfirmation="pcBorrado"/>
+                        <ice:commandButton action="#{culturaCientifica.editSetup}" value="Editar Actividad Científica" immediate="true" />
+                        <ice:commandButton action="#{culturaCientifica.listSetup}" value="Salir" immediate="true"/>
+
+                    </ice:panelLayout>
+                    <h3>Datos de la Actividad Científica</h3>
+
+                    <ice:outputText value="Tipo de actividad: "/>
+                    <ice:outputText value="#{culturaCientifica.actividadCientifica.tipo}" style="font-weight:bold;"/>
+                    <hr/>
+                    <c:choose>
+                        <c:when test="#{culturaCientifica.actividadCientifica.CDDVD}">
+                            <ice:outputText value="Título: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.titulo}" style="font-weight:bold;"/>
+                            <hr/>
+                            <ice:outputText value="Fecha: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.fecha}" style="font-weight:bold;">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+                            <hr/>
+                            <ice:outputText value="ISBN: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.ISBN}" style="font-weight:bold;"/>
+                            <hr/>
+                        </c:when>
+
+                        <c:when test="#{culturaCientifica.actividadCientifica.conferencia}">
+                            <ice:outputText value="Título: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.titulo}" style="font-weight:bold;"/>
+                            <hr/>
+                            <ice:outputText value="Fecha: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.fecha}" style="font-weight:bold;">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+                            <hr/>
+                            <ice:outputText value="Lugar: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.lugar}" style="font-weight:bold;"/>
+                            <hr/>
+                        </c:when>
+
+                        <c:when test="#{culturaCientifica.actividadCientifica.diaPuertasAbiertas}">
+                            <ice:outputText value="Descripción: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.descripcion}" style="font-weight:bold;"/>
+                            <hr/>
+                            <ice:outputText value="Fecha inicio: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.fechaInicio}" style="font-weight:bold;">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+                            <hr/>
+                            <ice:outputText value="Fecha fin: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.fechaFin}" style="font-weight:bold;">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+                            <hr/>
+                            <ice:outputText value="Lugar: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.lugar}" style="font-weight:bold;"/>
+                            <hr/>
+                        </c:when>
+
+                        <c:when test="#{culturaCientifica.actividadCientifica.exposicion}">
+                            <ice:outputText value="Título: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.titulo}" style="font-weight:bold;"/>
+                            <hr/>
+                            <ice:outputText value="Fecha: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.fecha}" style="font-weight:bold;">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+                            <hr/>
+                            <ice:outputText value="Lugar: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.lugar}" style="font-weight:bold;"/>
+                            <hr/>
+                        </c:when>
+
+                        <c:when test="#{culturaCientifica.actividadCientifica.feria}">
+                            <ice:outputText value="Título: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.titulo}" style="font-weight:bold;"/>
+                            <hr/>
+                            <ice:outputText value="Fecha Inicio: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.fechaInicio}" style="font-weight:bold;">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+                            <hr/>
+                            <ice:outputText value="Fecha Fin: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.fechaFin}" style="font-weight:bold;">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+                            <hr/>
+                            <ice:outputText value="Lugar: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.lugar}" style="font-weight:bold;"/>
+                            <hr/>
+                        </c:when>
+
+                        <c:when test="#{culturaCientifica.actividadCientifica.otraActividad}">
+                            <ice:outputText value="Descripción: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.descripcion}" style="font-weight:bold;"/>
+                            <hr/>
+                            <ice:outputText value="Cantidad otorgada: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.cantidad}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            <hr/>
+                            <ice:outputText value="Fecha: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.fecha}" style="font-weight:bold;">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+                            <hr/>
+
+                        </c:when>
+
+                        <c:when test="#{culturaCientifica.actividadCientifica.rutaCientifica}">
+                            <ice:outputText value="Descripción: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.descripcion}" style="font-weight:bold;"/>
+                            <hr/>
+                            <ice:outputText value="Fecha Inicio: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.fechaInicio}" style="font-weight:bold;">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+                            <hr/>
+                            <ice:outputText value="Fecha Fin: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.fechaFin}" style="font-weight:bold;">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+                            <hr/>
+                        </c:when>
+
+                        <c:when test="#{culturaCientifica.actividadCientifica.semanaCiencia}">
+                            <ice:outputText value="Título: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.descripcion}" style="font-weight:bold;"/>
+                            <hr/>
+                            <ice:outputText value="Fecha Inicio: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.fechaInicio}" style="font-weight:bold;">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+                            <hr/>
+                            <ice:outputText value="Fecha Fin: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.fechaFin}" style="font-weight:bold;">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+                            <hr/>
+                            <ice:outputText value="Lugar: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.lugar}" style="font-weight:bold;"/>
+                            <hr/>
+                        </c:when>
+
+                        <c:when test="#{culturaCientifica.actividadCientifica.taller}">
+                            <ice:outputText value="Título: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.titulo}" style="font-weight:bold;"/>
+                            <hr/>
+                            <ice:outputText value="Fecha: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.fecha}" style="font-weight:bold;">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+                            <hr/>
+                            <ice:outputText value="Lugar: "/>
+                            <ice:outputText value="#{culturaCientifica.actividadCientifica.lugar}" style="font-weight:bold;"/>
+                            <hr/>
+                        </c:when>
+                    </c:choose>
+                    <ice:outputText value="Cantidad otorgada: "/>
+                    <ice:outputText value="#{culturaCientifica.actividadCientifica.cantidad}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                    <hr/>
+                    <ice:outputText value="Organismo financiador: "/>
+                    <ice:outputText value="#{culturaCientifica.actividadCientifica.organismoFinanciador}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Notas: "/>
+                    <ice:outputText value="#{culturaCientifica.actividadCientifica.notas}" style="font-weight:bold;"/>
+                    <hr/>
+                    <br/>
+                    <h3>Autores</h3>
+                    <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Apellidos</th>
+                            <th style="font-weight:normal; text-align:left;">Nombre</th>
+                            <th style="font-weight:normal; text-align:left;">DNI</th>
+                            <th style="font-weight:normal; text-align:left;">Teléfono</th>
+                            <th style="font-weight:normal; text-align:left;">EMail</th>
+                            <th style="font-weight:normal; text-align:left;">Departamento</th>
+                        </tr>
+
+                        <c:forEach items="#{culturaCientifica.actividadCientifica.autoresIACT}" var="autor" >
+                            <tr>
+                                <td><ice:outputText value="#{autor.apellidos}" style="font-weight:bold;"/>
+                                </td>
+                                <td><ice:outputText value="#{autor.nombre}" style="font-weight:bold;"/></td>
+                                <td><ice:outputText value="#{autor.dni}" style="font-weight:bold;"/></td>
+                                <td><ice:outputText value="#{autor.contratoActual.telefono}" style="font-weight:bold;"/></td>
+                                <td><ice:outputText value="#{autor.contratoActual.EMail}" style="font-weight:bold;"/></td>
+                                <td><ice:outputText value="#{autor.contratoActual.departamento.nombre}" style="font-weight:bold;"/></td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                    <br/>
+                    <h3>Documentos</h3>
+                    <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Nombre del documento</th>
+
+                        </tr>
+
+                        <c:forEach items="#{culturaCientifica.actividadCientifica.documentos}" var="documento" >
+                            <tr>
+                                <td>
+                                    <ice:outputResource mimeType="application/pdf" resource="#{documento.resource}" label="#{documento.nombreDocumento}" type="link" attachment="false"/>
+                                </td>
+
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </ice:panelLayout>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

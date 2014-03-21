@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+
+            <ui:define name="body">
+
+                <ice:panelLayout layout="flow">
+                    <h2>Movimientos</h2>
+                    <table cellspacing="10">
+                        <c:forEach items="#{inventario.movimientos}" var="m">
+                            <tr>
+
+                            <c:if test="#{m.movimientoEntrada}">
+                                <td>
+                                    <ice:commandLink action="inventario-ver-movimientoentrada" style="font-weight:bold;">
+                                        <ice:outputText value="ENTRADA" style="color:green;"/>
+                                        <f:setPropertyActionListener target="#{inventarioEntrada.movimientoEntrada}" value="#{m.entrada}"/>
+                                    </ice:commandLink>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{m.entrada.fechaEntrada}" style="font-weight:bold;">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:outputText>
+                                </td>
+
+                                <td>
+                                    <ice:outputText value="#{m.entrada.productoAsignado.producto.nombre}"/>
+                                </td>
+
+                                <td>
+                                    <ice:outputText value="#{m.entrada.productoAsignado}"/>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{m.entrada.cantidadEntera} (#{m.entrada.productoAsignado.producto.tipoCantidad})"/>
+                                </td>
+
+
+                            </c:if>
+                            <c:if test="#{m.movimientoSalida}">
+                                <td>
+                                    <ice:commandLink action="inventario-ver-movimientosalida" style="font-weight:bold;">
+                                        <ice:outputText value="SALIDA" style="color:red;"/>
+                                        <f:setPropertyActionListener target="#{inventarioSalida.movimientoSalida}" value="#{m.salida}"/>
+                                    </ice:commandLink>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{m.salida.fechaSalida}" style="font-weight:bold;">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:outputText>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{m.salida.productoAsignado.producto.nombre}"/>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{m.salida.productoAsignado}"/>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{m.salida.cantidadEntera} (#{m.salida.productoAsignado.producto.tipoCantidad})"/>
+                                </td>
+
+                            </c:if>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </ice:panelLayout>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+

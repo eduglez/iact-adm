@@ -1,0 +1,1012 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+                <ice:panelGrid columns="6" >
+                    <br/>
+                    <br/>
+                    <br/>
+                    <ice:commandLink action="#{proyectos.salirSinGuardar}" value="Salir sin guardar" immediate="true"/>
+                    <ice:commandButton action="#{proyectos.salirGuardando}" value="Salir y GUARDAR"/>
+                    <ice:commandButton action="#{proyectos.guardarCambios}" value="GUARDAR AHORA"  />
+                    
+                    <ice:panelLayout layout="flow">
+                        <ice:outputLabel for="itCuentaInterna" value="Cuenta interna:"/>
+                        <br/>
+                        <ice:inputText id="itCuentaInterna" value="#{proyectos.proyecto.cuentaInterna}"/>
+                    </ice:panelLayout>
+                    <ice:panelLayout layout="flow">
+                        <ice:outputLabel for="itReferencia" value="Referencia:"/>
+                        <br/>
+                        <ice:inputText id="itReferencia" value="#{proyectos.proyecto.referencia}"/>
+                    </ice:panelLayout>
+                    <ice:panelLayout layout="flow">
+                        <ice:outputLabel for="somEstado" value="Estado:"/>
+                        <br/>
+                        <ice:selectOneMenu id="somEstado" value="#{proyectos.proyecto.estadoProyecto}" partialSubmit="true" required="true">
+                            <f:selectItems value="#{estadosProyecto.estadoProyectoItemsAvailableSelectOne}"/>
+                        </ice:selectOneMenu>
+                    </ice:panelLayout>
+                    <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="sbcEnWeb" value="Marcar para exportar a WEB"/>
+                                <ice:selectBooleanCheckbox id="sbcEnWeb" value="#{proyectos.proyecto.publicar}"/>
+                            </ice:panelLayout>
+                </ice:panelGrid>
+                <ice:panelLayout layout="flow">
+
+                    <ice:outputLabel for="somResponsable" value="Responsable:"/>
+                    <br/>
+                    <ice:panelCollapsible expanded="false">
+                        <f:facet name="header">
+                            <ice:panelGroup>
+                                <ice:outputText value="#{proyectos.proyecto.responsable.empleadoIACT.apellidos}, #{proyectos.proyecto.responsable.empleadoIACT.nombre}"/>
+                            </ice:panelGroup>
+                        </f:facet>
+                        <ice:panelGroup>
+
+
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="itDNI" value="DNI:"/>
+                                <br/>
+                                <ice:inputText id="itDNI" value="#{proyectos.proyecto.responsable.empleadoIACT.dni}" disabled="true" style="color:black;"/>
+                            </ice:panelLayout>
+
+                            <ice:panelGrid columns="4" cellspacing="20">
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itTelefonoEmpleado" value="Teléfono:"/>
+                                    <br/>
+                                    <ice:inputText id="itTelefonoEmpleado" value="#{proyectos.proyecto.responsable.empleadoIACT.contratoActual.telefono}" disabled="true" style="color:black;"/>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itCorreoElectronicoEmpleado" value="Correo electrónico:"/>
+                                    <br/>
+                                    <ice:inputText id="itCorreoElectronicoEmpleado" value="#{proyectos.proyecto.responsable.empleadoIACT.contratoActual.EMail}" disabled="true" style="color:black;"/>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itNombreDepartamento" value="Departamento:"/>
+                                    <br/>
+                                    <ice:inputText id="itNombreDepartamento" value="#{proyectos.proyecto.responsable.empleadoIACT.contratoActual.departamento.nombre}"  disabled="true" style="color:black;"/>
+                                </ice:panelLayout>
+
+                            </ice:panelGrid>
+                        </ice:panelGroup>
+                    </ice:panelCollapsible>
+
+                </ice:panelLayout>
+                <br/>
+                <ice:panelTabSet>
+
+                    <ice:panelTab id="tabDatosProyecto" label="Datos del proyecto">
+                        <ice:panelLayout layout="flow">
+
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="somTipoProyecto" value="Tipo de proyecto:"/>
+                                <br/>
+                                <ice:selectOneMenu id="somTipoProyecto" value="#{proyectos.proyecto.tipoProyecto}" partialSubmit="true">
+                                    <f:selectItems value="#{tiposProyecto.tipoProyectoItemsAvailableSelectOne}"/>
+                                </ice:selectOneMenu>
+                            </ice:panelLayout>
+
+
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="itSubtipoProyecto" value="Subtipo de proyecto:"/>
+                                <br/>
+                                <ice:inputText id="itSubtipoProyecto" value="#{proyectos.proyecto.subtipoProyecto}" size="80"/>
+                            </ice:panelLayout>
+                            <br/>
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="sbcContrato" value="Marcar casilla si es Contrato:"/>
+                                <br/>
+                                <ice:selectBooleanCheckbox id="sbcContrato" value="#{proyectos.proyecto.contrato}"/>
+                            </ice:panelLayout>
+                            <br/>
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="sbcFondosFeder" value="Marcar casilla si está financiado por fondos FEDER:"/>
+                                <br/>
+                                <ice:selectBooleanCheckbox id="sbcFondosFeder" value="#{proyectos.proyecto.financiadoFondosFEDER}"/>
+                            </ice:panelLayout>
+                            <br/>
+
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="itTitulo" value="Titulo:"/>
+                                <br/>
+                                <ice:inputText id="itTitulo" value="#{proyectos.proyecto.titulo}" size="100"/>
+                            </ice:panelLayout>
+                            <br/>
+
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="itConvocatoria" value="Convocatoria:"/>
+                                <br/>
+                                <ice:inputText id="itConvocatoria" value="#{proyectos.proyecto.convocatoria}"/>
+                            </ice:panelLayout>
+                            <br/>
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="somEntidadFinanciadora" value="Entidad financiadora:"/>
+                                <br/>
+                                <ice:selectOneMenu id="somEntidadFinanciadora" value="#{proyectos.proyecto.entidadFinanciadora}" partialSubmit="true">
+                                    <f:selectItems value="#{entidadesFinanciadoras.entidadFinanciadoraItemsAvailableSelectOne}"/>
+                                </ice:selectOneMenu>
+                            </ice:panelLayout>
+
+                            <br/>
+                            <ice:panelGrid columns="4" >
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaSolicitud" value="Fecha de solicitud:"/>
+                                    <br/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaSolicitud" value="#{proyectos.proyecto.fechaSolicitud}">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaResolucion" value="Fecha de resolución:"/>
+                                    <br/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaResolucion" value="#{proyectos.proyecto.fechaResolucion}">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaInicio" value="Fecha de inicio:"/>
+                                    <br/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaInicio" value="#{proyectos.proyecto.fechaInicio}">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaFin" value="Fecha de fin"/>
+                                    <br/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaFin" value="#{proyectos.proyecto.fechaFin}">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+
+                                <br/>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itFechaAceptacion" value="Fecha de aceptación:"/>
+                                    <br/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaAceptacion" value="#{proyectos.proyecto.fechaAceptacion}">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelLayout>
+                                <br/>
+
+                                <br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="itDotacion" value="Dotacion:"/>
+                                    <br/>
+                                    <ice:inputText id="itDotacion" value="#{proyectos.proyecto.dotacion}" converter="EuroCurrencyConverter"/>
+                                </ice:panelLayout>
+                                <br/><br/><br/>
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="somDepartamento" value="Departamento:"/>
+                                    <br/>
+                                    <ice:selectOneMenu id="somDepartamento" value="#{proyectos.proyecto.departamento}" partialSubmit="true">
+                                        <f:selectItems value="#{departamentos.departamentoItemsAvailableSelectOne}"/>
+                                    </ice:selectOneMenu>
+                                </ice:panelLayout>
+
+                                <ice:panelLayout layout="flow">
+                                    <ice:outputLabel for="somOrganismo" value="Organismo:"/>
+                                    <br/>
+                                    <ice:selectOneMenu id="somOrganismo" value="#{proyectos.proyecto.organismo}" partialSubmit="true">
+                                        <f:selectItems value="#{organismos.organismoItemsAvailableSelectOne}"/>
+                                    </ice:selectOneMenu>
+                                </ice:panelLayout>
+
+                            </ice:panelGrid>
+
+
+
+                            <br/>
+                            <br/>
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="itWeb" value="Web:"/>
+                                <br/>
+                                <ice:inputText id="itWeb" value="#{proyectos.proyecto.web}" size="100"/>
+                            </ice:panelLayout>
+                            <br/>
+                            <ice:panelLayout layout="flow">
+                                <ice:outputLabel for="itObservaciones" value="Observaciones:"/>
+                                <br/>
+                                <ice:inputTextarea id="itObservaciones" value="#{proyectos.proyecto.observaciones}" cols="60"/>
+
+                            </ice:panelLayout>
+                        </ice:panelLayout>
+                    </ice:panelTab>
+
+                    <ice:panelTab id="tabPersonal" label="Personal">
+
+
+                        <c:forEach items="#{proyectos.proyecto.personal}" var="personalProyecto" >
+                            <c:choose>
+                                <c:when test="#{personalProyecto.IACT}">
+                                    <ice:panelCollapsible expanded="false">
+                                        <f:facet name="header">
+                                            <ice:panelGroup>
+                                                <ice:outputText value="#{personalProyecto.empleadoIACT.apellidos}, #{personalProyecto.empleadoIACT.nombre}"  style="#{empty personalProyecto.proyecto?'text-decoration:line-through;':''}"/>
+                                            </ice:panelGroup>
+                                        </f:facet>
+                                        <ice:panelGroup>
+                                            <ice:panelGrid columns="3" >
+                                                <ice:panelLayout layout="flow" >
+                                                    <ice:outputLabel for="itApellidos" value="Apellidos:"/>
+                                                    <br/>
+                                                    <ice:inputText id="itApellidos" value="#{personalProyecto.empleadoIACT.apellidos}" disabled="true" style="color:black;" />
+                                                </ice:panelLayout>
+
+                                                <ice:panelLayout layout="flow">
+                                                    <ice:outputLabel for="itNombre" value="Nombre:"/>
+                                                    <br/>
+                                                    <ice:inputText id="itNombre" value="#{personalProyecto.empleadoIACT.nombre}" disabled="true" style="color:black;"/>
+                                                </ice:panelLayout>
+
+                                                <ice:panelLayout layout="flow">
+                                                    <ice:outputLabel for="itDNI" value="DNI:"/>
+                                                    <br/>
+                                                    <ice:inputText id="itDNI" value="#{personalProyecto.empleadoIACT.dni}" disabled="true" style="color:black;"/>
+                                                </ice:panelLayout>
+                                            </ice:panelGrid>
+                                            <ice:panelGrid columns="4" cellspacing="20">
+
+                                                <ice:panelLayout layout="flow">
+                                                    <ice:outputLabel for="itTelefonoEmpleado" value="Teléfono:"/>
+                                                    <br/>
+                                                    <ice:inputText id="itTelefonoEmpleado" value="#{personalProyecto.empleadoIACT.contratoActual.telefono}" disabled="true" style="color:black;"/>
+                                                </ice:panelLayout>
+
+                                                <ice:panelLayout layout="flow">
+                                                    <ice:outputLabel for="itCorreoElectronicoEmpleado" value="Correo electrónico:"/>
+                                                    <br/>
+                                                    <ice:inputText id="itCorreoElectronicoEmpleado" value="#{personalProyecto.empleadoIACT.contratoActual.EMail}" disabled="true" style="color:black;"/>
+                                                </ice:panelLayout>
+
+                                                <ice:panelLayout layout="flow">
+                                                    <ice:outputLabel for="itNombreDepartamento" value="Departamento:"/>
+                                                    <br/>
+                                                    <ice:inputText id="itNombreDepartamento" value="#{personalProyecto.empleadoIACT.contratoActual.departamento.nombre}"  disabled="true" style="color:black;"/>
+                                                </ice:panelLayout>
+
+                                                <ice:panelLayout layout="flow">
+                                                    <ice:outputLabel for="itProyectoContrato" value="Proyecto en Contrato:"/>
+                                                    <br/>
+                                                    <ice:inputText id="itProyectoContrato" value="#{personalProyecto.empleadoIACT.contratoActual.proyecto.proyecto.referencia}"  disabled="true" style="color:black;"/>
+                                                </ice:panelLayout>
+                                            </ice:panelGrid>
+                                        </ice:panelGroup>
+                                    </ice:panelCollapsible>
+                                    <ice:commandButton value="Quitar del proyecto" action="#{personalProyecto.quitarDeProyecto}"/>
+                                    <ice:commandButton value="Establecer responsable proyecto" action="#{personalProyecto.establecerResponsable}" rendered="#{personalProyecto.responsable?'false':'true'}"/>
+
+                                    <br/><br/><br/>
+                                </c:when>
+                            </c:choose>
+                        </c:forEach>
+
+                        <c:forEach items="#{proyectos.proyecto.personal}" var="personalProyecto" >
+                            <c:choose>
+                                <c:when test="#{not personalProyecto.IACT}">
+                                    <ice:panelCollapsible expanded="false">
+                                        <f:facet name="header">
+                                            <ice:panelGroup>
+                                                <ice:outputText value="EXTERNO: #{personalProyecto.apellidos}, #{personalProyecto.nombre}"   style="#{empty personalProyecto.proyecto?'text-decoration:line-through;':''}"/>
+                                            </ice:panelGroup>
+                                        </f:facet>
+                                        <ice:panelGroup>
+                                            <ice:panelLayout layout="flow" >
+                                                <ice:outputLabel  value="Apellidos:"/>
+                                                <br/>
+                                                <ice:inputText  value="#{personalProyecto.apellidos}"/>
+                                            </ice:panelLayout>
+
+                                            <ice:panelLayout layout="flow" >
+                                                <ice:outputLabel value="Nombre:"/>
+                                                <br/>
+                                                <ice:inputText  value="#{personalProyecto.nombre}"/>
+                                            </ice:panelLayout>
+
+                                            <ice:panelLayout layout="flow" >
+                                                <ice:outputLabel value="DNI:"/>
+                                                <br/>
+                                                <ice:inputText  value="#{personalProyecto.dni}"/>
+                                            </ice:panelLayout>
+
+                                            <ice:panelLayout layout="flow" >
+                                                <ice:outputLabel value="Fecha inicio:"/>
+                                                <br/>
+                                                <ice:selectInputDate renderAsPopup="true"  value="#{personalProyecto.fechaInicio}">
+                                                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                                </ice:selectInputDate>
+                                            </ice:panelLayout>
+
+                                            <ice:panelLayout layout="flow" >
+                                                <ice:outputLabel  value="Fecha fin:"/>
+                                                <br/>
+                                                <ice:selectInputDate renderAsPopup="true" value="#{personalProyecto.fechaFin}">
+                                                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                                </ice:selectInputDate>
+                                            </ice:panelLayout>
+                                        </ice:panelGroup>
+                                    </ice:panelCollapsible>
+                                    <ice:commandButton value="Quitar del proyecto" action="#{personalProyecto.quitarDeProyecto}"/>
+                                    <br/><br/><br/>
+                                </c:when>
+                            </c:choose>
+                        </c:forEach>
+                        <br/>
+                        <ice:panelCollapsible expanded="false" >
+                            <f:facet name="header">
+                                <ice:panelGroup>
+                                    <ice:outputText value="Nuevo empleado en proyecto"/>
+                                </ice:panelGroup>
+                            </f:facet>
+                            <ice:panelGroup>
+                                <ice:outputLabel value="Empleado IACT:"/>
+                                <br/>
+                                <ice:selectInputText
+                                    rows="10"
+                                    width="500"
+                                    valueChangeListener="#{proyectos.empleadoIACTValueChanged}"
+                                    listVar="empleadoIACT"
+                                    listValue="#{proyectos.empleadoIACTMatchPossibilities}"
+                                    partialSubmit="true"
+                                    immediate="true"
+                                    id="BuscadorPersonalIACT"
+                                    >
+
+                                    <f:facet name="selectInputText">
+                                        <ice:panelGrid columns="3">
+                                            <ice:outputText value="#{empleadoIACT.apellidos}, #{contratoIACT.empleado.nombre}" />
+                                            <ice:outputText value="#{empleadoIACT.dni}"/>
+                                            <ice:outputText value="#{(not empty empleadoIACT.contratoActual)?(empleadoIACT.contratoActual.tipoEmpleado.adscripcion.nombre):''}" style="font-weight: bold;"/>
+                                        </ice:panelGrid>
+                                    </f:facet>
+                                </ice:selectInputText>
+                                <br/>
+                                <ice:outputLabel value="Empleado externo:"/>
+                                <br/>
+                                <br/>
+
+                                <ice:outputLabel  value="Apellidos:"/>
+                                <br/>
+                                <ice:inputText  value="#{proyectos.nuevoEmpleadoProyecto.apellidos}"/>
+
+                                <br/>
+
+                                <ice:outputLabel value="Nombre:"/>
+                                <br/>
+                                <ice:inputText  value="#{proyectos.nuevoEmpleadoProyecto.nombre}"/>
+                                <br/>
+
+
+                                <ice:outputLabel value="DNI:"/>
+                                <br/>
+                                <ice:inputText  value="#{proyectos.nuevoEmpleadoProyecto.dni}"/>
+
+                                <br/>
+
+                                <ice:outputLabel value="Fecha inicio:"/>
+                                <br/>
+                                <ice:selectInputDate renderAsPopup="true"  value="#{proyectos.nuevoEmpleadoProyecto.fechaInicio}">
+                                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                </ice:selectInputDate>
+
+
+                                <ice:outputLabel  value="Fecha fin:"/>
+                                <br/>
+                                <ice:selectInputDate renderAsPopup="true" value="#{proyectos.nuevoEmpleadoProyecto.fechaFin}">
+                                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                </ice:selectInputDate>
+                                <ice:commandButton value="Insertar empleado Externo" action="#{proyectos.insertarEmpleadoProyectoExterno}" partialSubmit="true" type="link"/>
+
+
+                            </ice:panelGroup>
+                        </ice:panelCollapsible>
+
+
+                    </ice:panelTab>
+
+                    <ice:panelTab id="tabDatosEconomicos" label="Distribución de dotación">
+                        <ice:panelLayout layout="flow" style="text-align:right;">
+                            <ice:selectOneMenu id="somAnualidades" value="#{proyectos.tablaDistribucionConcesion.anualidadSeleccionada}" partialSubmit="true">
+                                <f:selectItems value="#{proyectos.anualidadItemsAvailableSelectOne}"/>
+                            </ice:selectOneMenu>
+                            <ice:commandButton value="Insertar anualidad" action="#{proyectos.tablaDistribucionConcesion.insertarAnualidad}" immediate="true" partialSubmit="true"/>
+                        </ice:panelLayout>
+                        <br/>
+                        <c:choose>
+                            <c:when test="#{(proyectos.proyecto.JA) and (not proyectos.proyecto.proyectoExcelencia) and (not proyectos.proyecto.ayudaGruposInvestigacion)}">
+                                <table border="1" cellpadding="5" bordercolor="#CCCCCC">
+                                    <tr class="tituloTabla">
+                                        <th>
+                                            PARTIDAS
+                                        </th>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap" varStatus="i">
+                                            <th>
+                                                <ice:outputText value="#{i.index+1}ª Anualidad"  escape="false" style="#{ap.marcaBorrado?'text-decoration:line-through;':''}"/>
+                                                <br/>
+                                                <ice:outputText value="(#{ap.anualidad.anio})" escape="false" style="#{ap.marcaBorrado?'text-decoration:line-through;':''}"/>
+                                                <br/>
+                                                <ice:commandLink value="#{ap.marcaBorrado?'Volver a poner':'Borrar'}" action="#{proyectos.tablaDistribucionConcesion.toggleMarcaBorrarAnualidad}" style="font-weight:normal;">
+                                                    <f:setPropertyActionListener target="#{proyectos.tablaDistribucionConcesion.anualidadPartidaSeleccionada}" value="#{ap}"/>
+                                                </ice:commandLink>
+                                            </th>
+                                        </c:forEach>
+                                        <th>
+                                            TOTAL
+                                        </th>
+                                    </tr>
+                                    <tr class="personalTitulo">
+                                        <td>
+                                            1.- PERSONAL
+                                        </td>
+
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td class="total">
+                                                <ice:outputText value="#{ap.totalPersonal}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                            </td>
+                                        </c:forEach>
+
+                                        <td class="total">
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.totalPersonal}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+
+                                    </tr>
+                                    <tr class="personal">
+                                        <td>
+                                            Complementos Salariales
+                                        </td>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td style="text-align:right;">
+                                                <ice:inputText styleClass="valorEntrada" value="#{ap.complementosSalariales}" converter="EuroCurrencyConverter" style="text-align:right;" size="10"/>
+                                            </td>
+                                        </c:forEach>
+                                        <td class="total">
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.totalComplementosSalariales}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="personal">
+                                        <td>
+                                            Contratación personal
+                                        </td>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td style="text-align:right;">
+                                                <ice:inputText styleClass="valorEntrada" value="#{ap.contratacionPersonal}"  converter="EuroCurrencyConverter" style="text-align:right;" size="10"/>
+                                            </td>
+                                        </c:forEach>
+                                        <td class="total">
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.totalContratacionPersonal}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr class="gastosEjecucionTitulo">
+                                        <td>
+                                            2.- INVENTARIABLE
+                                        </td>
+
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td class="total">
+                                                <ice:outputText value="#{ap.totalInventariable}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                            </td>
+                                        </c:forEach>
+
+                                        <td class="total">
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.totalInventariable}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+
+                                    </tr>
+                                    <tr class="gastosEjecucion">
+                                        <td>
+                                            Inventariable
+                                        </td>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td style="text-align:right;">
+                                                <ice:inputText styleClass="valorEntrada" value="#{ap.inventariable}"  converter="EuroCurrencyConverter" style="text-align:right;" size="10"/>
+                                            </td>
+                                        </c:forEach>
+                                        <td class="total">
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.totalInventariable}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="costesIndirectosTitulo">
+                                        <td>
+                                            3.- FUNCIONAMIENTO
+                                        </td>
+
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td class="total">
+                                                <ice:outputText value="#{ap.totalFuncionamiento}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                            </td>
+                                        </c:forEach>
+
+                                        <td class="total">
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.totalFuncionamiento}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+
+                                    </tr>
+                                    <tr class="costesIndirectos">
+                                        <td>
+                                            Fungible
+                                        </td>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td style="text-align:right;">
+                                                <ice:inputText styleClass="valorEntrada" value="#{ap.fungible}"  converter="EuroCurrencyConverter" style="text-align:right;" size="10"/>
+                                            </td>
+                                        </c:forEach>
+                                        <td class="total">
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.totalFungible}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="costesIndirectos">
+                                        <td>
+                                            Otros gastos
+                                        </td>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td style="text-align:right;">
+                                                <ice:inputText styleClass="valorEntrada" value="#{ap.otrosGastos}"  converter="EuroCurrencyConverter" style="text-align:right;" size="10"/>
+                                            </td>
+                                        </c:forEach>
+                                        <td class="total">
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.totalOtrosGastos}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="totales">
+                                        <td>
+                                            TOTAL
+                                        </td>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td>
+                                                <ice:outputText value="#{ap.total}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                            </td>
+                                        </c:forEach>
+                                        <td>
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.total}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </c:when>
+
+                            <c:when test="#{proyectos.proyecto.ayudaGruposInvestigacion}">
+                                <table border="1" cellpadding="5" bordercolor="#CCCCCC">
+                                    <tr class="tituloTabla">
+                                        <th>
+                                            PARTIDAS
+                                        </th>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap" varStatus="i">
+                                            <th>
+                                                <ice:outputText value="#{i.index+1}ª Anualidad"  escape="false" style="#{ap.marcaBorrado?'text-decoration:line-through;':''}"/>
+                                                <br/>
+                                                <ice:outputText value="(#{ap.anualidad.anio})" escape="false" style="#{ap.marcaBorrado?'text-decoration:line-through;':''}"/>
+                                                <br/>
+                                                <ice:commandLink value="#{ap.marcaBorrado?'Volver a poner':'Borrar'}" action="#{proyectos.tablaDistribucionConcesion.toggleMarcaBorrarAnualidad}" style="font-weight:normal;">
+                                                    <f:setPropertyActionListener target="#{proyectos.tablaDistribucionConcesion.anualidadPartidaSeleccionada}" value="#{ap}"/>
+                                                </ice:commandLink>
+                                            </th>
+                                        </c:forEach>
+                                        <th>
+                                            TOTAL
+                                        </th>
+                                    </tr>
+
+
+                                    <tr class="gastosEjecucion">
+                                        <td>
+                                            1.- Inventariable
+                                        </td>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td style="text-align:right;">
+                                                <ice:inputText styleClass="valorEntrada" value="#{ap.inventariable}"  converter="EuroCurrencyConverter"  style="text-align:right;" size="10"/>
+                                            </td>
+                                        </c:forEach>
+                                        <td class="total">
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.totalInventariable}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr class="costesIndirectos">
+                                        <td>
+                                            2.- Fungible
+                                        </td>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td style="text-align:right;">
+                                                <ice:inputText styleClass="valorEntrada" value="#{ap.fungible}"  converter="EuroCurrencyConverter" style="text-align:right;" size="10"/>
+                                            </td>
+                                        </c:forEach>
+                                        <td class="total">
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.totalFungible}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="personal">
+                                        <td>
+                                            3.- Personal de Apoyo
+                                        </td>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td style="text-align:right;">
+                                                <ice:inputText styleClass="valorEntrada" value="#{ap.contratacionPersonal}"  converter="EuroCurrencyConverter" style="text-align:right;" size="10"/>
+                                            </td>
+                                        </c:forEach>
+                                        <td class="total">
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.totalContratacionPersonal}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr class="totales">
+                                        <td>
+                                            TOTAL
+                                        </td>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td>
+                                                <ice:outputText value="#{ap.total}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                            </td>
+                                        </c:forEach>
+                                        <td>
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.total}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </c:when>
+
+
+                            <c:when test="#{proyectos.proyecto.proyectoExcelencia}">
+                                <table border="1" cellpadding="5" bordercolor="#CCCCCC">
+                                    <tr class="tituloTabla">
+                                        <th>
+                                            PARTIDAS
+                                        </th>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap" varStatus="i">
+                                            <th>
+                                                <ice:outputText value="#{i.index+1}ª Anualidad"  escape="false" style="#{ap.marcaBorrado?'text-decoration:line-through;':''}"/>
+                                                <br/>
+                                                <ice:outputText value="(#{ap.anualidad.anio})" escape="false" style="#{ap.marcaBorrado?'text-decoration:line-through;':''}"/>
+                                                <br/>
+                                                <ice:commandLink value="#{ap.marcaBorrado?'Volver a poner':'Borrar'}" action="#{proyectos.tablaDistribucionConcesion.toggleMarcaBorrarAnualidad}" style="font-weight:normal;">
+                                                    <f:setPropertyActionListener target="#{proyectos.tablaDistribucionConcesion.anualidadPartidaSeleccionada}" value="#{ap}"/>
+                                                </ice:commandLink>
+                                            </th>
+                                        </c:forEach>
+                                        <th>
+                                            TOTAL
+                                        </th>
+                                    </tr>
+
+                                    <tr class="personal">
+                                        <td>
+                                            1.- Gastos de personal
+                                        </td>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td style="text-align:right;">
+                                                <ice:inputText styleClass="valorEntrada" value="#{ap.contratacionPersonal}"  converter="EuroCurrencyConverter" style="text-align:right;" size="10"/>
+                                            </td>
+                                        </c:forEach>
+                                        <td class="total">
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.totalContratacionPersonal}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="costesIndirectos">
+                                        <td>
+                                            2.- Gastos de Ejecución
+                                        </td>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td style="text-align:right;">
+                                                <ice:inputText styleClass="valorEntrada" value="#{ap.fungible}"  converter="EuroCurrencyConverter" style="text-align:right;" size="10"/>
+                                            </td>
+                                        </c:forEach>
+                                        <td class="total">
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.totalFungible}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr class="gastosEjecucion">
+                                        <td>
+                                            3.- Gastos Complementarios
+                                        </td>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td style="text-align:right;">
+                                                <ice:inputText styleClass="valorEntrada" value="#{ap.inventariable}"  converter="EuroCurrencyConverter" style="text-align:right;" size="10"/>
+                                            </td>
+                                        </c:forEach>
+                                        <td class="total">
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.totalInventariable}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="totales">
+                                        <td>
+                                            TOTAL
+                                        </td>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td>
+                                                <ice:outputText value="#{ap.total}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                            </td>
+                                        </c:forEach>
+                                        <td>
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.total}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </c:when>
+
+
+                            <c:otherwise>
+                                <table border="1" cellpadding="5" bordercolor="#CCCCCC">
+                                    <tr class="tituloTabla">
+                                        <th>
+                                            PARTIDAS
+                                        </th>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap" varStatus="i">
+                                            <th>
+                                                <ice:outputText value="#{i.index+1}ª Anualidad"  escape="false" style="#{ap.marcaBorrado?'text-decoration:line-through;':''}"/>
+                                                <br/>
+                                                <ice:outputText value="(#{ap.anualidad.anio})" escape="false" style="#{ap.marcaBorrado?'text-decoration:line-through;':''}"/>
+                                                <br/>
+                                                <ice:commandLink value="#{ap.marcaBorrado?'Volver a poner':'Borrar'}" action="#{proyectos.tablaDistribucionConcesion.toggleMarcaBorrarAnualidad}" style="font-weight:normal;">
+                                                    <f:setPropertyActionListener target="#{proyectos.tablaDistribucionConcesion.anualidadPartidaSeleccionada}" value="#{ap}"/>
+                                                </ice:commandLink>
+                                            </th>
+                                        </c:forEach>
+                                        <th>
+                                            TOTAL
+                                        </th>
+                                    </tr>
+
+                                    <tr class="personal">
+                                        <td>
+                                            1.- Gastos Ejecución (Contratación de Personal + Costes de Ejecución)
+                                        </td>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td style="text-align:right;">
+                                                <ice:inputText styleClass="valorEntrada" value="#{ap.contratacionPersonal}"  converter="EuroCurrencyConverter" style="text-align:right;" size="10"/>
+                                            </td>
+                                        </c:forEach>
+                                        <td class="total">
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.totalContratacionPersonal}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="personal">
+                                        <td>
+                                            2.- Complementos Salariales
+                                        </td>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td style="text-align:right;">
+                                                <ice:inputText styleClass="valorEntrada" value="#{ap.complementosSalariales}"  converter="EuroCurrencyConverter" style="text-align:right;" size="10"/>
+                                            </td>
+                                        </c:forEach>
+                                        <td class="total">
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.totalComplementosSalariales}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="personalTitulo">
+                                        <td>
+                                            3.- TOTAL COSTES DIRECTOS (1+2)
+                                        </td>
+
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td class="total">
+                                                <ice:outputText value="#{ap.totalPersonal}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                            </td>
+                                        </c:forEach>
+
+                                        <td class="total">
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.totalPersonal}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr class="costesIndirectos">
+                                        <td>
+                                            4.- Costes Indirectos
+                                        </td>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td style="text-align:right;">
+                                                <ice:inputText styleClass="valorEntrada" value="#{ap.costesIndirectos}"  converter="EuroCurrencyConverter" style="text-align:right;" size="10"/>
+                                            </td>
+                                        </c:forEach>
+                                        <td class="total">
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.totalIndirecto}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="totales">
+                                        <td>
+                                            TOTAL CONCEDIDO (3+4)
+                                        </td>
+                                        <c:forEach items="#{proyectos.proyecto.datosEconomicos}" var="ap">
+                                            <td>
+                                                <ice:outputText value="#{ap.total}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                            </td>
+                                        </c:forEach>
+                                        <td>
+                                            <ice:outputText value="#{proyectos.tablaDistribucionConcesion.total}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </c:otherwise>
+
+                        </c:choose>
+
+
+                    </ice:panelTab>
+
+                    <ice:panelTab id="tabJustificaciones" label="Justificaciones">
+                        <ice:panelSeries id="justificacionesProyectoPanel"
+                                         value="#{proyectos.proyecto.justificaciones}"
+                                         var="justificacion">
+                            <ice:panelLayout layout="flow">
+
+                                <ice:panelGrid columns="4" bgcolor="#{justificacion.marcaBorrado?'#E8E8E8':''}">
+                                    <ice:outputLabel for="itFechaInicialPeriodoPlazo" value="FECHA INICIAL DEL PERIODO DE JUSTIFICACIÓN: "/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaInicialPeriodoPlazo" value="#{justificacion.fechaInicialPeriodoJustificacion}">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+
+                                    <ice:outputLabel for="itFechaFinPeriodoPlazo" value="FECHA FINAL DEL PERIODO DE JUSTIFICACIÓN: "/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaFinPeriodoPlazo" value="#{justificacion.fechaFinalPeriodoJustificacion}">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelGrid>
+                                <br/>
+                                <ice:panelGrid columns="2" bgcolor="#{justificacion.marcaBorrado?'#E8E8E8':''}">
+                                    <ice:outputLabel for="itFechaFinPlazoJustificacion" value="FECHA FINAL DE PLAZO PARA JUSTIFICAR: "/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaFinPlazoJustificacion" value="#{justificacion.fechaFinPlazoProximaJustificacion}">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelGrid>
+                                <br/>
+                                <ice:panelGrid columns="2" bgcolor="#{justificacion.marcaBorrado?'#E8E8E8':''}">
+                                    <ice:outputLabel for="itFechaJustificacion" value="FECHA JUSTIFICACIÓN: "/>
+                                    <ice:selectInputDate renderAsPopup="true" id="itFechaJustificacion" value="#{justificacion.fechaJustificacion}">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:selectInputDate>
+                                </ice:panelGrid>
+                                <br/>
+                                <table border="1" cellpadding="5" bordercolor="#CCCCCC">
+                                    <tr class="tituloTabla">
+                                        <td id="conceptoGastoTablaJustificacion">Concepto de gasto</td>
+                                        <td id="gastosInputadosTablaJustificacion">Justificación actual</td>
+                                    </tr>
+
+                                    <tr class="personalTitulo">
+                                        <td>Gastos de personal</td>
+                                        <td style="text-align:right;">
+                                            <ice:inputText styleClass="valorEntrada" value="#{justificacion.gastosPersonal}"  converter="EuroCurrencyConverter" style="text-align:right;" size="10"/>
+                                        </td>
+
+                                    </tr>
+                                    <tr class="gastosEjecucionTitulo">
+                                        <td>Gastos de ejecución</td>
+                                        <td style="text-align:right;">
+                                            <ice:inputText styleClass="valorEntrada" value="#{justificacion.gastosEjecucion}"  converter="EuroCurrencyConverter" style="text-align:right;" size="10"/>
+                                        </td>
+
+                                    </tr>
+                                    <tr class="personalTitulo">
+                                        <td>Dotación adicional</td>
+                                        <td style="text-align:right;">
+                                            <ice:inputText styleClass="valorEntrada" value="#{justificacion.dotacionAdicional}"  converter="EuroCurrencyConverter" style="text-align:right;" size="10"/>
+                                        </td>
+
+                                    </tr>
+                                    <tr class="gastosEjecucionTitulo">
+                                        <td>Costes indirectos</td>
+                                        <td style="text-align:right;">
+                                            <ice:inputText styleClass="valorEntrada" value="#{justificacion.costesIndirectos}"  converter="EuroCurrencyConverter" style="text-align:right;" size="10"/>
+                                        </td>
+
+                                    </tr>
+                                    <tr class="totales">
+                                        <td>Total</td>
+                                        <td>
+                                            <ice:outputText value="#{justificacion.total}" nospan="true" escape="false" converter="EuroCurrencyConverter"/>
+
+                                        </td>
+
+                                    </tr>
+                                </table>
+
+
+                            </ice:panelLayout>
+                            <ice:commandButton  value="#{justificacion.marcaBorrado?'Volver a poner':'Borrar'}"  action="#{proyectos.toggleMarcaBorrarJustificacion}" >
+                                <f:setPropertyActionListener value="#{justificacion}" target="#{proyectos.justificacionSeleccionada}" />
+                            </ice:commandButton>
+                            <br/>
+                            <hr/>
+                            <br/>
+
+                        </ice:panelSeries>
+
+                        <ice:commandButton value="Meter otra justificación" action="#{proyectos.insertarJustificacion}" partialSubmit="true" immediate="true"/>
+                    </ice:panelTab>
+
+
+
+
+
+
+                    <ice:panelTab id="tabDocumentos" label="Documentos">
+                        <ice:panelLayout layout="flow">
+                            <ice:dataTable
+                                value="#{proyectos.proyecto.documentos}"
+                                var="documento"
+                                id="documentosTable"
+                                width="400">
+
+                                <ice:column >
+                                    <f:facet name="header">
+                                        <ice:outputText value="Nombre del documento"/>
+                                    </f:facet>
+                                    <ice:inputText value="#{documento.nombreDocumento}" disabled="#{empty documento.proyecto}"/>
+
+                                </ice:column>
+
+                                <ice:column>
+                                    <ice:outputResource mimeType="application/pdf" resource="#{documento.resource}" label="Ver" type="link" attachment="false"/>
+                                </ice:column>
+
+                                <ice:column>
+                                    <ice:outputResource mimeType="application/pdf" resource="#{documento.resource}" label="Descargar" type="link" attachment="true" />
+                                </ice:column>
+
+                                <ice:column>
+                                    <ice:commandLink value="Borrar" label="Borrar" type="link" action="#{documento.borrar}" immediate="true" partialSubmit="true" disabled="#{empty documento.proyecto}"/>
+                                </ice:column>
+
+                            </ice:dataTable>
+                            <br/><br/>
+                            <ice:panelCollapsible expanded="false">
+                                <f:facet name="header">
+                                    <ice:panelGroup>
+                                        <ice:outputText value="Insertar otro documento"/>
+                                    </ice:panelGroup>
+                                </f:facet>
+
+                                <ice:panelSeries value="#{proyectos.documentosProyectosAutomaticos}" var="fichero">
+                                    <ice:panelGrid columns="4">
+                                        <ice:outputText value="Fichero creado hace #{fichero.creadoHace}"/>
+                                        <ice:outputResource mimeType="application/pdf" resource="#{fichero.resource}" label="Ver" type="link" attachment="false"/>
+                                        <ice:commandLink action="#{fichero.asignarAProyecto}" value="Asignar" partialSubmit="true">
+                                            <f:setPropertyActionListener value="#{proyectos.proyecto}" target="#{fichero.proyecto}" />
+                                        </ice:commandLink>
+                                        <ice:commandLink action="#{fichero.borrar}" value="Borrar" partialSubmit="true"/>
+                                    </ice:panelGrid>
+                                </ice:panelSeries>
+                                <br/>
+                                <ice:inputFile uniqueFolder="false" uploadDirectory="/home/intranet/SCAN" uploadDirectoryAbsolute="true"  />
+                                <br/>
+                                <ice:commandButton value="Actualizar ficheros" partialSubmit="true" immediate="true"/>
+                            </ice:panelCollapsible>
+
+                        </ice:panelLayout>
+
+                    </ice:panelTab>
+
+                </ice:panelTabSet>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

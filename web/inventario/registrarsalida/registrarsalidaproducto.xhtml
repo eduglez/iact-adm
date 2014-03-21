@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+
+    <body>
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+
+                <c:set var="producto" value="#{inventarioSalida.movimientoSalida.productoAsignado.producto}"/>
+                <h3><ice:outputText value="Salida de #{producto.nombre}"/></h3>
+
+                <ice:panelLayout layout="flow">
+                    <ice:outputLabel for="itFecha" value="Fecha:"/>
+                    <br/>
+                    <ice:selectInputDate renderAsPopup="true" id="itFecha" value="#{inventarioSalida.movimientoSalida.fechaSalida}">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                    </ice:selectInputDate>
+                </ice:panelLayout>
+
+
+                <ice:panelLayout layout="flow">
+                    <ice:outputLabel for="somParaProyecto" value="Para proyecto:"/>
+                    <br/>
+                    <ice:selectOneMenu id="somParaProyecto" value="#{inventarioSalida.movimientoSalida.paraProyecto}">
+                        <f:selectItems value="#{proyectos.proyectoItemsAvailableSelectOne}"/>
+                    </ice:selectOneMenu>
+                    <br/><br/>
+                    <ice:outputLabel for="somParaEmpleado" value="Para empleado:"/>
+                    <br/>
+                    <ice:selectOneMenu id="somParaEmpleado" value="#{inventarioSalida.movimientoSalida.paraEmpleado}">
+                        <f:selectItems value="#{personal.empleadoItemsAvailableSelectOne}"/>
+                    </ice:selectOneMenu>
+                    <br/><br/>
+                    <ice:outputLabel for="somParaLineaInvestigacion" value="Para Línea de Investigación"/>
+                    <br/>
+                    <ice:selectOneMenu id="somParaLineaInvestigacion" value="#{inventarioSalida.movimientoSalida.paraLineaInvestigacion}">
+                        <f:selectItems value="#{proyectos.lineaInvestigacionItemsAvailableSelectOne}"/>
+                    </ice:selectOneMenu>
+                    <br/><br/>
+                </ice:panelLayout>
+
+                <ice:panelLayout layout="flow">
+                    <ice:outputLabel for="somRecogidoPorEmpleado" value="Recogido por:"/>
+                    <br/>
+                    <ice:selectOneMenu id="somRecogidoPorEmpleado" value="#{inventarioSalida.movimientoSalida.recogidoPor}">
+                        <f:selectItems value="#{personal.empleadoItemsAvailableSelectOne}"/>
+                    </ice:selectOneMenu>
+                </ice:panelLayout>
+
+
+                <ice:panelLayout layout="flow" rendered="#{not producto.tipoCantidad.flotante}">
+                    <ice:outputLabel for="itCantidadEntera" value="Cantidad (#{producto.tipoCantidad.nombre}):"/>
+                    <br/>
+                    <ice:inputText id="itCantidadEntera" value="#{inventarioSalida.movimientoSalida.cantidadEntera}"/>
+                    <br/><br/>
+                </ice:panelLayout>
+
+                <ice:panelLayout layout="flow" rendered="#{producto.tipoCantidad.flotante}">
+                    <ice:outputLabel for="itCantidadFlotante" value="Cantidad (#{producto.tipoCantidad.nombre}):"/>
+                    <br/>
+                    <ice:inputText id="itCantidadFlotante" value="#{inventarioSalida.movimientoSalida.cantidadFlotante}"/>
+                    <br/><br/>
+                </ice:panelLayout>
+
+                <ice:panelLayout layout="flow"><ice:commandButton value="Aceptar" action="#{inventarioSalida.registrarSalidaProducto}"/></ice:panelLayout>
+            </ui:define>
+
+
+
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+        
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+                <h1>Consulta por productos</h1>
+                    <ice:messages/>
+
+                <br/>
+
+
+                <ice:panelCollapsible expanded="false">
+                    <f:facet name="header">
+                        <ice:panelGroup>
+                            <ice:outputText value="Filtros"/>
+                        </ice:panelGroup>
+                    </f:facet>
+                    <ice:panelGroup>
+                    <ice:panelGrid columns="3" layout="flow" cellspacing="10" >
+                        <ice:panelLayout layout="flow">
+                            <ice:outputLabel value="Inventariables: " for="sbcInventariables"/>
+                            <ice:selectBooleanCheckbox id="sbcInventariables" value="#{lineasPedido.filtroInvetariables}" immediate="true" partialSubmit="true"/>
+                        </ice:panelLayout>
+
+                        <ice:panelLayout layout="flow">
+                            <ice:outputLabel value="Fungibles: " for="sbcFungibles"/>
+                            <ice:selectBooleanCheckbox id="sbcFungibles" value="#{lineasPedido.filtroFungibles}" immediate="true" partialSubmit="true"/>
+                        </ice:panelLayout>
+
+                        <ice:panelLayout layout="flow">
+                            <ice:outputLabel value="Otros gastos: " for="sbcOtrosGastos"/>
+                            <ice:selectBooleanCheckbox id="sbcOtrosGastos" value="#{lineasPedido.filtroOtrosGastos}" immediate="true" partialSubmit="true"/>
+                        </ice:panelLayout>
+                        </ice:panelGrid>
+                    <br/>
+                        <ice:panelLayout layout="flow">
+                            <ice:outputLabel value="Por proveedor: " for="somFiltroProveedor"/>
+                            <ice:selectOneMenu id="somFiltroProveedor" value="#{lineasPedido.filtroProveedor}" partialSubmit="true">
+                                <f:selectItems value="#{proveedores.proveedorItemsAvailableSelectOne}"/>
+                                </ice:selectOneMenu>
+                        </ice:panelLayout>
+
+                       
+
+                
+                    </ice:panelGroup>
+                </ice:panelCollapsible>
+
+                <ice:dataTable
+                    value="#{lineasPedido.lineasPedidoItems}"
+                    var="lp"
+                    id="Tabla"
+                    sortColumn="#{lineasPedido.columnaOrden}"
+                    sortAscending="#{lineasPedido.ascendente}">
+
+                    <ice:column >
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader1" columnName="nombreProducto" >
+                            <ice:outputText value="Nombre de producto"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:commandLink action="#{pedidos.verPedido}" >
+                            <ice:outputText  value="#{lp.descripcionAlternativa}" nospan="true"/>
+                            <f:setPropertyActionListener value="#{lp.pedido}" target="#{pedidos.pedido}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+                     <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader5" columnName="tipoProducto" >
+                            <ice:outputText value="Tipo producto"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:commandLink value="#{lp.producto.nombre}" action="#{pedidos.verPedido}">
+                            <f:setPropertyActionListener value="#{lp.pedido}" target="#{pedidos.pedido}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+                    
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader2" columnName="proveedor" >
+                            <ice:outputText value="Razón social proveedor"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:commandLink value="#{lp.pedido.proveedor.razonSocial}" action="#{pedidos.verPedido}">
+                            <f:setPropertyActionListener value="#{lp.pedido}" target="#{pedidos.pedido}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader3" columnName="idPedido" >
+                            <ice:outputText value="Pedido"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:commandLink value="#{lp.pedido.id}" action="#{pedidos.verPedido}">
+                            <f:setPropertyActionListener value="#{lp.pedido}" target="#{pedidos.pedido}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+                    
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:commandSortHeader id="regionHeader4" columnName="fechaPedido" >
+                            <ice:outputText value="Fecha pedido"/>
+                            </ice:commandSortHeader>
+                        </f:facet>
+                        <ice:commandLink  action="#{pedidos.verPedido}">
+                            <ice:outputText value="#{lp.pedido.fecha}">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy"/>
+                            </ice:outputText>
+                            <f:setPropertyActionListener value="#{lp.pedido}" target="#{pedidos.pedido}" />
+                        </ice:commandLink>
+
+                    </ice:column>
+
+                   
+
+
+                </ice:dataTable>
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

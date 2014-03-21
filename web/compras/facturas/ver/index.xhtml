@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <ice:panelConfirmation id="pcBorrado" message="Seguro que desea borrar la factura #{facturas.factura.numFactura}" acceptLabel="Aceptar" rendered="true" cancelLabel="Cancelar"/>
+                <ice:panelLayout layout="flow">
+                    <ice:panelLayout layout="flow" style="text-align:right;">
+                        <ice:commandButton action="#{facturas.destroy}" value="Borrar factura" immediate="true" rendered="#{login.adm||login.gerencia||login.compras}" panelConfirmation="pcBorrado"/>
+                        <ice:commandButton action="#{facturas.editSetup}" value="Editar factura" immediate="true" rendered="#{login.adm||login.gerencia||login.compras}"/>
+                        <ice:commandButton action="#{facturas.listSetup}" value="Salir" immediate="true"/>
+                    </ice:panelLayout>
+                    <h3>Datos factura</h3>
+
+                    <ice:outputText value="Número de factura: "/>
+                    <ice:outputText value="#{facturas.factura.numFactura}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Importe: "/>
+                    <ice:outputText value="#{facturas.factura.importe}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                    <c:if test="#{not empty facturas.factura.documento}">
+                        <hr/>
+                        <ice:outputResource mimeType="application/pdf" resource="#{facturas.factura.documento.resource}" label="Ver factura" type="link" attachment="false"/>
+                    </c:if>
+                    <hr/>
+                    <br/>
+                    <h3>Pedidos a los que corresponde</h3>
+                    <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Fecha</th>
+                            <th style="font-weight:normal; text-align:left;">Número de pedido</th>
+                            <th style="font-weight:normal; text-align:left;">Estado</th>
+                            <th style="font-weight:normal; text-align:left;">Proveedor</th>
+                            <th style="font-weight:normal; text-align:left;">Base imponible</th>
+                            <th style="font-weight:normal; text-align:left;">Total</th>
+                        </tr>
+                        <c:forEach items="#{facturas.factura.pedidos}" var="pedido">
+                            <tr>
+                               <td>
+                                   <ice:outputText value="#{pedido.fecha}" style="font-weight:bold;">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy"/>
+                                    </ice:outputText>
+                                </td>
+                                <td>
+                                    <ice:commandLink action="#{pedidos.verPedido}">
+                                        <ice:outputText value="#{pedido.numPedido}" style="font-weight:bold;"/>
+                                        <f:setPropertyActionListener target="#{pedidos.pedido}" value="#{pedido}"/>
+                                    </ice:commandLink>
+                                </td>
+                                <td><ice:outputText value="#{pedido.estadoPedido.nombre}" style="font-weight:bold;"/></td>
+                                <td><ice:outputText value="#{pedido.proveedor.razonSocial}" style="font-weight:bold;"/></td>
+                                <td>
+                                <ice:outputText value="#{pedido.baseImponible}" style="font-weight:bold;"  converter="EuroCurrencyConverter"/>
+                            </td>
+
+                            <td>
+                                <ice:outputText value="#{pedido.total}" style="font-weight:bold;"  converter="EuroCurrencyConverter"/>
+                            </td>
+                            </tr>
+                        </c:forEach>
+
+                    </table>
+                    <br/>
+                    <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Base imponible</th>
+                            <th style="font-weight:normal; text-align:left;">Total</th>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <ice:outputText value="#{facturas.factura.baseImponible}" style="font-weight:bold;"  converter="EuroCurrencyConverter"/>
+                            </td>
+
+                            <td>
+                                <ice:outputText value="#{facturas.factura.total}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                            </td>
+                        </tr>
+
+                    </table>
+                    <br/>
+                    <br/>
+                    <h3>Albaranes</h3>
+                    <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Número de albarán</th>
+                            <th style="font-weight:normal; text-align:left;">Fecha de llegada</th>
+                            <th style="font-weight:normal; text-align:left;">Albarán</th>
+                        </tr>
+                        <c:forEach items="#{facturas.factura.albaranes}" var="albaran" >
+                            <tr>
+                                <td>
+                                    <ice:outputText value="#{albaran.numAlbaran}" style="font-weight:bold;"/>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{albaran.fechaLlegada}" style="font-weight:bold;">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                                    </ice:outputText>
+                                </td>
+                                <td>
+                                    <ice:outputResource mimeType="application/pdf" resource="#{albaran.documento.resource}" label="Ver" type="link" attachment="false"/>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </ice:panelLayout>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

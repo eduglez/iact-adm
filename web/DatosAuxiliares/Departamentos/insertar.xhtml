@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+
+                <h1>Insertar nuevo departamento</h1>
+                    <ice:panelLayout layout="flow">
+                        <ice:outputLabel for="itNombreDepartamento" value="Nombre departamento:" required="true"/>
+                        <br/>
+                        <ice:message for="itNombreDepartamento" style="color:red"/>
+                        <br/>
+                        <ice:inputText id="itNombreDepartamento" value="#{departamentos.departamento.nombre}"/>
+                    </ice:panelLayout>
+                <br/>
+                <ice:panelLayout layout="flow">
+                    <ice:commandButton action="#{departamentos.create}" value="Aceptar"  />
+                    <ice:commandButton action="#{departamentos.listSetup}" value="Cancelar"  immediate="true"/>
+                </ice:panelLayout>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

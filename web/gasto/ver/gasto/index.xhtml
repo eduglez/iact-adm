@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+                <h3>Gasto</h3>
+
+                <ice:outputText value="Fecha: "/>
+                <ice:outputText value="#{gastos.gastoRealizado.fecha}" style="font-weight:bold;">
+                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                </ice:outputText>
+                <hr/>
+
+                <ice:outputText value="Para Proyecto: "/>
+                <ice:outputText value="${gastos.gastoRealizado.asignadoA.proyecto.referencia}" style="font-weight:bold;"/>
+                <hr/>
+                <ice:outputText value="Para Línea de Investigación: "/>
+                <ice:outputText value="${gastos.gastoRealizado.asignadoA.lineaInvestigacion.nombre}" style="font-weight:bold;"/>
+                <hr/>
+                <ice:outputText value="Para Empleado: "/>
+                <ice:outputText value="${gastos.gastoRealizado.asignadoA.empleado.apellidos}, ${gastos.gastoRealizado.asignadoA.empleado.nombre}" style="font-weight:bold;"/>
+                <hr/>
+
+
+                <ice:outputText value="Tipo de gasto: "/>
+                <ice:outputText value="#{gastos.gastoRealizado.gasto.descripcion}" style="font-weight:bold;"/>
+                <br/>
+                <ice:outputText value="#{gastos.gastoRealizado.gasto.tipoGasto}" style="font-weight:bold;"/>
+                <hr/>
+
+                <ice:outputText value="Total:"/>
+                <ice:outputText value="#{gastos.gastoRealizado.total}" style="font-weight:bold;" converter="EuroCurrencyConverter"/>
+                <hr/>
+                <ice:outputText value="Observaciones: "/>
+                <ice:outputText value="#{gastos.gastoRealizado.observaciones}" style="font-weight:bold;"/>
+                <br/>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+

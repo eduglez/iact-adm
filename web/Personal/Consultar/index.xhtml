@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Consulta</th>
+                            <th>Descargar en PDF</th>
+                            <th>Descargar en Excel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><ice:outputResource mimeType="application/pdf" resource="#{personal.personalPDF}" label="Listado de personal simple" type="link" fileName="ListadoPersonal.pdf" attachment="false"/></td>
+                            <td><ice:outputResource mimeType="application/pdf" resource="#{personal.personalPDF}" label="Listado de personal simple" type="link" fileName="ListadoPersonal.pdf" attachment="true"/></td>
+                            <td><ice:outputResource mimeType="application/vnd.ms-excel" resource="#{personal.personalExcel}" label="Listado de personal completo" type="link" fileName="ListadoPersonal.xls" attachment="true"/></td>
+                        </tr>
+
+                        <tr>
+                            <td><ice:outputResource mimeType="application/pdf" resource="#{personal.informeFinContrato}" label="Listado de personal con final de contrato a un mes" type="link" fileName="ListadoPersonal.pdf" attachment="false"/></td>
+                            <td><ice:outputResource mimeType="application/pdf" resource="#{personal.informeFinContrato}" label="Listado de personal con final de contrato a un mes" type="link" fileName="ListadoPersonal.pdf" attachment="true"/></td>
+                            <td><ice:outputResource mimeType="application/vnd.ms-excel" resource="#{personal.informeExcelFinContrato}" label="Listado de personal con final de contrato a un mes" type="link" fileNDSame="ListadoPersonal.xls" attachment="true"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListadoCompras" pageWidth="2750" pageHeight="595" orientation="Landscape" columnWidth="2710" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true">
+	<property name="ireport.zoom" value="1.464100000000031"/>
+	<property name="ireport.x" value="3041"/>
+	<property name="ireport.y" value="0"/>
+	<field name="numPedido" class="java.lang.String"/>
+	<field name="fecha" class="java.util.Date"/>
+	<field name="estadoPedido.nombre" class="java.lang.String"/>
+	<field name="fechaCancelacion" class="java.util.Date"/>
+	<field name="proveedor.razonSocial" class="java.lang.String"/>
+	<field name="proveedor.telefono" class="java.lang.String"/>
+	<field name="proveedor.EMail" class="java.lang.String"/>
+	<field name="entidad.nombre" class="java.lang.String"/>
+	<field name="proyecto.referencia" class="java.lang.String"/>
+	<field name="solicitante.nombre" class="java.lang.String"/>
+	<field name="solicitante.apellidos" class="java.lang.String"/>
+	<field name="lineas" class="java.util.Collection"/>
+	<field name="baseImponibleFloat" class="java.lang.Float"/>
+	<field name="totalFloat" class="java.lang.Float"/>
+	<field name="proyecto.responsable.empleadoIACT.contratoActual.lineaInvestigacion.nombre" class="java.lang.String"/>
+	<field name="ivaAplicadoFloat" class="java.lang.Float"/>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="113" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Número de pedido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="0" width="113" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="0" width="113" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="339" y="0" width="191" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Fecha cancelación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="530" y="0" width="354" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Razón social proveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="884" y="0" width="126" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Teléfono proveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1010" y="0" width="126" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Email proveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1136" y="0" width="195" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Entidad solicitante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1331" y="0" width="195" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Referencia proyecto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1526" y="0" width="312" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Solicitante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2299" y="0" width="130" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Base imponible]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2559" y="0" width="149" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2429" y="0" width="130" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[IVA Aplicado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1838" y="0" width="461" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Línea de Investigación]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="67" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="113" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{numPedido}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="113" y="0" width="113" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="226" y="0" width="113" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{estadoPedido.nombre}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="339" y="0" width="191" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fechaCancelacion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="530" y="0" width="354" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proveedor.razonSocial}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="884" y="0" width="126" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proveedor.telefono}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1010" y="0" width="126" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proveedor.EMail}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1136" y="0" width="195" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{entidad.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1331" y="0" width="195" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proyecto.referencia}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1526" y="0" width="312" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{solicitante.apellidos}!=null?$F{solicitante.apellidos}:"")+", "+($F{solicitante.nombre}!=null?$F{solicitante.nombre}:"")]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="20" width="2708" height="47"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{lineas})]]></dataSourceExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[compras.jsfcontroller.PedidoController.class.getResource("/reports/Compras/Consultar/excelSubInformeLineas.jasper").getPath()]]></subreportExpression>
+			</subreport>
+			<textField pattern="#,##0.00 €" isBlankWhenNull="true">
+				<reportElement x="2559" y="1" width="149" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{totalFloat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1838" y="1" width="461" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proyecto.responsable.empleadoIACT.contratoActual.lineaInvestigacion.nombre}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 €" isBlankWhenNull="true">
+				<reportElement x="2299" y="1" width="130" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{baseImponibleFloat}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 €" isBlankWhenNull="true">
+				<reportElement x="2429" y="1" width="130" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{ivaAplicadoFloat}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="18">
+			<textField>
+				<reportElement x="0" y="0" width="2708" height="18"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

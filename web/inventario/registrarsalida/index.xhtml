@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+
+
+    <body>
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <h3>Información del producto</h3>
+                <ice:outputText value="EAN: "/>
+                <ice:outputText value="#{inventarioSalida.productoSeleccionado.ean}" style="font-weight:bold;"/>
+                <hr/>
+                <ice:outputText value="Nombre del producto: "/>
+                <ice:outputText value="#{inventarioSalida.productoSeleccionado.nombre}" style="font-weight:bold;"/>
+                <hr/>
+                <ice:outputText value="Descripción: "/>
+                <ice:outputText value="#{inventarioSalida.productoSeleccionado.descripcion}" style="font-weight:bold;"/>
+                <hr/>
+
+                <h3>Entradas registradas</h3>
+                <ul>
+                    <c:forEach items="#{inventarioSalida.entradasProductoSeleccionado}" var="entrada">
+                        <li>
+                            <ice:commandLink action="#{inventarioSalida.prepairRegistrarSalidaProducto}" value="#{entrada}">
+                                <f:setPropertyActionListener target="#{inventarioSalida.entradaSeleccionada}" value="#{entrada}"/>
+                            </ice:commandLink>
+                        </li>
+
+                    </c:forEach>
+
+                </ul>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+
+            <ui:define name="body">
+
+                <ice:panelLayout layout="flow">
+                    <h2>Almacén</h2>
+
+                    <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Nombre del producto</th>
+                            <th style="font-weight:normal; text-align:left;">Descripción</th>
+                            <th style="font-weight:normal; text-align:left;">Cantidad actual en almacén</th>
+                        </tr>
+
+                            <c:forEach items="#{inventarioProducto.productos}" var="pa">
+                                 <tr>
+                                    <td>
+                                        <ice:commandLink action="inventario-ver-producto" style="font-weight:bold;">
+                                            <ice:outputText value="#{pa.nombre}"/>
+                                            <f:setPropertyActionListener target="#{inventarioProducto.producto}" value="#{pa}"/>
+                                        </ice:commandLink>
+                                    </td>
+                                    <td>
+                                        <ice:commandLink action="inventario-ver-producto" style="font-weight:bold;">
+                                            <ice:outputText value="#{pa.descripcion}"/>
+                                            <f:setPropertyActionListener target="#{inventarioProducto.producto}" value="#{pa}"/>
+                                        </ice:commandLink>
+                                    </td>
+                                    <c:if test="#{pa.tipoCantidad.entera}">
+                                        <td>
+                                            <ice:outputText value="#{pa.totalEntero} (#{pa.tipoCantidad.nombre})"/>
+                                        </td>
+                                    </c:if>
+
+                                     <c:if test="#{pa.tipoCantidad.flotante}">
+                                        <td>
+                                            <ice:outputText value="#{pa.totalFlotante} (#{pa.tipoCantidad.nombre})"/>
+                                        </td>
+                                    </c:if>
+
+                                 </tr>
+                        </c:forEach>
+                        
+                    </table>
+
+                </ice:panelLayout>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+

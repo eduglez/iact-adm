@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:ve="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml">
+    <w:body>
+        <w:p w:rsidR="0096275F" w:rsidRPr="00DA28FD" w:rsidRDefault="0096275F" w:rsidP="00DA28FD">
+            <w:pPr>
+                <w:pStyle w:val="Ttulo1"/>
+            </w:pPr>
+            <w:r w:rsidRPr="00DA28FD">
+                <w:t xml:space="preserve">Orden de pedido</w:t>
+            </w:r>
+        </w:p>
+        <w:tbl>
+            <w:tblPr>
+                <w:tblStyle w:val="Listaclara-nfasis1"/>
+                <w:tblW w:w="8930" w:type="dxa"/>
+                <w:tblLayout w:type="fixed"/>
+                <w:tblLook w:val="04A0"/>
+            </w:tblPr>
+            <w:tblGrid>
+                <w:gridCol w:w="2518"/>
+                <w:gridCol w:w="1946"/>
+                <w:gridCol w:w="2161"/>
+                <w:gridCol w:w="2305"/>
+            </w:tblGrid>
+            <w:tr w:rsidR="00B3313F" w:rsidRPr="00DA28FD" w:rsidTr="00DA28FD">
+                <w:trPr>
+                    <w:cnfStyle w:val="100000000000"/>
+                    <w:trHeight w:val="331"/>
+                </w:trPr>
+                <w:tc>
+                    <w:tcPr>
+                        <w:cnfStyle w:val="001000000000"/>
+                        <w:tcW w:w="2518" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="0096275F" w:rsidRPr="00DA28FD" w:rsidRDefault="0096275F" w:rsidP="00DA28FD">
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t>Fecha de pedido:</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="1946" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="0096275F" w:rsidRPr="00B231B0" w:rsidRDefault="00B3313F" w:rsidP="00B231B0">
+                        <w:pPr>
+                            <w:cnfStyle w:val="100000000000"/>
+                        </w:pPr>
+                        <w:r w:rsidRPr="00B231B0">
+                            <w:t>$fechaPedido</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="2161" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="0096275F" w:rsidRPr="00DA28FD" w:rsidRDefault="00B3313F" w:rsidP="00DA28FD">
+                        <w:pPr>
+                            <w:cnfStyle w:val="100000000000"/>
+                        </w:pPr>
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t>Número de pedido:</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="2305" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="0096275F" w:rsidRPr="00B231B0" w:rsidRDefault="00AB6425" w:rsidP="00B231B0">
+                        <w:pPr>
+                            <w:cnfStyle w:val="100000000000"/>
+                        </w:pPr>
+                        <w:r w:rsidRPr="00B231B0">
+                            <w:t>$numPedido</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00B3313F" w:rsidRPr="00DA28FD" w:rsidTr="00DA28FD">
+                <w:trPr>
+                    <w:cnfStyle w:val="000000100000"/>
+                    <w:trHeight w:val="329"/>
+                </w:trPr>
+                <w:tc>
+                    <w:tcPr>
+                        <w:cnfStyle w:val="001000000000"/>
+                        <w:tcW w:w="2518" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00B3313F" w:rsidRPr="00DA28FD" w:rsidRDefault="00B3313F" w:rsidP="00DA28FD">
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t>Proyecto:</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="6412" w:type="dxa"/>
+                        <w:gridSpan w:val="3"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00B3313F" w:rsidRPr="00B231B0" w:rsidRDefault="00505AD7" w:rsidP="00B231B0">
+                        <w:pPr>
+                            <w:cnfStyle w:val="000000100000"/>
+                        </w:pPr>
+                        <w:r w:rsidRPr="00B231B0">
+                            <w:t>$nombre_proyecto</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00B3313F" w:rsidRPr="00DA28FD" w:rsidTr="00DA28FD">
+                <w:trPr>
+                    <w:trHeight w:val="296"/>
+                </w:trPr>
+                <w:tc>
+                    <w:tcPr>
+                        <w:cnfStyle w:val="001000000000"/>
+                        <w:tcW w:w="2518" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00B3313F" w:rsidRPr="00DA28FD" w:rsidRDefault="00B3313F" w:rsidP="00DA28FD">
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t>Investigador principal:</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="6412" w:type="dxa"/>
+                        <w:gridSpan w:val="3"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00B3313F" w:rsidRPr="00B231B0" w:rsidRDefault="00AB6425" w:rsidP="00B231B0">
+                        <w:pPr>
+                            <w:cnfStyle w:val="000000000000"/>
+                        </w:pPr>
+                        <w:r w:rsidRPr="00B231B0">
+                            <w:t>$nombre_ip</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00B3313F" w:rsidRPr="00DA28FD" w:rsidTr="00DA28FD">
+                <w:trPr>
+                    <w:cnfStyle w:val="000000100000"/>
+                </w:trPr>
+                <w:tc>
+                    <w:tcPr>
+                        <w:cnfStyle w:val="001000000000"/>
+                        <w:tcW w:w="2518" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00B3313F" w:rsidRPr="00DA28FD" w:rsidRDefault="00B3313F" w:rsidP="00DA28FD">
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t>A la atención de:</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="6412" w:type="dxa"/>
+                        <w:gridSpan w:val="3"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00B3313F" w:rsidRPr="00B231B0" w:rsidRDefault="00AB6425" w:rsidP="00B231B0">
+                        <w:pPr>
+                            <w:cnfStyle w:val="000000100000"/>
+                        </w:pPr>
+                        <w:r w:rsidRPr="00B231B0">
+                            <w:t>$nombre_solicitante</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+        </w:tbl>
+        <w:p w:rsidR="00820124" w:rsidRPr="00DA28FD" w:rsidRDefault="00DA28FD" w:rsidP="00DA28FD">
+            <w:pPr>
+                <w:pStyle w:val="Ttulo2"/>
+            </w:pPr>
+            <w:r>
+                <w:t>Dirección de facturación</w:t>
+            </w:r>
+        </w:p>
+        <w:tbl>
+            <w:tblPr>
+                <w:tblStyle w:val="Listaclara-nfasis1"/>
+                <w:tblW w:w="0" w:type="auto"/>
+                <w:tblLook w:val="0420"/>
+            </w:tblPr>
+            <w:tblGrid>
+                <w:gridCol w:w="8897"/>
+            </w:tblGrid>
+            <w:tr w:rsidR="00DA28FD" w:rsidRPr="00DA28FD" w:rsidTr="00F456A8">
+                <w:trPr>
+                    <w:cnfStyle w:val="100000000000"/>
+                </w:trPr>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="8897" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00DA28FD" w:rsidRPr="00DA28FD" w:rsidRDefault="00DA28FD" w:rsidP="00B17962">
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t>INSTITUTO ANDALUZ DE CIENCIAS DE LA TIERRA</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00DA28FD" w:rsidRPr="00DA28FD" w:rsidTr="00F456A8">
+                <w:trPr>
+                    <w:cnfStyle w:val="000000100000"/>
+                </w:trPr>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="8897" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00DA28FD" w:rsidRPr="00DA28FD" w:rsidRDefault="00DA28FD" w:rsidP="00B17962">
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t xml:space="preserve">Av. </w:t>
+                        </w:r>
+                        <w:proofErr w:type="spellStart"/>
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t>Fuentenueva</w:t>
+                        </w:r>
+                        <w:proofErr w:type="spellEnd"/>
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t xml:space="preserve"> s/n – Facultad de Ciencias, 18002</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00DA28FD" w:rsidRPr="00DA28FD" w:rsidTr="00F456A8">
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="8897" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00DA28FD" w:rsidRPr="00DA28FD" w:rsidRDefault="00DA28FD" w:rsidP="00B17962">
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t xml:space="preserve">Teléfono 958243158   Fax: 958243384  CIF. </w:t>
+                        </w:r>
+                        <w:r w:rsidRPr="00B231B0">
+                            <w:t>$CIF</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+        </w:tbl>
+        <w:p w:rsidR="00820124" w:rsidRPr="00DA28FD" w:rsidRDefault="00DA28FD" w:rsidP="00DA28FD">
+            <w:pPr>
+                <w:pStyle w:val="Ttulo2"/>
+            </w:pPr>
+            <w:r>
+                <w:t>Dirección de entrega</w:t>
+            </w:r>
+        </w:p>
+        <w:tbl>
+            <w:tblPr>
+                <w:tblStyle w:val="Listaclara-nfasis1"/>
+                <w:tblW w:w="0" w:type="auto"/>
+                <w:tblLook w:val="0420"/>
+            </w:tblPr>
+            <w:tblGrid>
+                <w:gridCol w:w="1226"/>
+                <w:gridCol w:w="7671"/>
+            </w:tblGrid>
+            <w:tr w:rsidR="00DD541A" w:rsidRPr="00DA28FD" w:rsidTr="00F456A8">
+                <w:trPr>
+                    <w:cnfStyle w:val="100000000000"/>
+                </w:trPr>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="8897" w:type="dxa"/>
+                        <w:gridSpan w:val="2"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00DD541A" w:rsidRPr="00DA28FD" w:rsidRDefault="00DD541A" w:rsidP="00380D7D">
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t>$razonSocialEntrega</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00DD541A" w:rsidRPr="00DA28FD" w:rsidTr="00F456A8">
+                <w:trPr>
+                    <w:cnfStyle w:val="000000100000"/>
+                </w:trPr>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="1226" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00DD541A" w:rsidRPr="00DA28FD" w:rsidRDefault="00DD541A" w:rsidP="00DD541A">
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t xml:space="preserve">Dirección: </w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="7671" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00DD541A" w:rsidRPr="00B231B0" w:rsidRDefault="00DD541A" w:rsidP="00B231B0">
+                        <w:r w:rsidRPr="00B231B0">
+                            <w:t>$direccionEntrega</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00DD541A" w:rsidRPr="00DA28FD" w:rsidTr="00F456A8">
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="1226" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00DD541A" w:rsidRPr="00DA28FD" w:rsidRDefault="00DD541A" w:rsidP="00DD541A">
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t xml:space="preserve">Teléfono: </w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="7671" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00DD541A" w:rsidRPr="00B231B0" w:rsidRDefault="00DD541A" w:rsidP="00B231B0">
+                        <w:r w:rsidRPr="00B231B0">
+                            <w:t>$telefonoEntrega</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+        </w:tbl>
+        <w:p w:rsidR="00820124" w:rsidRPr="00DA28FD" w:rsidRDefault="00DA28FD" w:rsidP="00DA28FD">
+            <w:pPr>
+                <w:pStyle w:val="Ttulo2"/>
+            </w:pPr>
+            <w:r>
+                <w:t>Emitido para</w:t>
+            </w:r>
+        </w:p>
+        <w:tbl>
+            <w:tblPr>
+                <w:tblStyle w:val="Listaclara-nfasis1"/>
+                <w:tblW w:w="0" w:type="auto"/>
+                <w:tblLook w:val="0420"/>
+            </w:tblPr>
+            <w:tblGrid>
+                <w:gridCol w:w="1162"/>
+                <w:gridCol w:w="2233"/>
+                <w:gridCol w:w="587"/>
+                <w:gridCol w:w="1944"/>
+                <w:gridCol w:w="560"/>
+                <w:gridCol w:w="2411"/>
+            </w:tblGrid>
+            <w:tr w:rsidR="00DD541A" w:rsidRPr="00DA28FD" w:rsidTr="00F456A8">
+                <w:trPr>
+                    <w:cnfStyle w:val="100000000000"/>
+                </w:trPr>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="8897" w:type="dxa"/>
+                        <w:gridSpan w:val="6"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00DD541A" w:rsidRPr="00DA28FD" w:rsidRDefault="00DD541A" w:rsidP="003E026F">
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t>$razonSocialFacturacion</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00F456A8" w:rsidRPr="00DA28FD" w:rsidTr="00F456A8">
+                <w:trPr>
+                    <w:cnfStyle w:val="000000100000"/>
+                </w:trPr>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="1162" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00F456A8" w:rsidRPr="00DA28FD" w:rsidRDefault="00F456A8" w:rsidP="00DD541A">
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t xml:space="preserve">Dirección: </w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="7735" w:type="dxa"/>
+                        <w:gridSpan w:val="5"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00F456A8" w:rsidRPr="00B231B0" w:rsidRDefault="00F456A8" w:rsidP="00B231B0">
+                        <w:r w:rsidRPr="00B231B0">
+                            <w:t>$direccionFacturacion</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00F456A8" w:rsidRPr="00DA28FD" w:rsidTr="00F456A8">
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="1162" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00DD541A" w:rsidRPr="00DA28FD" w:rsidRDefault="00DD541A" w:rsidP="00DD541A">
+                        <w:proofErr w:type="spellStart"/>
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t>Teléfono</w:t>
+                        </w:r>
+                        <w:proofErr w:type="spellEnd"/>
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t xml:space="preserve">: </w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="2233" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00DD541A" w:rsidRPr="00B231B0" w:rsidRDefault="00DD541A" w:rsidP="00B231B0">
+                        <w:r w:rsidRPr="00B231B0">
+                            <w:t>$telefonoFacturacion</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="587" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00DD541A" w:rsidRPr="00DA28FD" w:rsidRDefault="00DD541A" w:rsidP="00F456A8">
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t xml:space="preserve">Fax: </w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="1944" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00DD541A" w:rsidRPr="00B231B0" w:rsidRDefault="00F456A8" w:rsidP="00B231B0">
+                        <w:r w:rsidRPr="00B231B0">
+                            <w:t>$faxFacturacion</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="560" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00DD541A" w:rsidRPr="00DA28FD" w:rsidRDefault="00F456A8" w:rsidP="003E026F">
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t>CIF:</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="2411" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00DD541A" w:rsidRPr="00B231B0" w:rsidRDefault="00F456A8" w:rsidP="00B231B0">
+                        <w:r w:rsidRPr="00B231B0">
+                            <w:t>$cifFacturacion</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+        </w:tbl>
+        <w:p w:rsidR="00AB6425" w:rsidRPr="00DA28FD" w:rsidRDefault="00AB6425" w:rsidP="00DA28FD"/>
+        <w:tbl>
+            <w:tblPr>
+                <w:tblStyle w:val="Listaclara-nfasis1"/>
+                <w:tblW w:w="0" w:type="auto"/>
+                <w:tblLayout w:type="fixed"/>
+                <w:tblLook w:val="04A0"/>
+            </w:tblPr>
+            <w:tblGrid>
+                <w:gridCol w:w="781"/>
+                <w:gridCol w:w="6415"/>
+                <w:gridCol w:w="1701"/>
+            </w:tblGrid>
+            <w:tr w:rsidR="00B3313F" w:rsidRPr="00DA28FD" w:rsidTr="00F456A8">
+                <w:trPr>
+                    <w:cnfStyle w:val="100000000000"/>
+                </w:trPr>
+                <w:tc>
+                    <w:tcPr>
+                        <w:cnfStyle w:val="001000000000"/>
+                        <w:tcW w:w="781" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00B3313F" w:rsidRPr="00DA28FD" w:rsidRDefault="00B3313F" w:rsidP="00DA28FD"/>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="6415" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00B3313F" w:rsidRPr="00DA28FD" w:rsidRDefault="00B3313F" w:rsidP="00DA28FD">
+                        <w:pPr>
+                            <w:cnfStyle w:val="100000000000"/>
+                        </w:pPr>
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t>Nombre producto / Descripción</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="1701" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00B3313F" w:rsidRPr="00DA28FD" w:rsidRDefault="00B3313F" w:rsidP="00DA28FD">
+                        <w:pPr>
+                            <w:cnfStyle w:val="100000000000"/>
+                        </w:pPr>
+                        <w:r w:rsidRPr="00DA28FD">
+                            <w:t>Cantidad</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+
+            <!-- #foreach( $linea in $lineas ) -->
+
+            <w:tr w:rsidR="00B3313F" w:rsidRPr="00DA28FD" w:rsidTr="00F456A8">
+                <w:trPr>
+                    <w:cnfStyle w:val="000000100000"/>
+                    <w:trHeight w:val="733"/>
+                </w:trPr>
+                <w:tc>
+                    <w:tcPr>
+                        <w:cnfStyle w:val="001000000000"/>
+                        <w:tcW w:w="781" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00B3313F" w:rsidRPr="00DA28FD" w:rsidRDefault="00B3313F" w:rsidP="00DD541A">
+                        <w:pPr>
+                            <w:pStyle w:val="Prrafodelista"/>
+                            <w:numPr>
+                                <w:ilvl w:val="0"/>
+                                <w:numId w:val="2"/>
+                            </w:numPr>
+                        </w:pPr>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="6415" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00B3313F" w:rsidRPr="00B231B0" w:rsidRDefault="00E81058" w:rsidP="00B231B0">
+                        <w:pPr>
+                            <w:cnfStyle w:val="000000100000"/>
+                        </w:pPr>
+                        <w:r w:rsidRPr="00B231B0">
+                            <w:t>$linea.getDescripcionAlternativa()</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="1701" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w:rsidR="00B3313F" w:rsidRPr="00B231B0" w:rsidRDefault="00820124" w:rsidP="00B231B0">
+                        <w:pPr>
+                            <w:jc w:val="right"/>
+                            <w:cnfStyle w:val="000000100000"/>
+                        </w:pPr>
+                        <w:r w:rsidRPr="00B231B0">
+                            <w:t>$linea.getCantidad()</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            
+            <!-- #end -->
+        </w:tbl>
+        <w:p w:rsidR="00B3313F" w:rsidRPr="00DA28FD" w:rsidRDefault="00B3313F" w:rsidP="00DA28FD"/>
+        <w:sectPr w:rsidR="00B3313F" w:rsidRPr="00DA28FD" w:rsidSect="00F456A8">
+            <w:headerReference w:type="default" r:id="rId8"/>
+            <w:footerReference w:type="default" r:id="rId9"/>
+            <w:pgSz w:w="11906" w:h="16838"/>
+            <w:pgMar w:top="1673" w:right="1416" w:bottom="1417" w:left="1701" w:header="6" w:footer="708" w:gutter="0"/>
+            <w:cols w:space="708"/>
+            <w:docGrid w:linePitch="360"/>
+        </w:sectPr>
+    </w:body>
+</w:document>
