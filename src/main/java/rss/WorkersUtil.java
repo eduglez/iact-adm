@@ -31,7 +31,7 @@ public class WorkersUtil {
         String databaseName="";
         String user="";
         String password="";
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/"+databaseName+"?user="+user+"&password="+password+);
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/"+databaseName+"?user="+user+"&password="+password);
 
     }
 
